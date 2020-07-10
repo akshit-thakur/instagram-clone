@@ -1,1 +1,45 @@
+/* .navbar {
+  background-color: blue;
+}
+.base-1 {
+  background-color: hotpink;
+}
+.base-3 {
+  background-color: olive;
+}
+.base-2 {
+  background-color: lightblue;
+}
+.base-1t {
+  background-color: navy;
+} */
 
+.story-box {
+  height: 25vw;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.post-img {
+  object-fit: cover;
+  width: 500px;
+  height: 500px;
+}
+.post-box {
+  border: 100px black;
+  border-radius: 1px;
+}
+.about-box {
+  height: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.comment-box {
+  height: 350px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.comment-box-no-about {
+  height: 450px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}

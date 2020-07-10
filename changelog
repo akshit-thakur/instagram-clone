@@ -1,0 +1,18 @@
+First Commit
+
+Scaffolded out application
+
+Second Commit
+
+Added Navigation Component
+
+Third Commit
+
+Designed Home Page
+ml-2 to navicons applied
+Added Dummy Data to shared directory(enough to make one post work)
+
+//TODO: Include Story and IGTV into explore tab so that we can explore them instead of populating the nav
+//TODO: Comment box and About Box are at odds
+//TODO: Make the page responsive 
+//TODO: Populate more data
