@@ -16,6 +16,8 @@
 /* .base-modal {
   background-color: pink;
 } */
+
+/* homepage css*/
 .story-box {
   height: 25vw;
   overflow-x: scroll;
@@ -24,15 +26,8 @@
 .post-img {
   object-fit: cover;
   width: 500px;
-  height: 500px;
+  height: 600px;
 }
-.post-img-profile {
-  object-fit: cover;
-  width: 450px;
-  height: 450px;
-  margin-top: 10px;
-}
-
 .about-box {
   max-height: 150px;
   overflow-x: scroll;
@@ -48,10 +43,40 @@
   overflow-x: scroll;
   overflow-y: scroll;
 }
+
+/*explore css*/
+.people-scroller {
+  overflow: auto;
+  padding-bottom: 10px;
+}
+.people-card {
+  height: auto;
+  width: 200px;
+  margin-left: 50px;
+  padding: 10px;
+}
+/* messages css */
+.message-main-container {
+  min-width: 40vw;
+  height: 700px;
+}
+.message-container {
+  min-width: 30vw;
+  max-height: 500px;
+  overflow: scroll;
+}
+
+/* profile css*/
 .scrollable {
   height: 200px;
   overflow-x: scroll;
   overflow-y: scroll;
+}
+.post-img-profile {
+  object-fit: cover;
+  width: 450px;
+  height: 450px;
+  margin-top: 10px;
 }
 .post-img-modal {
   object-fit: cover;

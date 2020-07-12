@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import EXPLORE from "../../shared/explore";
 import Comments from "../post/comments";
-
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -98,13 +98,16 @@ const Post = (props) => {
     return <div></div>;
   }
 };
-
-export default class FeedGallery extends Component {
+export default class View extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isClicked: false,
       post: {},
+      ownPosts: EXPLORE.ownPosts,
+      otherPosts: EXPLORE.otherPosts,
+      igtv: EXPLORE.igtv,
+      reels: EXPLORE.reels,
     };
   }
   render() {
@@ -124,19 +127,41 @@ export default class FeedGallery extends Component {
       ));
     };
 
-    const Bottom = (props) => {
+    if (this.props.active === "ownPosts")
       return (
-        <div className="col-lg-8 offset-lg-2 row">
-          <PostGrid posts={props.posts} />
-        </div>
+        <>
+          <div className="row">
+            <PostGrid posts={this.state.ownPosts} />
+          </div>
+          <Post post={this.state.post} isClicked={this.state.isClicked} />
+        </>
       );
-    };
-
-    return (
-      <>
-        <Bottom posts={this.props.posts} profile={this.props.profile} />
-        <Post post={this.state.post} isClicked={this.state.isClicked} />
-      </>
-    );
+    else if (this.props.active === "otherPosts")
+      return (
+        <>
+          <div className="row">
+            <PostGrid posts={this.state.otherPosts} />
+          </div>
+          <Post post={this.state.post} isClicked={this.state.isClicked} />
+        </>
+      );
+    else if (this.props.active === "igtv")
+      return (
+        <>
+          <div className="row">
+            <PostGrid posts={this.state.igtv} />
+          </div>
+          <Post post={this.state.post} isClicked={this.state.isClicked} />
+        </>
+      );
+    else
+      return (
+        <>
+          <div className="row">
+            <PostGrid posts={this.state.reels} />
+          </div>
+          <Post post={this.state.post} isClicked={this.state.isClicked} />
+        </>
+      );
   }
 }

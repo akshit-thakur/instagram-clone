@@ -1,11 +1,11 @@
 First Commit
 
 Scaffolded out application
-
+--------------------------------------------
 Second Commit
 
 Added Navigation Component
-
+--------------------------------------------
 Third Commit (10-07-2020)
 
 Designed Home Page
@@ -15,12 +15,12 @@ Added Dummy Data to shared directory(enough to make one post work)
 *******************
 
 TODO: 
-Include Story and IGTV into explore tab so that we can explore them instead of populating the nav
 Comment box and About Box are at odds
 Make the page layout screen responsive 
 Populate more data
 
 *******************
+--------------------------------------------
 Fourth Commit (12/07/2020)
 
 Setup react-router in MainComponent.js
@@ -35,6 +35,26 @@ Added popper.js etc to enable modal
 TODO: 
 Toggle the Posts icon when we toggle between expanded and compact view
 Make required UI adjustments(Expanded posts not aligned)
-Adjust CSS according to stuff otherwise classes are randomly distributed
 
 *******************
+--------------------------------------------
+Fifth Commit (13/07/2020)
+
+Added messages page and relevant dummy data and css classes
+*******************
+
+TODO: 
+Make the required pending dropdowns in all pages
+
+*******************
+--------------------------------------------
+Sixth Commit
+Rearranged CSS classes by page
+Layout of /explore page (src/explore)
+added explore.js in shared
+added more photos in public/posts/
+*******************
+TODO:
+Mostly CSS arrangements which is a continuous process anyways.
+*******************
+--------------------------------------------

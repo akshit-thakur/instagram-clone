@@ -8,8 +8,6 @@ import NavDropdown from "./navigation/navDropdown";
 import Navigation from "./navigation/navigationComponent";
 import OwnProfile from "./profile/ownProfileComponent";
 import Search from "./search/searchComponent";
-import IgTv from "./profile/igtvComponent";
-import Saved from "./profile/savedComponent";
 export default class MainComponent extends Component {
   constructor(props) {
     super(props);

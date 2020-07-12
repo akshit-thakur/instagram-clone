@@ -81,7 +81,6 @@ class OwnProfile extends Component {
       },
       posts: POSTS,
       active: "posts", //tab
-      isExpanded: false,
     };
   }
   render() {
