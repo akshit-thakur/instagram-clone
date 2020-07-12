@@ -8,21 +8,21 @@ const PostList = (props) => {
   } else {
     //if recent,sort according to top
   }
-  return props.posts.post.map((post) => (
-    <div className="row mt-5">
-      <div className="col-8 card">
+  return props.posts.map((post) => (
+    <div className="row shadow-lg mt-5">
+      <div className="col-8">
         <div className="row p-2">
           <div className="col-2">
             <img
-              src={post.avatar}
+              src={post.profile.avatar}
               width={50}
               height={50}
-              alt={post.name}
+              alt={post.profile.name}
               className="rounded-circle"
             />
           </div>
           <div className="col-4">
-            <div className="row h6">{post.name}</div>
+            <div className="row h6">{post.profile.name}</div>
             <div className="row small">{post.location}</div>
           </div>
           <div className="col offset-3">
@@ -33,7 +33,7 @@ const PostList = (props) => {
         </div>
         <img src={post.image} alt="post" className="post-img" />
       </div>
-      <div className="col card side-box">
+      <div className="col card">
         <SideComponent post={post} />
       </div>
     </div>
@@ -55,7 +55,6 @@ class Posts extends Component {
             <button
               id="topPosts"
               className="nav-link h3 active disabled"
-              href="#main"
               onClick={() => {
                 this.setState({ isTop: !this.state.isTop });
                 document

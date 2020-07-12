@@ -3,7 +3,7 @@ import Comments from "./comments";
 
 const About = (props) => {
   if (props.about !== "") {
-    return <div className="row">{props.about}</div>;
+    return <div className="about-box">{props.about}</div>;
   } else return <div></div>;
 };
 
@@ -23,7 +23,7 @@ const Info = (props) => {
       />
       <img
         src="icons/save.png"
-        alt="report here"
+        alt="save"
         width={50}
         height={50}
         className="ml-4 mr-0"

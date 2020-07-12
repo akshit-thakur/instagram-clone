@@ -6,13 +6,35 @@ Second Commit
 
 Added Navigation Component
 
-Third Commit
+Third Commit (10-07-2020)
 
 Designed Home Page
 ml-2 to navicons applied
 Added Dummy Data to shared directory(enough to make one post work)
 
-//TODO: Include Story and IGTV into explore tab so that we can explore them instead of populating the nav
-//TODO: Comment box and About Box are at odds
-//TODO: Make the page responsive 
-//TODO: Populate more data
+*******************
+
+TODO: 
+Include Story and IGTV into explore tab so that we can explore them instead of populating the nav
+Comment box and About Box are at odds
+Make the page layout screen responsive 
+Populate more data
+
+*******************
+Fourth Commit (12/07/2020)
+
+Setup react-router in MainComponent.js
+Added dummy required components (to setup layout later)
+Added "/you" profileComponent
+Setup nav to other tabs in profileComponent(will setup layout later)
+Added "shadow-lg" to posts
+Added popper.js etc to enable modal
+
+*******************
+
+TODO: 
+Toggle the Posts icon when we toggle between expanded and compact view
+Make required UI adjustments(Expanded posts not aligned)
+Adjust CSS according to stuff otherwise classes are randomly distributed
+
+*******************
