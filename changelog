@@ -37,13 +37,17 @@ Toggle the Posts icon when we toggle between expanded and compact view
 Make required UI adjustments(Expanded posts not aligned)
 
 *******************
+<<<<<<< HEAD
 --------------------------------------------
+=======
+>>>>>>> 755bebbd8b1fe0d52aada80f075977cd4ed870bf
 Fifth Commit (13/07/2020)
 
 Added messages page and relevant dummy data and css classes
 *******************
 
 TODO: 
+<<<<<<< HEAD
 Make the required pending dropdowns in all pages
 
 *******************
@@ -58,3 +62,9 @@ TODO:
 Mostly CSS arrangements which is a continuous process anyways.
 *******************
 --------------------------------------------
+=======
+Make the required dropdowns in all pages pending
+
+*******************
+Sixth Commit
+>>>>>>> 755bebbd8b1fe0d52aada80f075977cd4ed870bf
