@@ -19,8 +19,18 @@ const Info = (props) => {
         alt="report here"
         height={25}
         width={25}
-        className="ml-5"
+        className="ml-5 dropdown-toggle caret-off"
+        data-toggle="dropdown"
       />
+      <div class="dropdown-menu">
+        <a class="dropdown-item" type="button">
+          Report
+        </a>
+        <div className="dropdown-divider"></div>
+        <a class="dropdown-item" type="button">
+          Block
+        </a>
+      </div>
       <img
         src="icons/save.png"
         alt="save"

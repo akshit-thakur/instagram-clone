@@ -3,8 +3,6 @@
  * Not to be confused with main story component
  */
 
-//TODO: INCLUDE STORY AND IGTV INTO EXPLORE TAB SO THAT WE CAN EXPLORE THEM INSTEAD OF POPULATING THE NAV
-
 import React, { Component } from "react";
 import STORIES from "../../shared/stories";
 
@@ -37,7 +35,7 @@ class Stories extends Component {
       <div className="base-2 mb-5">
         <div className="card">
           <div className="card-header">
-            <a href="storyComponent.js" className="unstyled text-dark">
+            <a href="/stories" className="unstyled text-dark">
               <button className="btn">
                 <h2>Stories</h2>
               </button>

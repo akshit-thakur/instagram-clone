@@ -1,8 +1,17 @@
 /*All story clicks redirect here, the main story page*/
 import React, { Component } from "react";
+import STORIES from "../../shared/stories";
 
-export default class Story extends Component {
+class Story extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stories: STORIES.stories,
+    };
+  }
   render() {
-    return <div></div>;
+    return <></>;
   }
 }
+
+export default Story;

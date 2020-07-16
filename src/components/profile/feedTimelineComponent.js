@@ -19,8 +19,18 @@ const Info = (props) => {
         alt="report here"
         height={25}
         width={25}
-        className="ml-4"
+        className="ml-4 dropdown-toggle caret-off"
+        data-toggle="dropdown"
       />
+      <div class="dropdown-menu">
+        <a class="dropdown-item" type="button">
+          Report
+        </a>
+        <div className="dropdown-divider"></div>
+        <a class="dropdown-item" type="button">
+          Block
+        </a>
+      </div>
       <img
         src="icons/save.png"
         alt="report here"
@@ -71,7 +81,7 @@ const PostList = (props) => {
 class FeedTimeline extends Component {
   render() {
     return (
-      <div className="col-lg-6 offset-lg-3">
+      <div className="col-lg-8 offset-lg-2">
         <PostList
           posts={this.props.posts.filter(
             (post) => post.profile.id === this.props.profile.id

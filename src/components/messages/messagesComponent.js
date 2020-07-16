@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MESSAGES from "../../shared/messages";
+import baseUrl from "../../shared/baseUrl";
 
 class Messages extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Messages extends Component {
         link: "localhost:3000/profile/1.html",
       },
       active: undefined,
+      isInfoClicked: false,
     };
   }
   render() {
@@ -30,7 +32,9 @@ class Messages extends Component {
             return (
               <div
                 className="row mt-2 mb-3"
-                onClick={() => this.setState({ active: message })}
+                onClick={() =>
+                  this.setState({ active: message, isInfoClicked: false })
+                }
               >
                 <div className="col-lg-3 col-1">
                   <img
@@ -51,6 +55,37 @@ class Messages extends Component {
       );
     };
 
+    const ChooseComponent = () => {
+      if (this.state.isInfoClicked)
+        return (
+          <div id="chat-info">
+            Mute
+            <hr />
+            Delete
+            <hr />
+            Report
+            <hr />
+            Block
+            <hr />
+          </div>
+        );
+      else
+        return (
+          <>
+            <div className="col-12 row message-container">
+              {this.state.active.chat.map((message) => {
+                if (message.sender === this.state.profile.id)
+                  return <div className="card offset-7">{message.text}</div>;
+                else return <div className="card col-5">{message.text}</div>;
+              })}
+            </div>
+            <hr />
+            <b className="card">
+              <i>Type your msg</i>
+            </b>
+          </>
+        );
+    };
     const MainWindow = (props) => {
       if (props.active !== undefined) {
         const otherPerson = props.active.persons.filter(
@@ -67,30 +102,23 @@ class Messages extends Component {
               <img
                 src="icons/info.png"
                 className="mx-auto my-auto"
-                alt="Settings"
+                alt="Info"
                 width={50}
                 height={50}
+                onClick={() =>
+                  this.setState({ isInfoClicked: !this.state.isInfoClicked })
+                }
               />
             </div>
             <hr />
-            <div className="col-12 message-container row">
-              {props.active.chat.map((message) => {
-                if (message.sender === props.profileId)
-                  return <div className="card offset-7">{message.text}</div>;
-                else return <div className="card col-5">{message.text}</div>;
-              })}
-            </div>
-            <hr />
-            <b className="card">
-              <i>Type your msg</i>
-            </b>
+            <ChooseComponent />
           </div>
         );
       } else return <div className="card col"></div>;
     };
 
     return (
-      <div className="col-lg-8 offset-2 ">
+      <div className="col-lg-10 offset-1 ">
         <div className="row h3">
           Messages
           <div className="offset-10">
@@ -102,10 +130,20 @@ class Messages extends Component {
             />
             <img
               src="icons/settings.png"
-              className="m-1"
               alt="Settings"
               width={30}
+              className="m-1 dropdown-toggle caret-off"
+              data-toggle="dropdown"
             />
+            <div class="dropdown-menu">
+              <a
+                class="dropdown-item"
+                href={`${baseUrl}/messages`}
+                type="button"
+              >
+                Message Settings
+              </a>
+            </div>
           </div>
         </div>
         <div className="row message-main-container">

@@ -41,13 +41,7 @@ Make required UI adjustments(Expanded posts not aligned)
 Fifth Commit (13/07/2020)
 
 Added messages page and relevant dummy data and css classes
-*******************
 
-TODO: 
-Make the required pending dropdowns in all pages
-Make the required dropdowns in all pages pending
-
-*******************
 --------------------------------------------
 Sixth Commit (14/07/2020)
 Rearranged CSS classes by page
@@ -59,4 +53,18 @@ TODO:
 Mostly CSS arrangements which is a continuous process anyways.
 *******************
 --------------------------------------------
+Seventh Commit (17/07/2020)
+Adjusted the navbar to accomodate the dropdown (resulted in a bit expanded navigation icon tray)
+(Tried to) adjust navbar width.. from col-lg-8 offset-lg-2 to col-lg-10 offset-lg-1 to better accomodate on Windows machine and some other hit and trial CSS changes(may need rework)
+Made the required pending dropdowns in all pages (messages settings in /messages, report dropdown on posts)
+Info in active chat window now toggles between Chat window and Chat info(with only the basics for now)
 
+*******************
+TODO:
+Search toggle on navbar
+Story layout
+Pvt,Public and Following profile layouts
+(if possible) add the like and save functionality
+copy paste the ownProfile ChooseComponent for other tabs of profile nav as well
+*******************
+--------------------------------------------

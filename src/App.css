@@ -17,6 +17,14 @@
   background-color: pink;
 } */
 
+/*navbar*/
+.caret-off::before {
+  display: none;
+}
+.caret-off::after {
+  display: none;
+}
+
 /* homepage css*/
 .story-box {
   height: 25vw;
@@ -25,8 +33,9 @@
 }
 .post-img {
   object-fit: cover;
-  width: 500px;
+  width: 750px;
   height: 600px;
+  overflow: auto;
 }
 .about-box {
   max-height: 150px;
@@ -91,9 +100,8 @@
 }
 
 .modal-align {
-  margin: auto;
-  padding-top: 10%;
-  padding-left: 20%;
+  margin-left: 10%;
+  margin-top: 5%;
 }
 
 .message-container {
