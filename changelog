@@ -68,3 +68,11 @@ Pvt,Public and Following profile layouts
 copy paste the ownProfile ChooseComponent for other tabs of profile nav as well
 *******************
 --------------------------------------------
+Eighth commit (18/07/2020)
+Pvt,Public and Following profile layouts
+Added utilityMethods in profile directory to hold the repeating functions ChooseComponent and changeClasses
+
+*******************
+TODO:
+Dropdowns need to be arranged... both triggers trigger same dropdown
+*******************
