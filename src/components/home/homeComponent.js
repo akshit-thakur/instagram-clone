@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../footer/footerComponent";
 import Posts from "../post/postComponent";
-import Stories from "../stories/storiesComponent";
+import Stories from "./storiesComponent";
 
 class Home extends Component {
   render() {

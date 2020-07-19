@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import STORIES from "../../shared/stories";
 
 const StoryDisplay = (props) => {
-  return props.stories.stories.map((story) => (
+  return props.stories.map((story) => (
     <div className="col-3 offset-1 mb-5">
       <img
         src={story.avatar}

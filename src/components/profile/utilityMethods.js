@@ -4,6 +4,18 @@ import FeedTimeline from "./feedTimelineComponent";
 import IgTv from "./igtvComponent";
 import Saved from "./savedComponent";
 import Tagged from "./taggedComponent";
+import { OwnProfile } from "./ownProfileHeader";
+
+export const ChooseTop = ({ follow, post, profile }) => {
+  //if(active profile id and clicked profile id are same)
+  return <OwnProfile follow={follow} post={post} profile={profile} />;
+  //else if(clicked profile has active as follower)
+  // return <followingProfileHeader />;
+  //else if(profile.isPublic)
+  // return <publicProfileHeader />;
+  //else
+  // return <privateProfileHeader />;
+};
 
 export const ChooseComponent = ({ activeState, profile, posts }) => {
   if (activeState === "posts")

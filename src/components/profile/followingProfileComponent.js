@@ -48,11 +48,19 @@ const Top = (props) => {
             Following
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" type="button">
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
               Add to close friends
             </a>
             <div className="dropdown-divider"></div>
-            <a class="dropdown-item" type="button">
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Mute
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Take a break
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
               Unfollow
             </a>
           </div>

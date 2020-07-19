@@ -1,6 +1,4 @@
-/* .navbar {
-  background-color: blue;
-}
+/* 
 .base-1 {
   background-color: hotpink;
 }
@@ -12,11 +10,11 @@
 }
 .base-1t {
   background-color: navy;
-} */
-/* .base-modal {
+}
+.base-modal {
   background-color: pink;
-} */
-
+}
+*/
 /*navbar*/
 .caret-off::before {
   display: none;
@@ -112,4 +110,17 @@
 .message-main-container {
   min-width: 40vw;
   height: 700px;
+}
+
+/*story css*/
+.story-scroller {
+  overflow: auto;
+}
+
+.story-circle {
+  border: 3px dashed palevioletred;
+}
+.story-img {
+  width: 920px;
+  width: 690px;
 }
