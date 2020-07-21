@@ -63,7 +63,6 @@ Info in active chat window now toggles between Chat window and Chat info(with on
 TODO:
 Search toggle on navbar
 (if possible) add the like and save functionality
-copy paste the ownProfile ChooseComponent for other tabs of profile nav as well
 *******************
 --------------------------------------------
 Eighth commit (18/07/2020)
@@ -84,7 +83,20 @@ Expanded the "following" button dropdown a bit(more options now)
 Work laid out for single code to select own,following,private and public profile(just comments)
 *******************
 TODO:
-Complete the work laid out
 Make visual changes to IGTV in explore showing various subcategories like people you follow's IGTV
+*******************
+--------------------------------------------
+Tenth Commit (21/07/2020) 
+Reverted changes to a smaller card for story instead of screen filler card
+Change to Redux will take care of required profile component. Everything else in /profile working fine.
+Got rid of individual profileComponents. Only 4 things govern /profile now -> viewProfile.. chooseTop,chooseNav,chooseComponent
+*******************
+TODO:
+Switch to Redux and take care of commented code.
+*******************
+--------------------------------------------
+Eleventh Commit()
+*******************
+TODO:
 *******************
 --------------------------------------------

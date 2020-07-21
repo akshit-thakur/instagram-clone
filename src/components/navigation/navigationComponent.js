@@ -58,20 +58,20 @@ class Navigation extends Component {
             >
               <img src={`icons/navDropdown.png`} alt="dropdown" width={30} />
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" type="button">
+            <div className="dropdown-menu">
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 New Post
               </a>
               <div className="dropdown-divider"></div>
-              <a class="dropdown-item" type="button">
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 New Story
               </a>
               <div className="dropdown-divider"></div>
-              <a class="dropdown-item" type="button">
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 Settings
               </a>
               <div className="dropdown-divider"></div>
-              <a class="dropdown-item" type="button">
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 Logout
               </a>
             </div>

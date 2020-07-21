@@ -5,7 +5,7 @@ import Explore from "./explore/exploreComponent";
 import Home from "./home/homeComponent";
 import Messages from "./messages/messagesComponent";
 import Navigation from "./navigation/navigationComponent";
-import OwnProfile from "./profile/ownProfileComponent";
+import ProfileView from "./profile/profileViewComponent";
 import Story from "./stories/storyComponent";
 class MainComponent extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class MainComponent extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/explore" component={Explore} />
           <Route path="/messages" component={Messages} />
-          <Route path="/you" component={OwnProfile} />
+          <Route path="/you" component={ProfileView} />
           <Route path="/stories" component={Story} />
         </Switch>
       </div>

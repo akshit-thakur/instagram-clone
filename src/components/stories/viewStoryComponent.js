@@ -1,9 +1,10 @@
 import React from "react";
+import baseUrl from "../../shared/baseUrl";
 
 export const ViewStory = (props) => {
   if (props.story)
     return (
-      <div className="shadow-lg mt-5 col-12 ">
+      <div className="shadow-lg mt-5 col-lg-8 offset-lg-2">
         <div className="row p-2">
           <div className="col-1">
             <img
@@ -23,15 +24,27 @@ export const ViewStory = (props) => {
           <div className="col-2 offset-2">
             <img src="icons/comment.png" width={40} height={40} alt="Comment" />
             <img src="icons/messages.png" width={40} height={40} alt="Share" />
-            <img src="icons/alert.png" width={30} height={30} alt="Report" />
+            <img
+              src="icons/alert.png"
+              width={30}
+              height={30}
+              alt="Report"
+              className="dropdown-toggle caret-off"
+              data-toggle="dropdown"
+            />
+            <div class="dropdown-menu">
+              <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+                Report
+              </a>
+              <div className="dropdown-divider"></div>
+              <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+                Block
+              </a>
+            </div>
           </div>
           <h6>{props.story.time}</h6>
         </div>
-        <img
-          src={props.story.story}
-          alt="post"
-          className="offset-3 story-img"
-        />
+        <img src={props.story.story} alt="post" className="story-img" />
       </div>
     );
   else return <div></div>;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
+import baseUrl from "../../shared/baseUrl";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -23,11 +24,11 @@ const Info = (props) => {
         data-toggle="dropdown"
       />
       <div class="dropdown-menu">
-        <a class="dropdown-item" type="button">
+        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
           Report
         </a>
         <div className="dropdown-divider"></div>
-        <a class="dropdown-item" type="button">
+        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
           Block
         </a>
       </div>
