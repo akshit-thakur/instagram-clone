@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -69,7 +69,7 @@ const PostList = (props) => {
         <img src={post.image} alt="post" className="post-img-expanded" />
       </div>
       <div className="col card">
-        <Info likes={post.likes} comments={post.comments} />
+        <Info likes={post.likes.length} comments={post.comments} />
         <hr />
         <About about={post.about} />
         <hr />

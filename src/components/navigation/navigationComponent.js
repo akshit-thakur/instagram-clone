@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 
 class Navigation extends Component {
   render() {

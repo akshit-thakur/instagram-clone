@@ -1,5 +1,5 @@
 import React from "react";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
 import IgTv from "./igtvComponent";
@@ -53,7 +53,7 @@ export const ChooseTop = ({ follow, posts, profile }) => {
 };
 
 export const ChooseNav = ({ profile, switchNav, active }) => {
-  // if (profile.isPublic === false) return <div></div>;
+  if (profile.isPublic === false) return <div></div>;
   console.log(active);
   return (
     <div className="mx-auto my-5">

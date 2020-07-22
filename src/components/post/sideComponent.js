@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Comments from "./comments";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -10,7 +10,7 @@ const About = (props) => {
 
 const Info = (props) => {
   return (
-    <div>
+    <div className="row">
       <img src="icons/like.png" alt="likes" height={30} width={30} />
       {props.likes}
       <img src="icons/comment.png" alt="likes" width={30} height={30} />
@@ -37,7 +37,7 @@ const Info = (props) => {
         alt="save"
         width={50}
         height={50}
-        className="ml-4 mr-0"
+        className="ml-4"
       />
     </div>
   );
@@ -47,7 +47,7 @@ class SideComponent extends Component {
     return (
       <>
         <Info
-          likes={this.props.post.likes}
+          likes={this.props.post.likes.length}
           comments={this.props.post.comments}
         />
         <hr />

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import POSTS from "../../shared/posts";
+import { POSTS } from "../../shared/posts";
 import SideComponent from "./sideComponent";
+import ProfileView from "../profile/profileViewComponent";
 
 const PostList = (props) => {
   if (props.isTop) {
@@ -11,7 +12,7 @@ const PostList = (props) => {
   return props.posts.map((post) => (
     <div className="row shadow-lg mt-5">
       <div className="col-8">
-        <div className="row p-2">
+        <div className="row p-2" onClick={() => <ProfileView />}>
           <div className="col-2">
             <img
               src={post.profile.avatar}

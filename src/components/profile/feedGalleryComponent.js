@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -92,7 +92,10 @@ const Post = (props) => {
                 &times;
               </button>
             </div>
-            <Info likes={props.post.likes} comments={props.post.comments} />
+            <Info
+              likes={props.post.likes.length}
+              comments={props.post.comments}
+            />
 
             <hr />
             <About about={props.post.about} />

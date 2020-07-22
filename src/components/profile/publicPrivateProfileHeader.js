@@ -1,5 +1,5 @@
 import React from "react";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 import { InfoHeader } from "./utilityMethods";
 export const PublicPrivateProfileHeader = (props) => {
   return (

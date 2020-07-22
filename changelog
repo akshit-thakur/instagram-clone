@@ -92,10 +92,20 @@ Change to Redux will take care of required profile component. Everything else in
 Got rid of individual profileComponents. Only 4 things govern /profile now -> viewProfile.. chooseTop,chooseNav,chooseComponent
 *******************
 TODO:
-Switch to Redux and take care of commented code.
+Take care of commented code.
 *******************
 --------------------------------------------
-Eleventh Commit()
+Eleventh Commit(22/07/2020)
+Framework of Redux done
+Changed all export default in /shared to export const and thus all imports to import {} from './'
+private/public profile view now works perfectly
+Other minor changes
+*******************
+TODO:
+Reducers to code and make changes in code accordingly.
+*******************
+--------------------------------------------
+Twelveth Commit()
 *******************
 TODO:
 *******************

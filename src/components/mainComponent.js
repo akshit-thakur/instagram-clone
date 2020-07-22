@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import { ACCOUNT } from "../shared/account";
 import Explore from "./explore/exploreComponent";
 import Home from "./home/homeComponent";
 import Messages from "./messages/messagesComponent";
@@ -8,12 +7,6 @@ import Navigation from "./navigation/navigationComponent";
 import ProfileView from "./profile/profileViewComponent";
 import Story from "./stories/storyComponent";
 class MainComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      account: ACCOUNT,
-    };
-  }
   render() {
     return (
       <div>

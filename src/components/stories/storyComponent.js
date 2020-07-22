@@ -1,6 +1,6 @@
 /*All story clicks redirect here, the main story page*/
 import React, { Component } from "react";
-import STORIES from "../../shared/stories";
+import { STORIES } from "../../shared/stories";
 import { ViewStory } from "./viewStoryComponent";
 
 class Story extends Component {

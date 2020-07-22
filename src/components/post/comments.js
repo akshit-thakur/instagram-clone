@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import COMMENTS from "../../shared/comments";
+import { COMMENTS } from "../../shared/comments";
 
 const CommentList = (props) => {
   return (

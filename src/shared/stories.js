@@ -1,4 +1,4 @@
-const STORIES = [
+export const STORIES = [
   {
     id: "1",
     name: "A",
@@ -288,4 +288,3 @@ const STORIES = [
     time: "3m",
   },
 ];
-export default STORIES;

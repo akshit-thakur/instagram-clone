@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import STORIES from "../../shared/stories";
+import { STORIES } from "../../shared/stories";
 
 const StoryDisplay = (props) => {
   return props.stories.map((story) => (

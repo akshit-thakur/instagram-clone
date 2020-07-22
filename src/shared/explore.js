@@ -1,4 +1,4 @@
-const EXPLORE = {
+export const EXPLORE = {
   ownPosts: [
     {
       id: "1",
@@ -818,5 +818,3 @@ const EXPLORE = {
     },
   ],
 };
-
-export default EXPLORE;

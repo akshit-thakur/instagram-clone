@@ -1,5 +1,5 @@
 import React from "react";
-import baseUrl from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 
 export const ViewStory = (props) => {
   if (props.story)

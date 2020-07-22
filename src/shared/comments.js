@@ -1,4 +1,4 @@
-const COMMENTS = {
+export const COMMENTS = {
   comments: [
     {
       id: "1",
@@ -344,4 +344,3 @@ const COMMENTS = {
     },
   ],
 };
-export default COMMENTS;

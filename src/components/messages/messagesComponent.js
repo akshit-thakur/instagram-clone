@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import MESSAGES from "../../shared/messages";
-import baseUrl from "../../shared/baseUrl";
+import { MESSAGES } from "../../shared/messages";
+import { baseUrl } from "../../shared/baseUrl";
 
 class Messages extends Component {
   constructor(props) {

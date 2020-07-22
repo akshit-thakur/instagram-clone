@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
-import EXPLORE from "../../shared/explore";
-import baseUrl from "../../shared/baseUrl";
+import { EXPLORE } from "../../shared/explore";
+import { baseUrl } from "../../shared/baseUrl";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;

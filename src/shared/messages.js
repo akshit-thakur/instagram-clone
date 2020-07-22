@@ -1,4 +1,4 @@
-const MESSAGES = [
+export const MESSAGES = [
   {
     id: "1",
     persons: [
@@ -273,4 +273,3 @@ const MESSAGES = [
     ],
   },
 ];
-export default MESSAGES;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ACCOUNT } from "../../shared/account";
-import FOLLOWERS from "../../shared/followers";
+import { FOLLOWERS } from "../../shared/followers";
 import ExpandedView from "./expandedViewComponent";
 import View from "./viewComponent";
 const changeClasses = (activeClass) => {
