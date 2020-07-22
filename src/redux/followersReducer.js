@@ -1,7 +1,7 @@
 import { FOLLOWERS } from "../shared/followers";
 import * as ActionTypes from "./actionTypes";
 
-export const Followers = (state = { followers: FOLLOWERS }, action) => {
+export const Followers = (state = FOLLOWERS, action) => {
   switch (action.type) {
     case ActionTypes.ADD_FOLLOWER:
       return state;

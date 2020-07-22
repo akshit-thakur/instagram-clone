@@ -2,10 +2,7 @@ import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
-import IgTv from "./igtvComponent";
 import { OwnProfileHeader } from "./ownProfileHeader";
-import Saved from "./savedComponent";
-import Tagged from "./taggedComponent";
 
 export const changeClasses = (className) => {
   document.querySelector("#posts").classList.remove("active");
@@ -66,7 +63,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             onClick={() => {
               changeClasses("#posts");
               if (active !== "posts") switchNav("posts");
-              else switchNav("postsExpanded");
+              else switchNav("expanded");
             }}
           >
             <img
@@ -88,7 +85,8 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             href={`${baseUrl}/igtv`}
             onClick={() => {
               changeClasses("#igtv");
-              switchNav("igtv");
+              if (active !== "igtv") switchNav("igtv");
+              else switchNav("expanded");
             }}
           >
             <img src="icons/igtv.png" alt="IGTV" width={30} />
@@ -105,7 +103,8 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             href={`${baseUrl}/saved`}
             onClick={() => {
               changeClasses("#saved");
-              switchNav("saved");
+              if (active !== "saved") switchNav("saved");
+              else switchNav("expanded");
             }}
           >
             <img src="icons/save.png" alt="Saved" width={30} />
@@ -120,7 +119,8 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             href={`${baseUrl}/tagged`}
             onClick={() => {
               changeClasses("#tagged");
-              switchNav("tagged");
+              if (active !== "tagged") switchNav("tagged");
+              else switchNav("expanded");
             }}
           >
             <img src="icons/tagged.png" alt="Tagged" width={30} />
@@ -132,12 +132,30 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
   );
 };
 
-export const ChooseComponent = ({ activeState, profile, posts }) => {
-  if (activeState === "posts")
-    return <FeedGallery posts={posts} profile={profile} />;
-  else if (activeState === "postsExpanded")
-    return <FeedTimeline posts={posts} profile={profile} />;
-  else if (activeState === "igtv") return <IgTv />;
-  else if (activeState === "saved") return <Saved />;
-  else return <Tagged />;
+export const ChooseComponent = ({
+  activeState,
+  profile,
+  posts,
+  igtv,
+  saved,
+  tagged,
+}) => {
+  let postsToPass = posts;
+  if (activeState === "igtv") postsToPass = igtv;
+  else if (activeState === "saved") postsToPass = saved;
+  else if (activeState === "tagged") postsToPass = tagged;
+
+  if (
+    activeState === "posts" ||
+    activeState === "igtv" ||
+    activeState === "saved" ||
+    activeState === "tagged"
+  )
+    return <FeedGallery posts={postsToPass} />;
+  else
+    return (
+      <FeedTimeline
+        posts={postsToPass.filter((post) => post.profile.id === profile.id)}
+      />
+    );
 };

@@ -68,7 +68,7 @@ class Comments extends Component {
       >
         <CommentList
           postId={this.props.postId}
-          comments={this.state.comments.comments.filter(
+          comments={this.state.comments.filter(
             (comment) => comment.postId === this.props.postId
           )}
         />

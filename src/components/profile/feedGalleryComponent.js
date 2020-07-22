@@ -113,7 +113,7 @@ const Post = (props) => {
   }
 };
 
-export default class FeedGallery extends Component {
+class FeedGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -148,9 +148,10 @@ export default class FeedGallery extends Component {
 
     return (
       <>
-        <Bottom posts={this.props.posts} profile={this.props.profile} />
+        <Bottom posts={this.props.posts} />
         <Post post={this.state.post} isClicked={this.state.isClicked} />
       </>
     );
   }
 }
+export default FeedGallery;

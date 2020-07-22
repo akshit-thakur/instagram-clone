@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { FOLLOWERS } from "../../shared/followers";
 import { POSTS } from "../../shared/posts";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
+import { IGTV } from "../../shared/igtv";
+import { SAVED } from "../../shared/saved";
+import { TAGGED } from "../../shared/tagged";
 
 const PublicOrPrivateSelector = (props) => {
   if (props.profile.isPublic === true)
@@ -11,6 +14,9 @@ const PublicOrPrivateSelector = (props) => {
         activeState={props.active}
         profile={props.profile}
         posts={props.posts}
+        igtv={props.igtv}
+        saved={props.saved}
+        tagged={props.tagged}
       />
     );
   else
@@ -43,6 +49,9 @@ class ProfileView extends Component {
         },
       },
       posts: POSTS,
+      igtv: IGTV,
+      saved: SAVED,
+      tagged: TAGGED,
       active: "posts", //tab
     };
     // this.state = {
@@ -94,6 +103,15 @@ class ProfileView extends Component {
           active={this.state.active}
           profile={this.state.profile}
           posts={this.state.posts.filter(
+            (post) => post.profile.id === this.state.profile.id
+          )}
+          igtv={this.state.igtv.filter(
+            (post) => post.profile.id === this.state.profile.id
+          )}
+          saved={this.state.saved.filter(
+            (post) => post.profile.id === this.state.profile.id
+          )}
+          tagged={this.state.tagged.filter(
             (post) => post.profile.id === this.state.profile.id
           )}
         />

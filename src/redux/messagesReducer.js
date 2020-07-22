@@ -1,7 +1,7 @@
 import { MESSAGES } from "../shared/messages";
 import * as ActionTypes from "./actionTypes";
 
-export const Messages = (state = { state: MESSAGES }, action) => {
+export const Messages = (state = MESSAGES, action) => {
   switch (action.type) {
     case ActionTypes.ADD_MESSAGE:
       return state;

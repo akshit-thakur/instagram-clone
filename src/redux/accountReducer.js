@@ -1,6 +1,6 @@
 import { ACCOUNT } from "../shared/account";
 import * as ActionTypes from "./actionTypes";
-export const Account = (state = { account: ACCOUNT }, action) => {
+export const Account = (state = ACCOUNT, action) => {
   switch (action.type) {
     case ActionTypes.ADD_REPORT:
       return state;

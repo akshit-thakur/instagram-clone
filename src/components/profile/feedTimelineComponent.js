@@ -83,11 +83,7 @@ class FeedTimeline extends Component {
   render() {
     return (
       <div className="col-lg-8 offset-lg-2">
-        <PostList
-          posts={this.props.posts.filter(
-            (post) => post.profile.id === this.props.profile.id
-          )}
-        />
+        <PostList posts={this.props.posts} />
       </div>
     );
   }

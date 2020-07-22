@@ -1,7 +1,7 @@
 import { STORIES } from "../shared/stories";
 import * as ActionTypes from "./actionTypes";
 
-export const Stories = (state = { stories: STORIES }, action) => {
+export const Stories = (state = STORIES, action) => {
   switch (action.type) {
     case ActionTypes.ADD_STORY:
       return state;

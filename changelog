@@ -105,8 +105,11 @@ TODO:
 Reducers to code and make changes in code accordingly.
 *******************
 --------------------------------------------
-Twelveth Commit()
+Twelveth Commit(23/07/2020)
+Added igtv,tagged,saved in /shared and corresponding action types and action reducers
+Further improved the /profile to include only the totally needed components.. because layouts were repetitive
 *******************
 TODO:
+Previous tasks.. Nothing new in this commit
 *******************
 --------------------------------------------
