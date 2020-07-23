@@ -52,7 +52,7 @@ class Story extends Component {
 
 const mapStateToProps = (state) => ({
   stories: state.stories,
-  selectedStory: state.selectedStory,
+  selectedStory: state.utility.selectedStory,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -144,15 +144,15 @@ class FeedGallery extends Component {
     return (
       <>
         <Bottom posts={this.props.posts} />
-        <Post post={this.state.post} isClicked={this.state.isClicked} />
+        <Post post={this.props.post} isClicked={this.props.isClicked} />
       </>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    isPostClicked: state.isPostClicked,
-    post: state.postModal,
+    isPostClicked: state.utility.isPostClicked,
+    post: state.utility.postModal,
   };
 };
 

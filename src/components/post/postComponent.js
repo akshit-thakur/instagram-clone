@@ -51,7 +51,6 @@ class Posts extends Component {
               id="topPosts"
               className="nav-link h3 active disabled"
               onClick={() => {
-                //this.setState({ isTop: !this.props.isTop });
                 this.props.isTopToggle(this.props.isTop);
                 document
                   .querySelector("#recentPosts")
@@ -73,7 +72,7 @@ class Posts extends Component {
               id="recentPosts"
               className="nav-link h3 text-secondary"
               onClick={() => {
-                this.setState({ isTop: !this.state.isTop });
+                this.props.isTopToggle(this.props.isTop);
                 document
                   .querySelector("#topPosts")
                   .classList.remove("active", "disabled", "text-dark");
@@ -92,22 +91,18 @@ class Posts extends Component {
             </button>
           </ul>
         </div>
-        <PostList posts={this.props.posts} isTop={this.state.isTop} />
+        <PostList posts={this.props.posts} isTop={this.props.isTop} />
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    posts: state.posts,
-    isTop: state.isTop,
-  };
-};
+const mapStateToProps = (state) => ({
+  posts: state.posts,
+  isTop: state.isTop,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isTopToggle: (isTop) => dispatch(isTopToggle(isTop)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  isTopToggle: (isTop) => dispatch(isTopToggle(isTop)),
+});
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));

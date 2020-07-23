@@ -42,20 +42,14 @@ const Info = (props) => {
     </div>
   );
 };
-export const SideComponent = () => {
+export const SideComponent = (props) => {
   return (
     <>
-      <Info
-        likes={this.props.post.likes.length}
-        comments={this.props.post.comments}
-      />
+      <Info likes={props.post.likes.length} comments={props.post.comments} />
       <hr />
-      <About about={this.props.post.about} />
+      <About about={props.post.about} />
       <hr />
-      <Comments
-        isAboutEmpty={this.props.post.about === ""}
-        postId={this.props.post.id}
-      />
+      <Comments isAboutEmpty={props.post.about === ""} postId={props.post.id} />
     </>
   );
 };

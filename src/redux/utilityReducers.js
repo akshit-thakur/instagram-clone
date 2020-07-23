@@ -3,7 +3,7 @@ export const Utility = (
   state = {
     activeChat: undefined,
     activeTabExplore: "ownPosts",
-    activeTabProfile: "post",
+    activeTabProfile: "posts",
     isExploreExpanded: false,
     isInfoClicked: false,
     isPostClicked: false,
@@ -14,6 +14,14 @@ export const Utility = (
       avatar: `profile/1.jpg`,
       link: "localhost:3000/profile/1.html",
       isPublic: true,
+      about:
+        "Phasellus lacus justo, sodales sed maximus et, condimentum et neque. Quisque sed purus vel quam ullamcorper luctus. Nunc vel augue sapien. Suspendisse dignissim ipsum quis nunc vestibulum venenatis. Mauris non diam et mauris fringilla hendrerit. Proin id porta lectus. Curabitur vel porta eros. Sed suscipit malesuada tellus, id fringilla libero porttitor id. Proin imperdiet orci eget felis commodo, eu fermentum nibh elementum. Aenean sagittis nibh a risus imperdiet interdum. Suspendisse eget leo et metus consequat tempor sed nec eros. ",
+      extra: {
+        location: "Atlantis",
+        email: "dummy@business.com",
+        social: "Facebook",
+        mentioned: "other account",
+      },
     },
     postModal: {},
     selectedStory: undefined,

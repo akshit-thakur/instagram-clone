@@ -5,6 +5,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const StoryDisplay = (props) => {
   return props.stories.map((story) => (
@@ -36,7 +37,7 @@ class Stories extends Component {
             </a>
           </div>
           <div className="card-body row story-box fixed">
-            <StoryDisplay stories={this.state.stories} />
+            <StoryDisplay stories={this.props.stories} />
           </div>
         </div>
       </div>
@@ -50,4 +51,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Stories);
+export default withRouter(connect(mapStateToProps)(Stories));

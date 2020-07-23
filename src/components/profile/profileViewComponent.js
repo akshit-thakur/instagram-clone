@@ -27,6 +27,7 @@ const PublicOrPrivateSelector = (props) => {
 };
 class ProfileView extends Component {
   render() {
+    console.log(this.props);
     return (
       <>
         <div className="container">
@@ -69,9 +70,9 @@ class ProfileView extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  activeTabProfile: state.activeTabProfile,
+  activeTabProfile: state.utility.activeTabProfile,
   followers: state.followers,
-  loggedInProfile: state.loggedInProfile,
+  loggedInProfile: state.utility.loggedInProfile,
   posts: state.posts,
   igtv: state.igtv,
   saved: state.saved,

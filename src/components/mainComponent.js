@@ -23,4 +23,4 @@ class MainComponent extends Component {
     );
   }
 }
-export default withRouter(connect(MainComponent));
+export default withRouter(connect()(MainComponent));

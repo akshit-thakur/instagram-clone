@@ -113,9 +113,12 @@ TODO:
 Previous tasks.. Nothing new in this commit
 *******************
 --------------------------------------------
-Commit the Thirteenth()
-Added utilityReducer to take care of all stuff in local states after redux was setup
+Commit the Thirteenth(23/07/2020)
+Added utilityReducer to take care of all stuff in local states after redux was setup.
+Local states eliminated from components.
+Created new branch 'redux' on git repo so that nothing overlaps
 *******************
 TODO:
+Take care of the bug
 *******************
 --------------------------------------------

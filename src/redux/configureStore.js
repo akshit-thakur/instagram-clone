@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { Account } from "./accountReducer";
+import { Accounts } from "./accountReducer";
 import { Comments } from "./commentsReducer";
 import { Explore } from "./exploreReducer";
 import { Followers } from "./followersReducer";
@@ -16,7 +16,7 @@ import { Utility } from "./utilityReducers";
 export const ConfigureStore = () => {
   const store = createStore(
     combineReducers({
-      account: Account,
+      accounts: Accounts,
       comments: Comments,
       explore: Explore,
       followers: Followers,

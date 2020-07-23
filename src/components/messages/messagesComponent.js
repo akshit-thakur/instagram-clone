@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toggleInfoClicked, activateChat } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
+import { withRouter } from "react-router-dom";
 class Messages extends Component {
   render() {
     const LeftPanel = (props) => {
@@ -16,7 +17,7 @@ class Messages extends Component {
             return (
               <div
                 className="row mt-2 mb-3"
-                onClick={() => activateChat(message)}
+                onClick={() => this.props.activateChat(message)}
               >
                 <div className="col-lg-3 col-1">
                   <img
@@ -87,7 +88,7 @@ class Messages extends Component {
                 alt="Info"
                 width={50}
                 height={50}
-                onClick={() => toggleInfoClicked()}
+                onClick={() => this.props.toggleInfoClicked()}
               />
             </div>
             <hr />
@@ -147,9 +148,9 @@ class Messages extends Component {
 
 const mapStateToProps = (state) => ({
   messages: state.messages,
-  loggedInProfile: state.loggedInProfile,
-  activeChat: state.activeChat,
-  isInfoClicked: state.isInfoClicked,
+  loggedInProfile: state.utility.loggedInProfile,
+  activeChat: state.utility.activeChat,
+  isInfoClicked: state.utility.isInfoClicked,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -157,4 +158,6 @@ const mapDispatchToProps = (dispatch) => ({
   activateChat: (message) => dispatch(activateChat(message)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Messages)
+);

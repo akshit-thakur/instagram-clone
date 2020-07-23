@@ -173,15 +173,13 @@ class Explore extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedInProfile: state.loggedInProfile,
-    activeTabExplore: state.activeTabExplore,
-    accounts: state.accounts,
-    followers: state.followers,
-    isExploreExpanded: state.isExploreExpanded,
-  };
-};
+const mapStateToProps = (state) => ({
+  loggedInProfile: state.utility.loggedInProfile,
+  activeTabExplore: state.utility.activeTabExplore,
+  accounts: state.accounts,
+  followers: state.followers,
+  isExploreExpanded: state.utility.isExploreExpanded,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

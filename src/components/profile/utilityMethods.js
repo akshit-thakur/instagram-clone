@@ -63,14 +63,14 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             onClick={() => {
               changeClasses("#posts");
               if (active !== "posts") switchNav("posts");
-              else switchNav("expanded");
+              else switchNav("postsExpanded");
             }}
           >
             <img
               src={
-                active === "posts"
-                  ? `icons/feed,gallery.png`
-                  : `icons/gallery,timeline.png`
+                active === "postsExpanded"
+                  ? `icons/gallery,timeline.png`
+                  : `icons/feed,gallery.png`
               }
               alt="Gallery Feed"
               width={30}
@@ -86,7 +86,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             onClick={() => {
               changeClasses("#igtv");
               if (active !== "igtv") switchNav("igtv");
-              else switchNav("expanded");
+              else switchNav("igtvExpanded");
             }}
           >
             <img src="icons/igtv.png" alt="IGTV" width={30} />
@@ -104,7 +104,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             onClick={() => {
               changeClasses("#saved");
               if (active !== "saved") switchNav("saved");
-              else switchNav("expanded");
+              else switchNav("savedExpanded");
             }}
           >
             <img src="icons/save.png" alt="Saved" width={30} />
@@ -120,7 +120,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             onClick={() => {
               changeClasses("#tagged");
               if (active !== "tagged") switchNav("tagged");
-              else switchNav("expanded");
+              else switchNav("taggedExpanded");
             }}
           >
             <img src="icons/tagged.png" alt="Tagged" width={30} />
@@ -141,9 +141,12 @@ export const ChooseComponent = ({
   tagged,
 }) => {
   let postsToPass = posts;
-  if (activeState === "igtv") postsToPass = igtv;
-  else if (activeState === "saved") postsToPass = saved;
-  else if (activeState === "tagged") postsToPass = tagged;
+  if (activeState === "igtv" || activeState === "igtvExpanded")
+    postsToPass = igtv;
+  else if (activeState === "saved" || activeState === "savedExpanded")
+    postsToPass = saved;
+  else if (activeState === "tagged" || activeState === "taggedExpanded")
+    postsToPass = tagged;
 
   if (
     activeState === "posts" ||

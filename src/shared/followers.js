@@ -1,7 +1,7 @@
 export const FOLLOWERS = [
   {
     id: "1",
-    followers: ["7"],
+    followers: ["2"],
     following: ["2"],
   },
   {
