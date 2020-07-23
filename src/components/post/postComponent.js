@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { POSTS } from "../../shared/posts";
-import SideComponent from "./sideComponent";
+import { connect } from "react-redux";
 import ProfileView from "../profile/profileViewComponent";
-
+import { SideComponent } from "./sideComponent";
+import { withRouter } from "react-router-dom";
+import { isTopToggle } from "../../redux/actionCreators";
 const PostList = (props) => {
   if (props.isTop) {
     //if top,sort according to top
@@ -41,23 +42,16 @@ const PostList = (props) => {
   ));
 };
 class Posts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: POSTS,
-      isTop: true,
-    };
-  }
   render() {
     return (
-      <div>
+      <>
         <div id="main">
           <ul className="nav nav-tabs flex-row">
             <button
               id="topPosts"
               className="nav-link h3 active disabled"
               onClick={() => {
-                this.setState({ isTop: !this.state.isTop });
+                this.props.isTopToggle(this.props.isTop);
                 document
                   .querySelector("#recentPosts")
                   .classList.remove("active", "disabled", "text-dark");
@@ -78,7 +72,7 @@ class Posts extends Component {
               id="recentPosts"
               className="nav-link h3 text-secondary"
               onClick={() => {
-                this.setState({ isTop: !this.state.isTop });
+                this.props.isTopToggle(this.props.isTop);
                 document
                   .querySelector("#topPosts")
                   .classList.remove("active", "disabled", "text-dark");
@@ -97,10 +91,18 @@ class Posts extends Component {
             </button>
           </ul>
         </div>
-        <PostList posts={this.state.posts} isTop={this.state.isTop} />
-      </div>
+        <PostList posts={this.props.posts} isTop={this.props.isTop} />
+      </>
     );
   }
 }
 
-export default Posts;
+const mapStateToProps = (state) => ({
+  posts: state.posts,
+  isTop: state.isTop,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  isTopToggle: (isTop) => dispatch(isTopToggle(isTop)),
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));

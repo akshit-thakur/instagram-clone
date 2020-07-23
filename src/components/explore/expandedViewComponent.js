@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Comments from "../post/comments";
-import { EXPLORE } from "../../shared/explore";
+import { connect } from "react-redux";
 import { baseUrl } from "../../shared/baseUrl";
+import Comments from "../post/comments";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -79,48 +79,28 @@ const PostList = (props) => {
   ));
 };
 class ExpandedView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ownPosts: EXPLORE.ownPosts,
-      otherPosts: EXPLORE.otherPosts,
-      igtv: EXPLORE.igtv,
-      reels: EXPLORE.reels,
-    };
-  }
   render() {
-    if (this.props.active === "ownPosts")
-      return (
-        <>
-          <div className="col-lg-10 offset-lg-1">
-            <PostList posts={this.state.ownPosts} />
-          </div>
-        </>
-      );
-    else if (this.props.active === "otherPosts")
-      return (
-        <>
-          <div className="col-lg-10 offset-lg-1">
-            <PostList posts={this.state.otherPosts} />
-          </div>
-        </>
-      );
-    else if (this.props.active === "igtv")
-      return (
-        <>
-          <div className="col-lg-10 offset-lg-1">
-            <PostList posts={this.state.igtv} />
-          </div>
-        </>
-      );
-    else
-      return (
-        <>
-          <div className="col-lg-10 offset-lg-1">
-            <PostList posts={this.state.reels} />
-          </div>
-        </>
-      );
+    let postsToPass = this.props.ownPosts;
+    if (this.props.active === "otherPosts") postsToPass = this.props.otherPosts;
+    else if (this.props.active === "igtv") postsToPass = this.props.igtv;
+    else if (this.props.active === "reels") postsToPass = this.props.reels;
+    return (
+      <>
+        <div className="col-lg-10 offset-lg-1">
+          <PostList posts={postsToPass} />
+        </div>
+      </>
+    );
   }
 }
-export default ExpandedView;
+
+const mapStateToProps = (state) => {
+  return {
+    ownPosts: state.explore.ownPosts,
+    otherPosts: state.explore.otherPosts,
+    igtv: state.explore.igtv,
+    reels: state.explore.reels,
+  };
+};
+
+export default connect(mapStateToProps)(ExpandedView);

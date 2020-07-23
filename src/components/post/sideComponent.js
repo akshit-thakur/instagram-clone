@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Comments from "./comments";
+import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
+import Comments from "./comments";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -42,23 +42,14 @@ const Info = (props) => {
     </div>
   );
 };
-class SideComponent extends Component {
-  render() {
-    return (
-      <>
-        <Info
-          likes={this.props.post.likes.length}
-          comments={this.props.post.comments}
-        />
-        <hr />
-        <About about={this.props.post.about} />
-        <hr />
-        <Comments
-          isAboutEmpty={this.props.post.about === ""}
-          postId={this.props.post.id}
-        />
-      </>
-    );
-  }
-}
-export default SideComponent;
+export const SideComponent = (props) => {
+  return (
+    <>
+      <Info likes={props.post.likes.length} comments={props.post.comments} />
+      <hr />
+      <About about={props.post.about} />
+      <hr />
+      <Comments isAboutEmpty={props.post.about === ""} postId={props.post.id} />
+    </>
+  );
+};

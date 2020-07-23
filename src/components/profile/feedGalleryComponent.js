@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
 import { baseUrl } from "../../shared/baseUrl";
+import { connect } from "react-redux";
+import { postModal } from "../../redux/actionCreators";
 
 const About = (props) => {
   if (props.about !== "") {
@@ -114,13 +116,6 @@ const Post = (props) => {
 };
 
 class FeedGallery extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isClicked: false,
-      post: {},
-    };
-  }
   render() {
     const PostGrid = (props) => {
       return props.posts.map((post) => (
@@ -133,7 +128,7 @@ class FeedGallery extends Component {
           className="col-4 mb-5"
           data-toggle="modal"
           data-target="#postModal"
-          onClick={() => this.setState({ isClicked: true, post: post })}
+          onClick={() => this.props.postModal(post)}
         />
       ));
     };
@@ -149,9 +144,21 @@ class FeedGallery extends Component {
     return (
       <>
         <Bottom posts={this.props.posts} />
-        <Post post={this.state.post} isClicked={this.state.isClicked} />
+        <Post post={this.props.post} isClicked={this.props.isClicked} />
       </>
     );
   }
 }
-export default FeedGallery;
+const mapStateToProps = (state) => {
+  return {
+    isPostClicked: state.utility.isPostClicked,
+    post: state.utility.postModal,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postModal: (post) => dispatch(postModal(post)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FeedGallery);

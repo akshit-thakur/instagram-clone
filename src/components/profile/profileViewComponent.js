@@ -1,11 +1,9 @@
 /*selects the type of profile to display*/
 import React, { Component } from "react";
-import { FOLLOWERS } from "../../shared/followers";
-import { POSTS } from "../../shared/posts";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
-import { IGTV } from "../../shared/igtv";
-import { SAVED } from "../../shared/saved";
-import { TAGGED } from "../../shared/tagged";
+import { setActiveTabProfile } from "../../redux/actionCreators";
 
 const PublicOrPrivateSelector = (props) => {
   if (props.profile.isPublic === true)
@@ -28,95 +26,62 @@ const PublicOrPrivateSelector = (props) => {
     );
 };
 class ProfileView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profile: {
-        //of person clicked
-        id: "1",
-        name: "ABC",
-        avatar: `profile/1.jpg`,
-        link: "localhost:3000/profile/1.html",
-        isPublic: true,
-        about:
-          "Phasellus lacus justo, sodales sed maximus et, condimentum et neque. Quisque sed purus vel quam ullamcorper luctus. Nunc vel augue sapien. Suspendisse dignissim ipsum quis nunc vestibulum venenatis. Mauris non diam et mauris fringilla hendrerit. Proin id porta lectus. Curabitur vel porta eros. Sed suscipit malesuada tellus, id fringilla libero porttitor id. Proin imperdiet orci eget felis commodo, eu fermentum nibh elementum. Aenean sagittis nibh a risus imperdiet interdum. Suspendisse eget leo et metus consequat tempor sed nec eros. ",
-        followers: FOLLOWERS,
-        extra: {
-          location: "Atlantis",
-          email: "dummy@business.com",
-          social: "Facebook",
-          mentioned: "other account",
-        },
-      },
-      posts: POSTS,
-      igtv: IGTV,
-      saved: SAVED,
-      tagged: TAGGED,
-      active: "posts", //tab
-    };
-    // this.state = {
-    //   profile: {
-    //     id: "2",
-    //     name: "DEF",
-    //     avatar: `profile/2.jpg`,
-    //     link: "localhost:3000/profile/2.html",
-    //     isPublic: false,
-    //     about:
-    //       "Phasellus lacus justo, sodales sed maximus et, condimentum et neque. Quisque sed purus vel quam ullamcorper luctus. Nunc vel augue sapien. Suspendisse dignissim ipsum quis nunc vestibulum venenatis. Mauris non diam et mauris fringilla hendrerit. Proin id porta lectus. Curabitur vel porta eros. Sed suscipit malesuada tellus, id fringilla libero porttitor id. Proin imperdiet orci eget felis commodo, eu fermentum nibh elementum. Aenean sagittis nibh a risus imperdiet interdum. Suspendisse eget leo et metus consequat tempor sed nec eros. ",
-    //     followers: FOLLOWERS,
-    //     extra: {
-    //       location: "Atlantis",
-    //       email: "dummy@business.com",
-    //       social: "Facebook",
-    //       mentioned: "other account",
-    //     },
-    //   },
-    //   posts: POSTS,
-    //   active: "posts", //tab
-    // };
-  }
   render() {
-    const switchNav = (activeTab) => {
-      this.setState({ active: activeTab });
-    };
+    console.log(this.props);
     return (
       <>
         <div className="container">
           <ChooseTop
             follow={
-              this.state.profile.followers.filter(
-                (profile) => profile.id === this.state.profile.id
+              this.props.followers.filter(
+                (profile) => profile.id === this.props.loggedInProfile.id
               )[0]
             }
-            posts={this.state.posts.filter(
-              (post) => post.profile.id === this.state.profile.id
+            posts={this.props.posts.filter(
+              (post) => post.profile.id === this.props.loggedInProfile.id
             )}
-            profile={this.state.profile}
+            profile={this.props.loggedInProfile}
           />
           <ChooseNav
-            profile={this.state.profile}
-            switchNav={switchNav}
-            active={this.state.active}
+            profile={this.props.loggedInProfile}
+            switchNav={this.props.setActiveTabProfile}
+            active={this.props.activeTabProfile}
           />
         </div>
         <PublicOrPrivateSelector
-          active={this.state.active}
-          profile={this.state.profile}
-          posts={this.state.posts.filter(
-            (post) => post.profile.id === this.state.profile.id
+          active={this.props.activeTabProfile}
+          profile={this.props.loggedInProfile}
+          posts={this.props.posts.filter(
+            (post) => post.profile.id === this.props.loggedInProfile.id
           )}
-          igtv={this.state.igtv.filter(
-            (post) => post.profile.id === this.state.profile.id
+          igtv={this.props.igtv.filter(
+            (post) => post.profile.id === this.props.loggedInProfile.id
           )}
-          saved={this.state.saved.filter(
-            (post) => post.profile.id === this.state.profile.id
+          saved={this.props.saved.filter(
+            (post) => post.profile.id === this.props.loggedInProfile.id
           )}
-          tagged={this.state.tagged.filter(
-            (post) => post.profile.id === this.state.profile.id
+          tagged={this.props.tagged.filter(
+            (post) => post.profile.id === this.props.loggedInProfile.id
           )}
         />
       </>
     );
   }
 }
-export default ProfileView;
+
+const mapStateToProps = (state) => ({
+  activeTabProfile: state.utility.activeTabProfile,
+  followers: state.followers,
+  loggedInProfile: state.utility.loggedInProfile,
+  posts: state.posts,
+  igtv: state.igtv,
+  saved: state.saved,
+  tagged: state.tagged,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveTabProfile: (newTab) => dispatch(setActiveTabProfile(newTab)),
+});
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ProfileView)
+);

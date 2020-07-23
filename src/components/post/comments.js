@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { COMMENTS } from "../../shared/comments";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const CommentList = (props) => {
   return (
@@ -53,12 +54,6 @@ const CommentList = (props) => {
 };
 
 class Comments extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      comments: COMMENTS,
-    };
-  }
   render() {
     return (
       <div
@@ -68,7 +63,7 @@ class Comments extends Component {
       >
         <CommentList
           postId={this.props.postId}
-          comments={this.state.comments.filter(
+          comments={this.props.comments.filter(
             (comment) => comment.postId === this.props.postId
           )}
         />
@@ -76,4 +71,11 @@ class Comments extends Component {
     );
   }
 }
-export default Comments;
+
+const mapStateToProps = (state) => {
+  return {
+    comments: state.comments,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Comments));

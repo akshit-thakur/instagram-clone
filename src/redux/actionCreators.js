@@ -124,3 +124,41 @@ export const deleteTagged = (taggedInfo) => ({
   type: ActionTypes.DELETE_TAGGED,
   payload: taggedInfo,
 });
+
+export const isTopToggle = (isTop) => ({
+  type: ActionTypes.TOGGLE_TOP,
+  payload: isTop,
+});
+
+export const setActiveTabExplore = (newTab) => ({
+  type: ActionTypes.SET_ACTIVE_TAB_EXPLORE,
+  payload: newTab,
+});
+
+export const postModal = (post) => ({
+  type: ActionTypes.TOGGLE_POST_MODAL,
+  payload: post,
+});
+
+export const toggleExploreView = (isExploreExpanded) => ({
+  type: ActionTypes.TOGGLE_EXPLORE_VIEW,
+  payload: isExploreExpanded,
+});
+
+export const setActiveTabProfile = (newTab) => ({
+  type: ActionTypes.SET_ACTIVE_TAB_PROFILE,
+  payload: newTab,
+});
+
+export const selectStory = (story) => ({
+  type: ActionTypes.SELECT_STORY,
+  payload: story,
+});
+export const toggleInfoClicked = () => ({
+  type: ActionTypes.TOGGLE_MESSAGE_INFO,
+});
+
+export const activateChat = (message) => ({
+  type: ActionTypes.SHOW_CHAT,
+  payload: message,
+});
