@@ -113,3 +113,9 @@ TODO:
 Previous tasks.. Nothing new in this commit
 *******************
 --------------------------------------------
+Commit the Thirteenth()
+Added utilityReducer to take care of all stuff in local states after redux was setup
+*******************
+TODO:
+*******************
+--------------------------------------------

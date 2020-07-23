@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { ACCOUNT } from "../../shared/account";
-import { FOLLOWERS } from "../../shared/followers";
+import { connect } from "react-redux";
+import {
+  setActiveTabExplore,
+  toggleExploreView,
+} from "../../redux/actionCreators";
 import ExpandedView from "./expandedViewComponent";
 import View from "./viewComponent";
 const changeClasses = (activeClass) => {
@@ -32,21 +35,6 @@ const ChooseComponent = ({ active, isExpanded }) => {
 };
 
 class Explore extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      followers: FOLLOWERS,
-      profile: {
-        id: "1",
-        name: "ABC",
-        avatar: `profile/1.jpg`,
-        link: "localhost:3000/profile/1.html",
-      },
-      accounts: ACCOUNT,
-      active: "ownPosts",
-      isExpanded: false,
-    };
-  }
   render() {
     const PeopleYouMayKnow = ({ people, profileId, account }) => {
       //find not followed and follow mutuals
@@ -64,7 +52,7 @@ class Explore extends Component {
       return (
         <div className="row flex-nowrap people-scroller mt-5">
           {peopleToDisplay.map((personId) => {
-            const person = this.state.accounts.filter(
+            const person = this.props.accounts.filter(
               (account) => account.id === personId
             )[0];
             return (
@@ -94,11 +82,11 @@ class Explore extends Component {
       <div className="container">
         <h3>People You May Know</h3>
         <PeopleYouMayKnow
-          people={this.state.followers}
-          profileId={this.state.profile.id}
+          people={this.props.followers}
+          profileId={this.props.loggedInProfile.id}
           account={
-            this.state.followers.filter(
-              (account) => account.id === this.state.profile.id
+            this.props.followers.filter(
+              (account) => account.id === this.props.loggedInProfile.id
             )[0]
           }
         />
@@ -109,8 +97,8 @@ class Explore extends Component {
                 id="ownPosts"
                 className="nav-link unstyled mx-auto active disabled text-dark"
                 onClick={() => {
-                  this.setState({ active: "ownPosts" });
-                  changeClasses(this.state.active);
+                  changeClasses("ownPosts"); //might coz error
+                  this.props.setActiveTabExplore("ownPosts");
                 }}
                 href="#ownPosts"
               >
@@ -124,7 +112,7 @@ class Explore extends Component {
                 href="#otherPosts"
                 onClick={() => {
                   changeClasses("otherPosts");
-                  this.setState({ active: "otherPosts" });
+                  this.props.setActiveTabExplore("otherPosts");
                 }}
               >
                 Posts your friends like
@@ -136,7 +124,7 @@ class Explore extends Component {
                 href="#igtv"
                 onClick={() => {
                   changeClasses("igtv");
-                  this.setState({ active: "igtv" });
+                  this.props.setActiveTabExplore("igtv");
                 }}
                 className="nav-link unstyled text-secondary mx-auto"
               >
@@ -150,7 +138,7 @@ class Explore extends Component {
                 href="#reels"
                 onClick={() => {
                   changeClasses("reels");
-                  this.setState({ active: "reels" });
+                  this.props.setActiveTabExplore("reels");
                 }}
               >
                 Reels
@@ -164,7 +152,7 @@ class Explore extends Component {
               className="mx-1"
               width={30}
               height={30}
-              onClick={() => this.setState({ isExpanded: false })}
+              onClick={() => this.props.toggleExploreView(false)}
             />
             <img
               src="icons/gallery,timeline.png"
@@ -172,17 +160,35 @@ class Explore extends Component {
               className="mx-1"
               width={30}
               height={30}
-              onClick={() => this.setState({ isExpanded: true })}
+              onClick={() => this.props.toggleExploreView(true)}
             />
           </div>
         </div>
         <ChooseComponent
-          active={this.state.active}
-          isExpanded={this.state.isExpanded}
+          active={this.props.activeTabExplore}
+          isExpanded={this.props.isExploreExpanded}
         />
       </div>
     );
   }
 }
 
-export default Explore;
+const mapStateToProps = (state) => {
+  return {
+    loggedInProfile: state.loggedInProfile,
+    activeTabExplore: state.activeTabExplore,
+    accounts: state.accounts,
+    followers: state.followers,
+    isExploreExpanded: state.isExploreExpanded,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActiveTabExplore: (newTab) => dispatch(setActiveTabExplore(newTab)),
+    toggleExploreView: (isExploreExpanded) =>
+      dispatch(toggleExploreView(isExploreExpanded)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Explore);

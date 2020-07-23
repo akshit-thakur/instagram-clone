@@ -9,6 +9,9 @@ import { Messages } from "./messagesReducer";
 import { Posts } from "./postsReducer";
 import { Saved } from "./savedReducer";
 import { Stories } from "./storiesReducer";
+import { Igtv } from "./igtvReducer";
+import { Tagged } from "./taggedReducer";
+import { Utility } from "./utilityReducers";
 
 export const ConfigureStore = () => {
   const store = createStore(
@@ -17,10 +20,13 @@ export const ConfigureStore = () => {
       comments: Comments,
       explore: Explore,
       followers: Followers,
+      igtv: Igtv,
       messages: Messages,
       posts: Posts,
       saved: Saved,
+      utility: Utility,
       stories: Stories,
+      tagged: Tagged,
     }),
     applyMiddleware(thunk, logger)
   );

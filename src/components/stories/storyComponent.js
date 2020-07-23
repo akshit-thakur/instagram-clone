@@ -1,16 +1,10 @@
 /*All story clicks redirect here, the main story page*/
 import React, { Component } from "react";
-import { STORIES } from "../../shared/stories";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { ViewStory } from "./viewStoryComponent";
-
+import { selectStory } from "../../redux/actionCreators";
 class Story extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stories: STORIES,
-      selected: undefined,
-    };
-  }
   render() {
     return (
       <div className="col-lg-10 offset-lg-1">
@@ -32,7 +26,7 @@ class Story extends Component {
           />
         </div>
         <div className="row flex-nowrap people-scroller mt-5">
-          {this.state.stories.map((story) => (
+          {this.props.stories.map((story) => (
             <div className="mx-5">
               <img
                 src={story.avatar}
@@ -40,7 +34,7 @@ class Story extends Component {
                 height={70}
                 alt={story.name}
                 className="rounded-circle story-circle"
-                onClick={() => this.setState({ selected: story })}
+                onClick={() => this.props.selectStory(story)}
               />
               <br />
               <center>
@@ -50,10 +44,18 @@ class Story extends Component {
           ))}
         </div>
         <hr />
-        <ViewStory story={this.state.selected} />
+        <ViewStory story={this.props.selectedStory} />
       </div>
     );
   }
 }
 
-export default Story;
+const mapStateToProps = (state) => ({
+  stories: state.stories,
+  selectedStory: state.selectedStory,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  selectStory: (story) => dispatch(selectStory(story)),
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Story));

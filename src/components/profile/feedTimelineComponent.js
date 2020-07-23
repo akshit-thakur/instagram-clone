@@ -13,7 +13,7 @@ const Info = (props) => {
     <div>
       <img src="icons/like.png" alt="likes" height={30} width={30} />
       {props.likes}
-      <img src="icons/comment.png" alt="likes" width={30} height={30} />
+      <img src="icons/comment.png" alt="comments" width={30} height={30} />
       {props.comments}
       <img
         src="icons/alert.png"

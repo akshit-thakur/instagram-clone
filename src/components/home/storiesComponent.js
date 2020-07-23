@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { STORIES } from "../../shared/stories";
+import { connect } from "react-redux";
 
 const StoryDisplay = (props) => {
   return props.stories.map((story) => (
@@ -24,15 +24,9 @@ const StoryDisplay = (props) => {
 };
 
 class Stories extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stories: STORIES,
-    };
-  }
   render() {
     return (
-      <div className="base-2 mb-5">
+      <div className="mb-5">
         <div className="card">
           <div className="card-header">
             <a href="/stories" className="unstyled text-dark">
@@ -49,4 +43,11 @@ class Stories extends Component {
     );
   }
 }
-export default Stories;
+
+const mapStateToProps = (state) => {
+  return {
+    stories: state.stories,
+  };
+};
+
+export default connect(mapStateToProps)(Stories);

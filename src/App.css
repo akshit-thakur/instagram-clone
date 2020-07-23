@@ -1,20 +1,3 @@
-/* 
-.base-1 {
-  background-color: hotpink;
-}
-.base-3 {
-  background-color: olive;
-}
-.base-2 {
-  background-color: lightblue;
-}
-.base-1t {
-  background-color: navy;
-}
-.base-modal {
-  background-color: pink;
-}
-*/
 /*navbar*/
 .caret-off::before {
   display: none;

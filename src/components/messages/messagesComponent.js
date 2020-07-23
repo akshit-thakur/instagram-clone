@@ -1,25 +1,10 @@
 import React, { Component } from "react";
-import { MESSAGES } from "../../shared/messages";
+import { connect } from "react-redux";
+import { toggleInfoClicked, activateChat } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
-
 class Messages extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messages: MESSAGES,
-      profile: {
-        id: "1",
-        name: "ABC",
-        avatar: `profile/1.jpg`,
-        link: "localhost:3000/profile/1.html",
-      },
-      active: undefined,
-      isInfoClicked: false,
-    };
-  }
   render() {
     const LeftPanel = (props) => {
-      console.log(props.messages);
       return (
         <div className="card col-3">
           Search
@@ -28,13 +13,10 @@ class Messages extends Component {
             let otherPerson = message.persons.filter(
               (person) => person.id !== props.profileId
             )[0];
-            console.log(otherPerson);
             return (
               <div
                 className="row mt-2 mb-3"
-                onClick={() =>
-                  this.setState({ active: message, isInfoClicked: false })
-                }
+                onClick={() => activateChat(message)}
               >
                 <div className="col-lg-3 col-1">
                   <img
@@ -56,7 +38,7 @@ class Messages extends Component {
     };
 
     const ChooseComponent = () => {
-      if (this.state.isInfoClicked)
+      if (this.props.isInfoClicked)
         return (
           <div id="chat-info">
             Mute
@@ -73,8 +55,8 @@ class Messages extends Component {
         return (
           <>
             <div className="col-12 row message-container">
-              {this.state.active.chat.map((message) => {
-                if (message.sender === this.state.profile.id)
+              {this.props.activeChat.chat.map((message) => {
+                if (message.sender === this.props.loggedInProfile.id)
                   return <div className="card offset-7">{message.text}</div>;
                 else return <div className="card col-5">{message.text}</div>;
               })}
@@ -105,9 +87,7 @@ class Messages extends Component {
                 alt="Info"
                 width={50}
                 height={50}
-                onClick={() =>
-                  this.setState({ isInfoClicked: !this.state.isInfoClicked })
-                }
+                onClick={() => toggleInfoClicked()}
               />
             </div>
             <hr />
@@ -148,20 +128,33 @@ class Messages extends Component {
         </div>
         <div className="row message-main-container">
           <LeftPanel
-            messages={this.state.messages.filter((message) =>
+            messages={this.props.messages.filter((message) =>
               message.persons.find(
-                (person) => person.id === this.state.profile.id
+                (person) => person.id === this.props.loggedInProfile.id
               )
             )}
-            profileId={this.state.profile.id}
+            profileId={this.props.loggedInProfile.id}
           />
           <MainWindow
-            profileId={this.state.profile.id}
-            active={this.state.active}
+            profileId={this.props.loggedInProfile.id}
+            active={this.props.activeChat}
           />
         </div>
       </div>
     );
   }
 }
-export default Messages;
+
+const mapStateToProps = (state) => ({
+  messages: state.messages,
+  loggedInProfile: state.loggedInProfile,
+  activeChat: state.activeChat,
+  isInfoClicked: state.isInfoClicked,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleInfoClicked: () => dispatch(toggleInfoClicked()),
+  activateChat: (message) => dispatch(activateChat(message)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);

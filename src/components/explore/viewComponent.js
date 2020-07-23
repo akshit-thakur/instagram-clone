@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { EXPLORE } from "../../shared/explore";
-import Comments from "../post/comments";
+import { connect } from "react-redux";
+import { postModal } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
+import Comments from "../post/comments";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -109,18 +110,7 @@ const Post = (props) => {
     return <div></div>;
   }
 };
-export default class View extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isClicked: false,
-      post: {},
-      ownPosts: EXPLORE.ownPosts,
-      otherPosts: EXPLORE.otherPosts,
-      igtv: EXPLORE.igtv,
-      reels: EXPLORE.reels,
-    };
-  }
+class View extends Component {
   render() {
     const PostGrid = (props) => {
       return props.posts.map((post) => (
@@ -133,46 +123,38 @@ export default class View extends Component {
           className="col-4 mb-5"
           data-toggle="modal"
           data-target="#postModal"
-          onClick={() => this.setState({ isClicked: true, post: post })}
+          onClick={() => this.props.postModal(post)}
         />
       ));
     };
-
-    if (this.props.active === "ownPosts")
-      return (
-        <>
-          <div className="row">
-            <PostGrid posts={this.state.ownPosts} />
-          </div>
-          <Post post={this.state.post} isClicked={this.state.isClicked} />
-        </>
-      );
-    else if (this.props.active === "otherPosts")
-      return (
-        <>
-          <div className="row">
-            <PostGrid posts={this.state.otherPosts} />
-          </div>
-          <Post post={this.state.post} isClicked={this.state.isClicked} />
-        </>
-      );
-    else if (this.props.active === "igtv")
-      return (
-        <>
-          <div className="row">
-            <PostGrid posts={this.state.igtv} />
-          </div>
-          <Post post={this.state.post} isClicked={this.state.isClicked} />
-        </>
-      );
-    else
-      return (
-        <>
-          <div className="row">
-            <PostGrid posts={this.state.reels} />
-          </div>
-          <Post post={this.state.post} isClicked={this.state.isClicked} />
-        </>
-      );
+    let postsToPass = this.props.ownPosts;
+    if (this.props.active === "otherPosts") postsToPass = this.props.otherPosts;
+    else if (this.props.active === "igtv") postsToPass = this.props.igtv;
+    else if (this.props.active === "reels") postsToPass = this.props.reels;
+    return (
+      <>
+        <div className="row">
+          <PostGrid posts={postsToPass} />
+        </div>
+        <Post post={this.props.post} isClicked={this.props.isPostClicked} />
+      </>
+    );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    ownPosts: state.explore.ownPosts,
+    otherPosts: state.explore.otherPosts,
+    igtv: state.explore.igtv,
+    reels: state.explore.reels,
+    post: state.postModal,
+    isPostClicked: state.isPostClicked,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postModal: (post) => dispatch(postModal(post)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(View);
