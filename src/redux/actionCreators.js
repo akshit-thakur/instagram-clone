@@ -20,9 +20,9 @@ export const addIGTV = (igtvInfo) => ({
   payload: igtvInfo,
 });
 
-export const addLike = (profileInfo) => ({
+export const addLike = (postInfo) => ({
   type: ActionTypes.ADD_LIKE,
-  payload: profileInfo,
+  payload: postInfo,
 });
 
 export const addMessage = (messageInfo) => ({
@@ -85,9 +85,9 @@ export const deleteIGTV = (igtvInfo) => ({
   payload: igtvInfo,
 });
 
-export const deleteLike = (profileInfo) => ({
+export const deleteLike = (postInfo) => ({
   type: ActionTypes.DELETE_LIKE,
-  payload: profileInfo,
+  payload: postInfo,
 });
 
 export const deleteMessage = (messageInfo) => ({
@@ -161,4 +161,18 @@ export const toggleInfoClicked = () => ({
 export const activateChat = (message) => ({
   type: ActionTypes.SHOW_CHAT,
   payload: message,
+});
+
+export const setNavigationModalTrigger = () => ({
+  type: ActionTypes.TOGGLE_NAVIGATION,
+});
+
+export const addLikeExplore = (postInfo) => ({
+  type: ActionTypes.ADD_LIKE_EXPLORE,
+  payload: postInfo,
+});
+
+export const deleteLikeExplore = (postInfo) => ({
+  type: ActionTypes.DELETE_LIKE_EXPLORE,
+  payload: postInfo,
 });

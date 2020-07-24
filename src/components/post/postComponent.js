@@ -3,46 +3,93 @@ import { connect } from "react-redux";
 import ProfileView from "../profile/profileViewComponent";
 import { SideComponent } from "./sideComponent";
 import { withRouter } from "react-router-dom";
-import { isTopToggle } from "../../redux/actionCreators";
-const PostList = (props) => {
-  if (props.isTop) {
-    //if top,sort according to top
-  } else {
-    //if recent,sort according to top
-  }
-  return props.posts.map((post) => (
-    <div className="row shadow-lg mt-5">
-      <div className="col-8">
-        <div className="row p-2" onClick={() => <ProfileView />}>
-          <div className="col-2">
-            <img
-              src={post.profile.avatar}
-              width={50}
-              height={50}
-              alt={post.profile.name}
-              className="rounded-circle"
-            />
-          </div>
-          <div className="col-4">
-            <div className="row h6">{post.profile.name}</div>
-            <div className="row small">{post.location}</div>
-          </div>
-          <div className="col offset-3">
-            <img src="icons/like.png" width={25} height={25} alt="Like" />
-            <img src="icons/comment.png" width={25} height={25} alt="Comment" />
-            <img src="icons/messages.png" width={25} height={25} alt="Share" />
-          </div>
-        </div>
-        <img src={post.image} alt="post" className="post-img" />
-      </div>
-      <div className="col card">
-        <SideComponent post={post} />
-      </div>
-    </div>
-  ));
-};
+import { isTopToggle, addLike, deleteLike } from "../../redux/actionCreators";
+
 class Posts extends Component {
   render() {
+    const PostList = () => {
+      console.log(this.props.posts);
+      if (this.props.isTop) {
+        this.props.posts.sort(
+          (post1, post2) =>
+            parseInt(post2.likes.length) - parseInt(post1.likes.length)
+        );
+      } else {
+        this.props.posts.sort(
+          (post1, post2) =>
+            parseFloat(post1.timeSincePosted) -
+            parseFloat(post2.timeSincePosted)
+        );
+      }
+      return this.props.posts.map((post) => (
+        <div className="row shadow-lg mt-5">
+          <div className="col-8">
+            <div className="row p-2" onClick={() => <ProfileView />}>
+              <div className="col-2">
+                <img
+                  src={post.profile.avatar}
+                  width={50}
+                  height={50}
+                  alt={post.profile.name}
+                  className="rounded-circle"
+                />
+              </div>
+              <div className="col-4">
+                <div className="row h6">{post.profile.name}</div>
+                <div className="row small">{post.location}</div>
+              </div>
+              <div className="col offset-3">
+                <img
+                  src="icons/like.png"
+                  width={25}
+                  height={25}
+                  alt="Like"
+                  onClick={() => {
+                    if (post.likes.includes(this.props.loggedInProfile.id))
+                      this.props.deleteLike({
+                        postId: post.id,
+                        liker: this.props.loggedInProfile.id,
+                      });
+                    else
+                      this.props.addLike({
+                        postId: post.id,
+                        liker: this.props.loggedInProfile.id,
+                      });
+                  }}
+                />
+                <img
+                  src="icons/comment.png"
+                  width={25}
+                  height={25}
+                  alt="Comment"
+                />
+                <img
+                  src="icons/messages.png"
+                  width={25}
+                  height={25}
+                  alt="Share"
+                />
+              </div>
+            </div>
+            <img src={post.image} alt="post" className="post-img" />
+          </div>
+          <div className="col card">
+            <SideComponent
+              post={post}
+              numberOfComments={
+                this.props.comments.filter(
+                  (comment) => comment.postId === post.id
+                ).length
+              }
+              addLike={this.props.addLike}
+              deleteLike={this.props.deleteLike}
+              liker={this.props.loggedInProfile.id}
+            />
+          </div>
+        </div>
+      ));
+    };
+
     return (
       <>
         <div id="main">
@@ -91,7 +138,7 @@ class Posts extends Component {
             </button>
           </ul>
         </div>
-        <PostList posts={this.props.posts} isTop={this.props.isTop} />
+        <PostList />
       </>
     );
   }
@@ -99,10 +146,14 @@ class Posts extends Component {
 
 const mapStateToProps = (state) => ({
   posts: state.posts,
-  isTop: state.isTop,
+  comments: state.comments,
+  loggedInProfile: state.utility.loggedInProfile,
+  isTop: state.utility.isTop,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   isTopToggle: (isTop) => dispatch(isTopToggle(isTop)),
+  addLike: (post) => dispatch(addLike(post)),
+  deleteLike: (post) => dispatch(deleteLike(post)),
 });
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));

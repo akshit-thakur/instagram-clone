@@ -6,6 +6,7 @@ export const Utility = (
     activeTabProfile: "posts",
     isExploreExpanded: false,
     isInfoClicked: false,
+    isNavigationModalTriggered: false,
     isPostClicked: false,
     isTop: true, //for homepage
     loggedInProfile: {
@@ -23,7 +24,7 @@ export const Utility = (
         mentioned: "other account",
       },
     },
-    postModal: {},
+    postModal: undefined,
     selectedStory: undefined,
   },
   action
@@ -36,7 +37,7 @@ export const Utility = (
     case ActionTypes.TOGGLE_POST_MODAL:
       return {
         ...state,
-        isPostClicked: !state.isPostClicked, //might give problem
+        isPostClicked: true, //giving problem
         postModal: action.payload,
       };
     case ActionTypes.TOGGLE_EXPLORE_VIEW:
@@ -58,6 +59,8 @@ export const Utility = (
       return { ...state, activeChat: action.payload };
     case ActionTypes.TOGGLE_MESSAGE_INFO:
       return { ...state, isInfoClicked: !state.isInfoClicked };
+    case ActionTypes.TOGGLE_NAVIGATION:
+      return { ...state, isNavigationModalTriggered: true };
     default:
       return state;
   }

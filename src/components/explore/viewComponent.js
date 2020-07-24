@@ -1,19 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postModal } from "../../redux/actionCreators";
+import {
+  postModal,
+  addLikeExplore,
+  deleteLikeExplore,
+} from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
 import Comments from "../post/comments";
 const About = (props) => {
-  if (props.about !== "") {
-    return <div className="about-box">{props.about}</div>;
-  } else return <div></div>;
+  if (props.about !== "") return <div className="about-box">{props.about}</div>;
+  else return <div></div>;
 };
 
 const Info = (props) => {
   return (
-    <div className="">
-      <img src="icons/like.png" alt="likes" height={30} width={30} />
-      {props.likes}
+    <div>
+      <img
+        src="icons/like.png"
+        alt="likes"
+        height={30}
+        width={30}
+        onClick={() => {
+          if (props.postStats.likes.includes(props.liker))
+            props.deleteLikeExplore({
+              postId: props.post.id,
+              category: props.active,
+              liker: props.liker,
+            });
+          else
+            props.addLikeExplore({
+              postId: props.post.id,
+              category: props.active,
+              liker: props.liker,
+            });
+        }}
+      />
+      {props.postStats.likes.length}
       <img src="icons/comment.png" alt="likes" width={30} height={30} />
       {props.comments}
       <img
@@ -44,6 +66,7 @@ const Info = (props) => {
   );
 };
 const Post = (props) => {
+  console.log(props);
   if (props.isClicked) {
     return (
       <div id="postModal" className="modal modal-align" role="dialog">
@@ -64,7 +87,26 @@ const Post = (props) => {
                 <div className="row small">{props.post.location}</div>
               </div>
               <div className="offset-4 col">
-                <img src="icons/like.png" width={25} height={25} alt="Like" />
+                <img
+                  src="icons/like.png"
+                  width={25}
+                  height={25}
+                  alt="Like"
+                  onClick={() => {
+                    if (props.postStats.likes.includes(props.liker))
+                      props.deleteLikeExplore({
+                        postId: props.post.id,
+                        category: props.active,
+                        liker: props.liker,
+                      });
+                    else
+                      props.addLikeExplore({
+                        postId: props.post.id,
+                        category: props.active,
+                        liker: props.liker,
+                      });
+                  }}
+                />
                 <img
                   src="icons/comment.png"
                   width={25}
@@ -93,8 +135,15 @@ const Post = (props) => {
                 &times;
               </button>
             </div>
-            <Info likes={props.post.likes} comments={props.post.comments} />
-
+            <Info
+              post={props.post}
+              postStats={props.postStats}
+              comments={0}
+              active={props.active}
+              liker={props.liker}
+              addLikeExplore={props.addLikeExplore}
+              deleteLikeExplore={props.deleteLikeExplore}
+            />
             <hr />
             <About about={props.post.about} />
             <hr />
@@ -106,55 +155,65 @@ const Post = (props) => {
         </div>
       </div>
     );
-  } else {
-    return <div></div>;
-  }
+  } else return <div></div>;
+};
+const PostGrid = (props) => {
+  return props.posts.map((post) => (
+    <img
+      src={post.image}
+      width={400}
+      height={400}
+      alt="post"
+      role="button"
+      className="col-4 mb-5"
+      data-toggle="modal"
+      data-target="#postModal"
+      onClick={() => props.postModal(post)}
+    />
+  ));
 };
 class View extends Component {
   render() {
-    const PostGrid = (props) => {
-      return props.posts.map((post) => (
-        <img
-          src={post.image}
-          width={400}
-          height={400}
-          alt="post"
-          role="button"
-          className="col-4 mb-5"
-          data-toggle="modal"
-          data-target="#postModal"
-          onClick={() => this.props.postModal(post)}
-        />
-      ));
-    };
-    let postsToPass = this.props.ownPosts;
-    if (this.props.active === "otherPosts") postsToPass = this.props.otherPosts;
-    else if (this.props.active === "igtv") postsToPass = this.props.igtv;
-    else if (this.props.active === "reels") postsToPass = this.props.reels;
     return (
       <>
         <div className="row">
-          <PostGrid posts={postsToPass} />
+          <PostGrid
+            posts={this.props.explorePosts.filter(
+              (post) => post.category === this.props.active
+            )}
+            postModal={this.props.postModal}
+          />
         </div>
-        <Post post={this.props.post} isClicked={this.props.isPostClicked} />
+        <Post
+          post={this.props.post}
+          postStats={
+            this.props.post === undefined
+              ? { like: [] }
+              : this.props.explorePosts.filter(
+                  (post) => post.id === this.props.post.id
+                )[0]
+          }
+          isClicked={this.props.isPostClicked}
+          active={this.props.active}
+          liker={this.props.loggedInProfile.id}
+          addLikeExplore={this.props.addLikeExplore}
+          deleteLikeExplore={this.props.deleteLikeExplore}
+        />
       </>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    ownPosts: state.explore.ownPosts,
-    otherPosts: state.explore.otherPosts,
-    igtv: state.explore.igtv,
-    reels: state.explore.reels,
-    post: state.postModal,
-    isPostClicked: state.isPostClicked,
-  };
-};
+const mapStateToProps = (state) => ({
+  explorePosts: state.explore,
+  post: state.utility.postModal,
+  isPostClicked: state.utility.isPostClicked,
+  loggedInProfile: state.utility.loggedInProfile,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    postModal: (post) => dispatch(postModal(post)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  postModal: (post) => dispatch(postModal(post)),
+  addLikeExplore: (post) => dispatch(addLikeExplore(post)),
+  deleteLikeExplore: (post) => dispatch(deleteLikeExplore(post)),
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(View);

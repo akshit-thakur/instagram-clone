@@ -1,18 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addLikeExplore, deleteLikeExplore } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
 import Comments from "../post/comments";
 const About = (props) => {
-  if (props.about !== "") {
-    return <div className="about-box">{props.about}</div>;
-  } else return <div></div>;
+  if (props.about !== "") return <div className="about-box">{props.about}</div>;
+  else return <div></div>;
 };
 
 const Info = (props) => {
   return (
     <div>
-      <img src="icons/like.png" alt="likes" height={30} width={30} />
-      {props.likes}
+      <img
+        src="icons/like.png"
+        alt="likes"
+        height={30}
+        width={30}
+        onClick={() => {
+          if (props.post.likes.includes(props.liker))
+            props.deleteLikeExplore({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+          else
+            props.addLikeExplore({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+        }}
+      />
+      {props.post.likes.length}
       <img src="icons/comment.png" alt="likes" width={30} height={30} />
       {props.comments}
       <img
@@ -61,7 +78,24 @@ const PostList = (props) => {
             <div className="row small">{post.location}</div>
           </div>
           <div className="col offset-3">
-            <img src="icons/like.png" width={25} height={25} alt="Like" />
+            <img
+              src="icons/like.png"
+              width={25}
+              height={25}
+              alt="Like"
+              onClick={() => {
+                if (post.likes.includes(props.liker))
+                  props.deleteLikeExplore({
+                    postId: post.id,
+                    liker: props.liker,
+                  });
+                else
+                  props.addLikeExplore({
+                    postId: post.id,
+                    liker: props.liker,
+                  });
+              }}
+            />
             <img src="icons/comment.png" width={25} height={25} alt="Comment" />
             <img src="icons/messages.png" width={25} height={25} alt="Share" />
           </div>
@@ -69,7 +103,13 @@ const PostList = (props) => {
         <img src={post.image} alt="post" className="post-img-expanded" />
       </div>
       <div className="col card">
-        <Info likes={post.likes} comments={post.comments} />
+        <Info
+          post={post}
+          comments={0}
+          addLikeExplore={props.addLikeExplore}
+          deleteLikeExplore={props.deleteLikeExplore}
+          liker={props.liker}
+        />
         <hr />
         <About about={post.about} />
         <hr />
@@ -80,27 +120,30 @@ const PostList = (props) => {
 };
 class ExpandedView extends Component {
   render() {
-    let postsToPass = this.props.ownPosts;
-    if (this.props.active === "otherPosts") postsToPass = this.props.otherPosts;
-    else if (this.props.active === "igtv") postsToPass = this.props.igtv;
-    else if (this.props.active === "reels") postsToPass = this.props.reels;
     return (
       <>
         <div className="col-lg-10 offset-lg-1">
-          <PostList posts={postsToPass} />
+          <PostList
+            posts={this.props.explorePosts.filter(
+              (post) => post.category === this.props.active
+            )}
+            addLikeExplore={this.props.addLikeExplore}
+            deleteLikeExplore={this.props.deleteLikeExplore}
+            liker={this.props.loggedInProfile.id}
+          />
         </div>
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ownPosts: state.explore.ownPosts,
-    otherPosts: state.explore.otherPosts,
-    igtv: state.explore.igtv,
-    reels: state.explore.reels,
-  };
-};
+const mapStateToProps = (state) => ({
+  explorePosts: state.explore,
+  loggedInProfile: state.utility.loggedInProfile,
+});
 
-export default connect(mapStateToProps)(ExpandedView);
+const mapDispatchToProps = (dispatch) => ({
+  addLikeExplore: (post) => dispatch(addLikeExplore(post)),
+  deleteLikeExplore: (post) => dispatch(deleteLikeExplore(post)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ExpandedView);

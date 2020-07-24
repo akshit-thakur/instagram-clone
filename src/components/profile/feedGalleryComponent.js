@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Comments from "../post/comments";
 import { baseUrl } from "../../shared/baseUrl";
 import { connect } from "react-redux";
-import { postModal } from "../../redux/actionCreators";
-
+import { postModal, addLike, deleteLike } from "../../redux/actionCreators";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -12,9 +11,26 @@ const About = (props) => {
 
 const Info = (props) => {
   return (
-    <div className="">
-      <img src="icons/like.png" alt="likes" height={30} width={30} />
-      {props.likes}
+    <div>
+      <img
+        src="icons/like.png"
+        alt="likes"
+        height={30}
+        width={30}
+        onClick={() => {
+          if (props.likes.includes(props.liker))
+            props.deleteLike({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+          else
+            props.addLike({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+        }}
+      />
+      {props.likes.length}
       <img src="icons/comment.png" alt="likes" width={30} height={30} />
       {props.comments}
       <img
@@ -65,7 +81,24 @@ const Post = (props) => {
                 <div className="row small">{props.post.location}</div>
               </div>
               <div className="offset-4 col">
-                <img src="icons/like.png" width={25} height={25} alt="Like" />
+                <img
+                  src="icons/like.png"
+                  width={25}
+                  height={25}
+                  alt="Like"
+                  onClick={() => {
+                    if (props.postLikes.includes(props.liker))
+                      props.deleteLike({
+                        postId: props.post.id,
+                        liker: props.liker,
+                      });
+                    else
+                      props.addLike({
+                        postId: props.post.id,
+                        liker: props.liker,
+                      });
+                  }}
+                />
                 <img
                   src="icons/comment.png"
                   width={25}
@@ -95,8 +128,12 @@ const Post = (props) => {
               </button>
             </div>
             <Info
-              likes={props.post.likes.length}
+              likes={props.postLikes}
               comments={props.post.comments}
+              post={props.post}
+              liker={props.liker}
+              addLike={props.addLike}
+              deleteLike={props.deleteLike}
             />
 
             <hr />
@@ -110,16 +147,14 @@ const Post = (props) => {
         </div>
       </div>
     );
-  } else {
-    return <div></div>;
-  }
+  } else return <div></div>;
 };
-
 class FeedGallery extends Component {
   render() {
     const PostGrid = (props) => {
       return props.posts.map((post) => (
         <img
+          key={post.id}
           src={post.image}
           width={400}
           height={400}
@@ -144,21 +179,35 @@ class FeedGallery extends Component {
     return (
       <>
         <Bottom posts={this.props.posts} />
-        <Post post={this.props.post} isClicked={this.props.isClicked} />
+        <Post
+          post={this.props.modalPost}
+          postLikes={
+            this.props.modalPost === undefined
+              ? 0
+              : this.props.postOriginal.filter(
+                  (post) => post.id === this.props.modalPost.id
+                )[0].likes
+          }
+          postComments={0}
+          addLike={this.props.addLike}
+          deleteLike={this.props.deleteLike}
+          isClicked={this.props.isPostClicked}
+          liker={this.props.loggedInProfile.id}
+        />
       </>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    isPostClicked: state.utility.isPostClicked,
-    post: state.utility.postModal,
-  };
-};
+const mapStateToProps = (state) => ({
+  postOriginal: state.posts,
+  isPostClicked: state.utility.isPostClicked,
+  modalPost: state.utility.postModal,
+  loggedInProfile: state.utility.loggedInProfile,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    postModal: (post) => dispatch(postModal(post)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  postModal: (post) => dispatch(postModal(post)),
+  addLike: (post) => dispatch(addLike(post)),
+  deleteLike: (post) => dispatch(deleteLike(post)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(FeedGallery);

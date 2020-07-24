@@ -72,10 +72,8 @@ class Comments extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    comments: state.comments,
-  };
-};
+const mapStateToProps = (state) => ({
+  comments: state.comments,
+});
 
 export default withRouter(connect(mapStateToProps)(Comments));

@@ -8,9 +8,26 @@ export const Posts = (state = POSTS, action) => {
     case ActionTypes.DELETE_POST:
       return state;
     case ActionTypes.ADD_LIKE:
-      return state;
+      const indexToAddAt = state.findIndex(
+        (post) => post.id === action.payload.postId
+      );
+      state[indexToAddAt] = {
+        ...state[indexToAddAt],
+        likes: state[indexToAddAt].likes.concat(action.payload.liker),
+      };
+      return [...state];
+
     case ActionTypes.DELETE_LIKE:
-      return state;
+      const indexToDeleteAt = state.findIndex(
+        (post) => post.id === action.payload.postId
+      );
+      state[indexToDeleteAt] = {
+        ...state[indexToDeleteAt],
+        likes: state[indexToDeleteAt].likes.filter(
+          (liker) => liker !== action.payload.liker
+        ),
+      };
+      return [...state];
     default:
       return state;
   }

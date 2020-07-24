@@ -10,8 +10,25 @@ const About = (props) => {
 
 const Info = (props) => {
   return (
-    <div className="row">
-      <img src="icons/like.png" alt="likes" height={30} width={30} />
+    <div>
+      <img
+        src="icons/like.png"
+        alt="likes"
+        height={30}
+        width={30}
+        onClick={() => {
+          if (props.post.likes.includes(props.liker))
+            props.deleteLike({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+          else
+            props.addLike({
+              postId: props.post.id,
+              liker: props.liker,
+            });
+        }}
+      />
       {props.likes}
       <img src="icons/comment.png" alt="likes" width={30} height={30} />
       {props.comments}
@@ -23,12 +40,12 @@ const Info = (props) => {
         className="ml-5 dropdown-toggle caret-off"
         data-toggle="dropdown"
       />
-      <div class="dropdown-menu">
-        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+      <div className="dropdown-menu">
+        <a className="dropdown-item" type="button" href={`${baseUrl}`}>
           Report
         </a>
         <div className="dropdown-divider"></div>
-        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+        <a className="dropdown-item" type="button" href={`${baseUrl}`}>
           Block
         </a>
       </div>
@@ -37,7 +54,7 @@ const Info = (props) => {
         alt="save"
         width={50}
         height={50}
-        className="ml-4"
+        className="ml-5"
       />
     </div>
   );
@@ -45,7 +62,14 @@ const Info = (props) => {
 export const SideComponent = (props) => {
   return (
     <>
-      <Info likes={props.post.likes.length} comments={props.post.comments} />
+      <Info
+        post={props.post}
+        likes={props.post.likes.length}
+        comments={props.numberOfComments}
+        addLike={props.addLike}
+        deleteLike={props.deleteLike}
+        liker={props.liker}
+      />
       <hr />
       <About about={props.post.about} />
       <hr />

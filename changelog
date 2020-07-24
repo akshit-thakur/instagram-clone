@@ -11,14 +11,11 @@ Third Commit (10-07-2020)
 Designed Home Page
 ml-2 to navicons applied
 Added Dummy Data to shared directory(enough to make one post work)
-
 *******************
-
 TODO: 
 Comment box and About Box are at odds
 Make the page layout screen responsive 
 Populate more data
-
 *******************
 --------------------------------------------
 Fourth Commit (12/07/2020)
@@ -73,7 +70,6 @@ Added utilityMethods in profile directory to hold the repeating functions Choose
 TODO:
 Dropdowns need to be arranged... both triggers trigger same dropdown
 Make the code consistent with the video
-
 *******************
 --------------------------------------------
 Ninth commit (20/07/2020)
@@ -108,17 +104,24 @@ Reducers to code and make changes in code accordingly.
 Twelveth Commit(23/07/2020)
 Added igtv,tagged,saved in /shared and corresponding action types and action reducers
 Further improved the /profile to include only the totally needed components.. because layouts were repetitive
-*******************
-TODO:
-Previous tasks.. Nothing new in this commit
-*******************
 --------------------------------------------
 Commit the Thirteenth(23/07/2020)
 Added utilityReducer to take care of all stuff in local states after redux was setup.
 Local states eliminated from components.
 Created new branch 'redux' on git repo so that nothing overlaps
+--------------------------------------------
+Fourteenth and Fifteenth Commit(23/07/2020)
+These were on 'redux' branch.. redux enabled website is now working.
+--------------------------------------------
+Sixteenth Commit
+Homepage now sorts posts according to likes and timeSincePosted.
+Side Component of post now shows the actual number of comments(replies not included)
+All posts(homepage,explore(all tabs),profile(all tabs)) have now working Like feature
+Work laid out for navbar dropdown onClicks
 *******************
 TODO:
-Take care of the bug
+Include reply in actual number of comments
+Add the already liked heart icon
+Use 'visible/invisible' class to toggle the search box
 *******************
 --------------------------------------------
