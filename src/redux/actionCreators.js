@@ -176,6 +176,7 @@ export const deleteLikeExplore = (postInfo) => ({
   type: ActionTypes.DELETE_LIKE_EXPLORE,
   payload: postInfo,
 });
+
 export const toggleSearchBox = () => ({
   type: ActionTypes.TOGGLE_SEARCH,
 });

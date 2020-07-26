@@ -27,7 +27,6 @@ Added "shadow-lg" to posts
 Added popper.js etc to enable modal
 
 *******************
-
 TODO: 
 Toggle the Posts icon when we toggle between expanded and compact view
 Make required UI adjustments(Expanded posts not aligned)
@@ -54,11 +53,6 @@ Adjusted the navbar to accomodate the dropdown (resulted in a bit expanded navig
 (Tried to) adjust navbar width.. from col-lg-8 offset-lg-2 to col-lg-10 offset-lg-1 to better accomodate on Windows machine and some other hit and trial CSS changes(may need rework)
 Made the required pending dropdowns in all pages (messages settings in /messages, report dropdown on posts)
 Info in active chat window now toggles between Chat window and Chat info(with only the basics for now)
-
-*******************
-TODO:
-Add the save functionality
-*******************
 --------------------------------------------
 Eighth commit (18/07/2020)
 Pvt,Public and Following profile layouts
@@ -110,7 +104,7 @@ These were on 'redux' branch.. redux enabled website is now working.
 Sixteenth Commit(24/07/2020)
 Homepage now sorts posts according to likes and timeSincePosted.
 Side Component of post now shows the actual number of comments(replies not included)
-All posts(homepage,explore(all tabs),profile(all tabs)) have now working Like feature
+Added Like functionality across Home,Explore,Profile.
 Work laid out for navbar dropdown onClicks
 *******************
 TODO:
@@ -125,5 +119,13 @@ Replaced all icons with SVG.
 *******************
 TODO:
 Make svg for views, info button
+*******************
+--------------------------------------------
+Eighteenth Commit(27/07/2020)
+Added Save functionality across Home,Explore,Profile.
+*******************
+TODO:
+Reduce unneccessary props passed around
+Optimize backend.. profile/saved shows no post.
 *******************
 --------------------------------------------

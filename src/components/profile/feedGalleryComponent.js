@@ -14,12 +14,43 @@ const About = (props) => {
     return <div className="about-box">{props.about}</div>;
   } else return <div></div>;
 };
-
+const DecideToDisplay = (props) => {
+  //saved icon
+  if (props.loggedId === props.posterId) return <div></div>;
+  else {
+    const objToPass = {
+      postId: props.postId,
+      profileId: props.loggedId,
+    };
+    return (
+      <img
+        src={
+          props.isSaved //check if saved
+            ? "icons/saved.svg"
+            : "icons/save.svg"
+        }
+        alt="save"
+        width={50}
+        height={50}
+        className="ml-5"
+        onClick={() =>
+          props.isSaved
+            ? props.deleteSaved(objToPass)
+            : props.addSaved(objToPass)
+        }
+      />
+    );
+  }
+};
 const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.svg"
+        src={
+          props.likes.includes(props.liker)
+            ? "icons/liked.svg"
+            : "icons/like.svg"
+        }
         alt="likes"
         height={30}
         width={30}
@@ -56,12 +87,13 @@ const Info = (props) => {
           Block
         </a>
       </div>
-      <img
-        src={`${props.isSaved ? "icons/savedFill.svg" : "icons/save.svg"}`}
-        alt="save"
-        width={`${props.isSaved ? 100 : 50}`}
-        height={`${props.isSaved ? 100 : 50}`}
-        className="ml-5"
+      <DecideToDisplay
+        loggedId={props.liker}
+        isSaved={props.isSaved}
+        posterId={props.post.profile.id}
+        postId={props.post.id}
+        addSaved={props.addSaved}
+        deleteSaved={props.deleteSaved}
       />
     </div>
   );
@@ -88,7 +120,11 @@ const Post = (props) => {
               </div>
               <div className="offset-4 col">
                 <img
-                  src="icons/like.svg"
+                  src={
+                    props.postLikes.includes(props.liker)
+                      ? "icons/liked.svg"
+                      : "icons/like.svg"
+                  }
                   width={25}
                   height={25}
                   alt="Like"
@@ -141,6 +177,8 @@ const Post = (props) => {
               addLike={props.addLike}
               deleteLike={props.deleteLike}
               isSaved={props.isSaved}
+              addSaved={props.addSaved}
+              deleteSaved={props.deleteSaved}
             />
 
             <hr />
@@ -204,11 +242,13 @@ class FeedGallery extends Component {
               ? false
               : this.props.saved.filter(
                   (post) =>
-                    post.profile.id === this.props.loggedInProfile.id &&
-                    post.image === this.props.modalPost.image
+                    post.profileId.includes(this.props.loggedInProfile.id) &&
+                    post.postId === this.props.modalPost.id
                 ).length !== 0
           }
           liker={this.props.loggedInProfile.id}
+          addSaved={this.props.addSaved}
+          deleteSaved={this.props.deleteSaved}
         />
       </>
     );

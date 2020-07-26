@@ -3,24 +3,29 @@ import { connect } from "react-redux";
 import ProfileView from "../profile/profileViewComponent";
 import { SideComponent } from "./sideComponent";
 import { withRouter } from "react-router-dom";
-import { isTopToggle, addLike, deleteLike } from "../../redux/actionCreators";
+import {
+  isTopToggle,
+  addLike,
+  deleteLike,
+  addSaved,
+  deleteSaved,
+} from "../../redux/actionCreators";
 
 class Posts extends Component {
   render() {
     const PostList = () => {
-      console.log(this.props.posts);
-      if (this.props.isTop) {
+      if (this.props.isTop)
         this.props.posts.sort(
           (post1, post2) =>
             parseInt(post2.likes.length) - parseInt(post1.likes.length)
         );
-      } else {
+      else
         this.props.posts.sort(
           (post1, post2) =>
             parseFloat(post1.timeSincePosted) -
             parseFloat(post2.timeSincePosted)
         );
-      }
+
       return this.props.posts.map((post) => (
         <div className="row shadow-lg mt-5">
           <div className="col-8">
@@ -40,7 +45,11 @@ class Posts extends Component {
               </div>
               <div className="col offset-3">
                 <img
-                  src="icons/like.svg"
+                  src={
+                    post.likes.includes(this.props.loggedInProfile.id)
+                      ? "icons/liked.svg"
+                      : "icons/like.svg"
+                  }
                   width={25}
                   height={25}
                   alt="Like"
@@ -84,6 +93,15 @@ class Posts extends Component {
               addLike={this.props.addLike}
               deleteLike={this.props.deleteLike}
               liker={this.props.loggedInProfile.id}
+              isSaved={
+                this.props.saved.filter(
+                  (save) =>
+                    save.postId === post.id &&
+                    save.profileId.includes(this.props.loggedInProfile.id)
+                ).length > 0
+              }
+              addSaved={this.props.addSaved}
+              deleteSaved={this.props.deleteSaved}
             />
           </div>
         </div>
@@ -147,6 +165,7 @@ class Posts extends Component {
 const mapStateToProps = (state) => ({
   posts: state.posts,
   comments: state.comments,
+  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
   isTop: state.utility.isTop,
 });
@@ -155,5 +174,7 @@ const mapDispatchToProps = (dispatch) => ({
   isTopToggle: (isTop) => dispatch(isTopToggle(isTop)),
   addLike: (post) => dispatch(addLike(post)),
   deleteLike: (post) => dispatch(deleteLike(post)),
+  addSaved: (post) => dispatch(addSaved(post)),
+  deleteSaved: (post) => dispatch(deleteSaved(post)),
 });
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));

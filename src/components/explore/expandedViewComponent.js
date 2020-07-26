@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addLikeExplore, deleteLikeExplore } from "../../redux/actionCreators";
+import {
+  addLikeExplore,
+  deleteLikeExplore,
+  addSaved,
+  deleteSaved,
+} from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
 import Comments from "../post/comments";
 const About = (props) => {
@@ -12,7 +17,11 @@ const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.svg"
+        src={
+          props.post.likes.includes(props.liker)
+            ? "icons/liked.svg"
+            : "icons/like.svg"
+        }
         alt="likes"
         height={30}
         width={30}
@@ -20,11 +29,13 @@ const Info = (props) => {
           if (props.post.likes.includes(props.liker))
             props.deleteLikeExplore({
               postId: props.post.id,
+              category: props.active,
               liker: props.liker,
             });
           else
             props.addLikeExplore({
               postId: props.post.id,
+              category: props.active,
               liker: props.liker,
             });
         }}
@@ -50,11 +61,26 @@ const Info = (props) => {
         </a>
       </div>
       <img
-        src="icons/save.svg"
+        src={
+          props.isSaved //check if saved
+            ? "icons/saved.svg"
+            : "icons/save.svg"
+        }
         alt="saved"
         width={50}
         height={50}
         className="ml-2"
+        onClick={() => {
+          props.isSaved
+            ? props.deleteSaved({
+                postId: props.post.id,
+                profileId: props.liker,
+              })
+            : props.addSaved({
+                postId: props.post.id,
+                profileId: props.liker,
+              });
+        }}
       />
     </div>
   );
@@ -79,7 +105,11 @@ const PostList = (props) => {
           </div>
           <div className="col offset-3">
             <img
-              src="icons/like.svg"
+              src={
+                post.likes.includes(props.liker)
+                  ? "icons/liked.svg"
+                  : "icons/like.svg"
+              }
               width={25}
               height={25}
               alt="Like"
@@ -109,6 +139,14 @@ const PostList = (props) => {
           addLikeExplore={props.addLikeExplore}
           deleteLikeExplore={props.deleteLikeExplore}
           liker={props.liker}
+          isSaved={
+            props.saved.filter(
+              (save) =>
+                save.postId === post.id && save.profileId.includes(props.liker) //liker= current logged in profile
+            ).length > 0
+          }
+          addSaved={props.addSaved}
+          deleteSaved={props.deleteSaved}
         />
         <hr />
         <About about={post.about} />
@@ -130,6 +168,9 @@ class ExpandedView extends Component {
             addLikeExplore={this.props.addLikeExplore}
             deleteLikeExplore={this.props.deleteLikeExplore}
             liker={this.props.loggedInProfile.id}
+            saved={this.props.saved}
+            addSaved={this.props.addSaved}
+            deleteSaved={this.props.deleteSaved}
           />
         </div>
       </>
@@ -139,11 +180,14 @@ class ExpandedView extends Component {
 
 const mapStateToProps = (state) => ({
   explorePosts: state.explore,
+  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addLikeExplore: (post) => dispatch(addLikeExplore(post)),
   deleteLikeExplore: (post) => dispatch(deleteLikeExplore(post)),
+  addSaved: (post) => dispatch(addSaved(post)),
+  deleteSaved: (post) => dispatch(deleteSaved(post)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ExpandedView);

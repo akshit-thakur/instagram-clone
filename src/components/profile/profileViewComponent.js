@@ -57,8 +57,8 @@ class ProfileView extends Component {
           igtv={this.props.igtv.filter(
             (post) => post.profile.id === this.props.loggedInProfile.id
           )}
-          saved={this.props.saved.filter(
-            (post) => post.profile.id === this.props.loggedInProfile.id
+          saved={this.props.saved.filter((post) =>
+            post.profileId.includes(this.props.loggedInProfile.id)
           )}
           tagged={this.props.tagged.filter(
             (post) => post.profile.id === this.props.loggedInProfile.id

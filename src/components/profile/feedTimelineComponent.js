@@ -1,19 +1,56 @@
 import React, { Component } from "react";
 import Comments from "../post/comments";
 import { baseUrl } from "../../shared/baseUrl";
-import { postModal, addLike, deleteLike } from "../../redux/actionCreators";
+import {
+  postModal,
+  addLike,
+  deleteLike,
+  addSaved,
+  deleteSaved,
+} from "../../redux/actionCreators";
 import { connect } from "react-redux";
 
 const About = (props) => {
   if (props.about !== "") return <div className="about-box">{props.about}</div>;
   else return <div></div>;
 };
-
+const DecideToDisplay = (props) => {
+  //saved icon
+  if (props.loggedId === props.posterId) return <div></div>;
+  else {
+    const objToPass = {
+      postId: props.postId,
+      profileId: props.loggedId,
+    };
+    return (
+      <img
+        src={
+          props.isSaved //check if saved
+            ? "icons/saved.svg"
+            : "icons/save.svg"
+        }
+        alt="save"
+        width={50}
+        height={50}
+        className="ml-5"
+        onClick={() =>
+          props.isSaved
+            ? props.deleteSaved(objToPass)
+            : props.addSaved(objToPass)
+        }
+      />
+    );
+  }
+};
 const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.svg"
+        src={
+          props.post.likes.includes(props.liker)
+            ? "icons/liked.svg"
+            : "icons/like.svg"
+        }
         alt="likes"
         height={30}
         width={30}
@@ -50,12 +87,13 @@ const Info = (props) => {
           Block
         </a>
       </div>
-      <img
-        src="icons/save.svg"
-        alt="report here"
-        width={50}
-        height={50}
-        className="ml-2"
+      <DecideToDisplay
+        loggedId={props.liker}
+        isSaved={props.isSaved}
+        posterId={props.post.profile.id}
+        postId={props.post.id}
+        addSaved={props.addSaved}
+        deleteSaved={props.deleteSaved}
       />
     </div>
   );
@@ -80,7 +118,11 @@ const PostList = (props) => {
           </div>
           <div className="col offset-3">
             <img
-              src="icons/like.svg"
+              src={
+                post.likes.includes(props.liker)
+                  ? "icons/liked.svg"
+                  : "icons/like.svg"
+              }
               width={25}
               height={25}
               alt="Like"
@@ -110,6 +152,15 @@ const PostList = (props) => {
           post={post}
           addLike={props.addLike}
           deleteLike={props.deleteLike}
+          addSaved={props.addSaved}
+          deleteSaved={props.deleteSaved}
+          liker={props.liker}
+          isSaved={
+            props.saved.filter(
+              (save) =>
+                save.postId === post.id && save.profileId.includes(props.liker) //liker= current logged in profile
+            ).length > 0
+          }
         />
         <hr />
         <About about={post.about} />
@@ -119,7 +170,6 @@ const PostList = (props) => {
     </div>
   ));
 };
-
 class FeedTimeline extends Component {
   render() {
     return (
@@ -128,6 +178,10 @@ class FeedTimeline extends Component {
           posts={this.props.posts}
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
+          addSaved={this.props.addSaved}
+          deleteSaved={this.props.deleteSaved}
+          liker={this.props.loggedInProfile.id}
+          saved={this.props.saved}
         />
       </div>
     );
@@ -135,6 +189,7 @@ class FeedTimeline extends Component {
 }
 const mapStateToProps = (state) => ({
   posts: state.posts,
+  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
 });
 
@@ -142,5 +197,7 @@ const mapDispatchToProps = (dispatch) => ({
   postModal: (post) => dispatch(postModal(post)),
   addLike: (post) => dispatch(addLike(post)),
   deleteLike: (post) => dispatch(deleteLike(post)),
+  addSaved: (post) => dispatch(addSaved(post)),
+  deleteSaved: (post) => dispatch(deleteSaved(post)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FeedTimeline);

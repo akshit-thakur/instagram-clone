@@ -7,12 +7,43 @@ const About = (props) => {
     return <div className="about-box">{props.about}</div>;
   } else return <div></div>;
 };
-
+const DecideToDisplay = (props) => {
+  //saved icon
+  if (props.loggedId === props.posterId) return <div></div>;
+  else {
+    const objToPass = {
+      postId: props.postId,
+      profileId: props.loggedId,
+    };
+    return (
+      <img
+        src={
+          props.isSaved //check if saved
+            ? "icons/saved.svg"
+            : "icons/save.svg"
+        }
+        alt="save"
+        width={50}
+        height={50}
+        className="ml-5"
+        onClick={() => {
+          props.isSaved
+            ? props.deleteSaved(objToPass)
+            : props.addSaved(objToPass);
+        }}
+      />
+    );
+  }
+};
 const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.svg"
+        src={
+          props.post.likes.includes(props.liker)
+            ? "icons/liked.svg"
+            : "icons/like.svg"
+        }
         alt="likes"
         height={30}
         width={30}
@@ -49,13 +80,15 @@ const Info = (props) => {
           Block
         </a>
       </div>
-      <img
-        src="icons/save.svg"
-        alt="save"
-        width={50}
-        height={50}
-        className="ml-5"
+      <DecideToDisplay
+        loggedId={props.liker}
+        isSaved={props.isSaved}
+        posterId={props.post.profile.id}
+        postId={props.post.id}
+        addSaved={props.addSaved}
+        deleteSaved={props.deleteSaved}
       />
+      {/*save icon*/}
     </div>
   );
 };
@@ -69,6 +102,9 @@ export const SideComponent = (props) => {
         addLike={props.addLike}
         deleteLike={props.deleteLike}
         liker={props.liker}
+        isSaved={props.isSaved}
+        addSaved={props.addSaved}
+        deleteSaved={props.deleteSaved}
       />
       <hr />
       <About about={props.post.about} />
