@@ -17,18 +17,18 @@ export const PublicPrivateProfileHeader = (props) => {
         <div className="row p-3">
           <h3>{props.profile.name}</h3>
           <button className="btn shadow text-dark text-weight-bold mx-5">
-            <img src="icons/follow request.png" alt="follow icon" width={30} />
+            <img src="icons/follow request.svg" alt="follow icon" width={30} />
             Follow
           </button>
           <img
-            src="icons/messages.png"
+            src="icons/messages.svg"
             alt="message"
             width={30}
             height={30}
             className="mt-2"
           />
           <img
-            src="icons/alert.png"
+            src="icons/alert.svg"
             alt="report"
             width={20}
             height={20}

@@ -69,6 +69,7 @@ class Explore extends Component {
                   <h4>{person.name}</h4>
                   <br />
                   <button className="btn shadow text-dark text-weight-bold">
+                    <img src="icons/follow.svg" alt="follow" width={30} />
                     Follow
                   </button>
                 </center>
@@ -147,7 +148,7 @@ class Explore extends Component {
           </ul>
           <div className="row col">
             <img
-              src="icons/feed,gallery.png"
+              src="icons/feedgrid.svg"
               alt="gallery"
               className="mx-1"
               width={30}
@@ -155,7 +156,7 @@ class Explore extends Component {
               onClick={() => this.props.toggleExploreView(false)}
             />
             <img
-              src="icons/gallery,timeline.png"
+              src="icons/feedtimeline.svg"
               alt="gallery"
               className="mx-1"
               width={30}

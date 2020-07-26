@@ -12,7 +12,7 @@ const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.png"
+        src="icons/like.svg"
         alt="likes"
         height={30}
         width={30}
@@ -30,10 +30,10 @@ const Info = (props) => {
         }}
       />
       {props.likes}
-      <img src="icons/comment.png" alt="likes" width={30} height={30} />
+      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
       {props.comments}
       <img
-        src="icons/alert.png"
+        src="icons/alert.svg"
         alt="report here"
         height={25}
         width={25}
@@ -50,7 +50,7 @@ const Info = (props) => {
         </a>
       </div>
       <img
-        src="icons/save.png"
+        src="icons/save.svg"
         alt="save"
         width={50}
         height={50}

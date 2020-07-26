@@ -12,7 +12,7 @@ const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.png"
+        src="icons/like.svg"
         alt="likes"
         height={30}
         width={30}
@@ -30,10 +30,10 @@ const Info = (props) => {
         }}
       />
       {props.post.likes.length}
-      <img src="icons/comment.png" alt="likes" width={30} height={30} />
+      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
       {props.comments}
       <img
-        src="icons/alert.png"
+        src="icons/alert.svg"
         alt="report here"
         height={25}
         width={25}
@@ -50,7 +50,7 @@ const Info = (props) => {
         </a>
       </div>
       <img
-        src="icons/save.png"
+        src="icons/save.svg"
         alt="saved"
         width={50}
         height={50}
@@ -79,7 +79,7 @@ const PostList = (props) => {
           </div>
           <div className="col offset-3">
             <img
-              src="icons/like.png"
+              src="icons/like.svg"
               width={25}
               height={25}
               alt="Like"
@@ -96,8 +96,8 @@ const PostList = (props) => {
                   });
               }}
             />
-            <img src="icons/comment.png" width={25} height={25} alt="Comment" />
-            <img src="icons/messages.png" width={25} height={25} alt="Share" />
+            <img src="icons/comment.svg" width={25} height={25} alt="Comment" />
+            <img src="icons/messages.svg" width={25} height={25} alt="Share" />
           </div>
         </div>
         <img src={post.image} alt="post" className="post-img-expanded" />

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { baseUrl } from "../../shared/baseUrl";
-import { setNavigationModalTrigger } from "../../redux/actionCreators";
+import {
+  setNavigationModalTrigger,
+  toggleSearchBox,
+} from "../../redux/actionCreators";
 import { connect } from "react-redux";
 class Navigation extends Component {
   render() {
@@ -13,10 +16,23 @@ class Navigation extends Component {
     const NavList = () => {
       return (
         <ul className="navbar list-unstyled">
-          <li className="nav-item">
+          <input
+            type="text"
+            placeholder="Search"
+            size={10}
+            className={`${
+              this.props.isSearchBoxVisible ? "visible" : "invisible"
+            }`}
+          />
+          <li
+            className="nav-item"
+            onClick={() => {
+              this.props.toggleSearchBox();
+            }}
+          >
             <a className="nav-link " href={`${baseUrl}`}>
               <img
-                src={`icons/search.png`}
+                src={`icons/search.svg`}
                 alt="search"
                 title="search"
                 width={30}
@@ -26,14 +42,14 @@ class Navigation extends Component {
 
           <li className="nav-item ">
             <a className="nav-link " href="/">
-              <img src={`icons/home.png`} alt="home" title="home" width={30} />
+              <img src={`icons/home.svg`} alt="home" title="home" width={30} />
             </a>
           </li>
 
           <li className="nav-item ">
             <a className="nav-link" href="/explore">
               <img
-                src={`icons/explore.png`}
+                src={`icons/explore.svg`}
                 alt="explore"
                 title="explore"
                 width={30}
@@ -44,7 +60,7 @@ class Navigation extends Component {
           <li className="nav-item ">
             <a className="nav-link " href="/messages">
               <img
-                src={`icons/messages.png`}
+                src={`icons/messages.svg`}
                 alt="messages"
                 title="messages"
                 width={30}
@@ -54,7 +70,7 @@ class Navigation extends Component {
 
           <li className="nav-item ">
             <a className="nav-link " href="/you">
-              <img src={`icons/profile.png`} alt="profile" width={30} />
+              <img src={`icons/profile.svg`} alt="profile" width={30} />
             </a>
           </li>
           <li className="nav-item dropdown list-unstyled">
@@ -63,7 +79,7 @@ class Navigation extends Component {
               data-toggle="dropdown"
               href={`${baseUrl}`}
             >
-              <img src={`icons/navDropdown.png`} alt="dropdown" width={30} />
+              <img src={`icons/dropdown.svg`} alt="dropdown" width={30} />
             </a>
             <div className="dropdown-menu">
               <a
@@ -113,9 +129,11 @@ class Navigation extends Component {
 
 const mapStateToProps = (state) => ({
   isNewStoryModal: state.utility.isNewStoryModal,
+  isSearchBoxVisible: state.utility.isSearchBoxVisible,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setNavigationModalTrigger: () => dispatch(setNavigationModalTrigger()),
+  toggleSearchBox: () => dispatch(toggleSearchBox()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

@@ -15,7 +15,6 @@ Added Dummy Data to shared directory(enough to make one post work)
 TODO: 
 Comment box and About Box are at odds
 Make the page layout screen responsive 
-Populate more data
 *******************
 --------------------------------------------
 Fourth Commit (12/07/2020)
@@ -58,8 +57,7 @@ Info in active chat window now toggles between Chat window and Chat info(with on
 
 *******************
 TODO:
-Search toggle on navbar
-(if possible) add the like and save functionality
+Add the save functionality
 *******************
 --------------------------------------------
 Eighth commit (18/07/2020)
@@ -96,10 +94,6 @@ Framework of Redux done
 Changed all export default in /shared to export const and thus all imports to import {} from './'
 private/public profile view now works perfectly
 Other minor changes
-*******************
-TODO:
-Reducers to code and make changes in code accordingly.
-*******************
 --------------------------------------------
 Twelveth Commit(23/07/2020)
 Added igtv,tagged,saved in /shared and corresponding action types and action reducers
@@ -113,7 +107,7 @@ Created new branch 'redux' on git repo so that nothing overlaps
 Fourteenth and Fifteenth Commit(23/07/2020)
 These were on 'redux' branch.. redux enabled website is now working.
 --------------------------------------------
-Sixteenth Commit
+Sixteenth Commit(24/07/2020)
 Homepage now sorts posts according to likes and timeSincePosted.
 Side Component of post now shows the actual number of comments(replies not included)
 All posts(homepage,explore(all tabs),profile(all tabs)) have now working Like feature
@@ -122,6 +116,14 @@ Work laid out for navbar dropdown onClicks
 TODO:
 Include reply in actual number of comments
 Add the already liked heart icon
-Use 'visible/invisible' class to toggle the search box
+*******************
+--------------------------------------------
+Seventeenth Commit(26/07/2020)
+Search Button toggles search box on navbar.
+Search Box added to messages.
+Replaced all icons with SVG.
+*******************
+TODO:
+Make svg for views, info button
 *******************
 --------------------------------------------

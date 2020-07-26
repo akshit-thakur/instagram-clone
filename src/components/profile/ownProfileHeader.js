@@ -17,21 +17,21 @@ export const OwnProfileHeader = (props) => {
         <div className="row p-3">
           <h3>{props.profile.name}</h3>
           <img
-            src="icons/edit.png"
+            src="icons/edit.svg"
             alt="edit"
             width={30}
             height={30}
             className="ml-auto"
           />
           <img
-            src="icons/camera.png"
+            src="icons/camera.svg"
             alt="post"
             width={30}
             height={30}
             className="ml-auto"
           />
           <img
-            src="icons/settings.png"
+            src="icons/settings.svg"
             alt="settings"
             width={30}
             height={30}

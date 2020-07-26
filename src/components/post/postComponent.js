@@ -40,7 +40,7 @@ class Posts extends Component {
               </div>
               <div className="col offset-3">
                 <img
-                  src="icons/like.png"
+                  src="icons/like.svg"
                   width={25}
                   height={25}
                   alt="Like"
@@ -58,13 +58,13 @@ class Posts extends Component {
                   }}
                 />
                 <img
-                  src="icons/comment.png"
+                  src="icons/comment.svg"
                   width={25}
                   height={25}
                   alt="Comment"
                 />
                 <img
-                  src="icons/messages.png"
+                  src="icons/messages.svg"
                   width={25}
                   height={25}
                   alt="Share"

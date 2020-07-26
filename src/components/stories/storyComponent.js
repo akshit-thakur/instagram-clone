@@ -12,13 +12,13 @@ class Story extends Component {
           <div className="h2">Stories</div>
           <img
             className="offset-10"
-            src="icons/camera.png"
+            src="icons/camera.svg"
             alt="add new story"
             width={30}
             height={30}
           />
           <img
-            src="icons/settings.png"
+            src="icons/settings.svg"
             alt="Settings"
             width={30}
             height={30}

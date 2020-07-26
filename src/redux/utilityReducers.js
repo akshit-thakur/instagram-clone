@@ -8,6 +8,7 @@ export const Utility = (
     isInfoClicked: false,
     isNavigationModalTriggered: false,
     isPostClicked: false,
+    isSearchBoxVisible: false,
     isTop: true, //for homepage
     loggedInProfile: {
       id: "1",
@@ -61,6 +62,8 @@ export const Utility = (
       return { ...state, isInfoClicked: !state.isInfoClicked };
     case ActionTypes.TOGGLE_NAVIGATION:
       return { ...state, isNavigationModalTriggered: true };
+    case ActionTypes.TOGGLE_SEARCH:
+      return { ...state, isSearchBoxVisible: !state.isSearchBoxVisible };
     default:
       return state;
   }

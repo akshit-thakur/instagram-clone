@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import Comments from "../post/comments";
 import { baseUrl } from "../../shared/baseUrl";
 import { connect } from "react-redux";
-import { postModal, addLike, deleteLike } from "../../redux/actionCreators";
+import {
+  postModal,
+  addLike,
+  deleteLike,
+  addSaved,
+  deleteSaved,
+} from "../../redux/actionCreators";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -13,7 +19,7 @@ const Info = (props) => {
   return (
     <div>
       <img
-        src="icons/like.png"
+        src="icons/like.svg"
         alt="likes"
         height={30}
         width={30}
@@ -31,10 +37,10 @@ const Info = (props) => {
         }}
       />
       {props.likes.length}
-      <img src="icons/comment.png" alt="likes" width={30} height={30} />
+      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
       {props.comments}
       <img
-        src="icons/alert.png"
+        src="icons/alert.svg"
         alt="report here"
         height={25}
         width={25}
@@ -51,10 +57,10 @@ const Info = (props) => {
         </a>
       </div>
       <img
-        src="icons/save.png"
+        src={`${props.isSaved ? "icons/savedFill.svg" : "icons/save.svg"}`}
         alt="save"
-        width={50}
-        height={50}
+        width={`${props.isSaved ? 100 : 50}`}
+        height={`${props.isSaved ? 100 : 50}`}
         className="ml-5"
       />
     </div>
@@ -82,7 +88,7 @@ const Post = (props) => {
               </div>
               <div className="offset-4 col">
                 <img
-                  src="icons/like.png"
+                  src="icons/like.svg"
                   width={25}
                   height={25}
                   alt="Like"
@@ -100,13 +106,13 @@ const Post = (props) => {
                   }}
                 />
                 <img
-                  src="icons/comment.png"
+                  src="icons/comment.svg"
                   width={25}
                   height={25}
                   alt="Comment"
                 />
                 <img
-                  src="icons/messages.png"
+                  src="icons/messages.svg"
                   width={25}
                   height={25}
                   alt="Share"
@@ -134,6 +140,7 @@ const Post = (props) => {
               liker={props.liker}
               addLike={props.addLike}
               deleteLike={props.deleteLike}
+              isSaved={props.isSaved}
             />
 
             <hr />
@@ -192,6 +199,15 @@ class FeedGallery extends Component {
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
           isClicked={this.props.isPostClicked}
+          isSaved={
+            this.props.modalPost === undefined
+              ? false
+              : this.props.saved.filter(
+                  (post) =>
+                    post.profile.id === this.props.loggedInProfile.id &&
+                    post.image === this.props.modalPost.image
+                ).length !== 0
+          }
           liker={this.props.loggedInProfile.id}
         />
       </>
@@ -200,6 +216,7 @@ class FeedGallery extends Component {
 }
 const mapStateToProps = (state) => ({
   postOriginal: state.posts,
+  saved: state.saved,
   isPostClicked: state.utility.isPostClicked,
   modalPost: state.utility.postModal,
   loggedInProfile: state.utility.loggedInProfile,
@@ -209,5 +226,7 @@ const mapDispatchToProps = (dispatch) => ({
   postModal: (post) => dispatch(postModal(post)),
   addLike: (post) => dispatch(addLike(post)),
   deleteLike: (post) => dispatch(deleteLike(post)),
+  addSaved: (post) => dispatch(addSaved(post)),
+  deleteSaved: (post) => dispatch(deleteSaved(post)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FeedGallery);

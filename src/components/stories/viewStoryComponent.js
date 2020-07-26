@@ -18,14 +18,14 @@ export const ViewStory = (props) => {
           <div className="col-5 h6 ml-0">{props.story.name}</div>
           {/*TODO: if active profile is same as story poster name*/}
           <div className="col-1">
-            <img src="icons/views.png" alt="views" width={35} height={35} />
+            <img src="icons/views.svg" alt="views" width={35} height={35} />
             {props.story.views}
           </div>
           <div className="col-2 offset-2">
-            <img src="icons/comment.png" width={40} height={40} alt="Comment" />
-            <img src="icons/messages.png" width={40} height={40} alt="Share" />
+            <img src="icons/comment.svg" width={40} height={40} alt="Comment" />
+            <img src="icons/messages.svg" width={40} height={40} alt="Share" />
             <img
-              src="icons/alert.png"
+              src="icons/alert.svg"
               width={30}
               height={30}
               alt="Report"

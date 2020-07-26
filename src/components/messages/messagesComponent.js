@@ -8,7 +8,11 @@ class Messages extends Component {
     const LeftPanel = (props) => {
       return (
         <div className="card col-3">
-          Search
+          <input
+            type="text"
+            placeholder="Search messages"
+            className="mx-5 mt-3"
+          />
           <hr />
           {props.messages.map((message) => {
             let otherPerson = message.persons.filter(
@@ -83,7 +87,7 @@ class Messages extends Component {
                 <h6 className="p-2">Active Now</h6>
               </div>
               <img
-                src="icons/info.png"
+                src="icons/info.svg"
                 className="mx-auto my-auto"
                 alt="Info"
                 width={50}
@@ -104,13 +108,13 @@ class Messages extends Component {
           Messages
           <div className="offset-10">
             <img
-              src="icons/edit.png"
+              src="icons/edit.svg"
               className="m-1"
               alt="New Post"
               width={30}
             />
             <img
-              src="icons/settings.png"
+              src="icons/settings.svg"
               alt="Settings"
               width={30}
               className="m-1 dropdown-toggle caret-off"

@@ -69,8 +69,8 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             <img
               src={
                 active === "postsExpanded"
-                  ? `icons/gallery,timeline.png`
-                  : `icons/feed,gallery.png`
+                  ? `icons/feedtimeline.svg`
+                  : `icons/feedgrid.svg`
               }
               alt="Gallery Feed"
               width={30}
@@ -89,7 +89,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
               else switchNav("igtvExpanded");
             }}
           >
-            <img src="icons/igtv.png" alt="IGTV" width={30} />
+            <img src="icons/igtv.svg" alt="IGTV" width={30} />
             IGTV
           </a>
         </li>
@@ -107,7 +107,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
               else switchNav("savedExpanded");
             }}
           >
-            <img src="icons/save.png" alt="Saved" width={30} />
+            <img src="icons/save.svg" alt="Saved" width={30} />
             Saved
           </a>
         </li>
@@ -123,7 +123,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
               else switchNav("taggedExpanded");
             }}
           >
-            <img src="icons/tagged.png" alt="Tagged" width={30} />
+            <img src="icons/tagged.svg" alt="Tagged" width={30} />
             Tagged
           </a>
         </li>
