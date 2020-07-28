@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import {
   addLikeExplore,
   deleteLikeExplore,
-  addSaved,
-  deleteSaved,
+  addSavedExplore,
+  deleteSavedExplore,
 } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
 import Comments from "../post/comments";
@@ -72,11 +72,11 @@ const Info = (props) => {
         className="ml-2"
         onClick={() => {
           props.isSaved
-            ? props.deleteSaved({
+            ? props.deleteSavedExplore({
                 postId: props.post.id,
                 profileId: props.liker,
               })
-            : props.addSaved({
+            : props.addSavedExplore({
                 postId: props.post.id,
                 profileId: props.liker,
               });
@@ -140,13 +140,12 @@ const PostList = (props) => {
           deleteLikeExplore={props.deleteLikeExplore}
           liker={props.liker}
           isSaved={
-            props.saved.filter(
-              (save) =>
-                save.postId === post.id && save.profileId.includes(props.liker) //liker= current logged in profile
+            props.posts.filter(
+              (p) => p.id === post.id && p.savedBy.includes(props.liker) //liker= current logged in profile
             ).length > 0
           }
-          addSaved={props.addSaved}
-          deleteSaved={props.deleteSaved}
+          addSavedExplore={props.addSavedExplore}
+          deleteSavedExplore={props.deleteSavedExplore}
         />
         <hr />
         <About about={post.about} />
@@ -168,9 +167,8 @@ class ExpandedView extends Component {
             addLikeExplore={this.props.addLikeExplore}
             deleteLikeExplore={this.props.deleteLikeExplore}
             liker={this.props.loggedInProfile.id}
-            saved={this.props.saved}
-            addSaved={this.props.addSaved}
-            deleteSaved={this.props.deleteSaved}
+            addSavedExplore={this.props.addSavedExplore}
+            deleteSavedExplore={this.props.deleteSavedExplore}
           />
         </div>
       </>
@@ -180,14 +178,13 @@ class ExpandedView extends Component {
 
 const mapStateToProps = (state) => ({
   explorePosts: state.explore,
-  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addLikeExplore: (post) => dispatch(addLikeExplore(post)),
   deleteLikeExplore: (post) => dispatch(deleteLikeExplore(post)),
-  addSaved: (post) => dispatch(addSaved(post)),
-  deleteSaved: (post) => dispatch(deleteSaved(post)),
+  addSavedExplore: (post) => dispatch(addSavedExplore(post)),
+  deleteSavedExplore: (post) => dispatch(deleteSavedExplore(post)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ExpandedView);

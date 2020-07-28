@@ -2,15 +2,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 import { setActiveTabProfile } from "../../redux/actionCreators";
+import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 
 const PublicOrPrivateSelector = (props) => {
   if (props.profile.isPublic === true)
     return (
       <ChooseComponent
         activeState={props.active}
-        profile={props.profile}
         posts={props.posts}
         igtv={props.igtv}
         saved={props.saved}
@@ -27,23 +26,24 @@ const PublicOrPrivateSelector = (props) => {
 };
 class ProfileView extends Component {
   render() {
-    console.log(this.props);
     return (
       <>
         <div className="container">
           <ChooseTop
-            follow={
-              this.props.followers.filter(
-                (profile) => profile.id === this.props.loggedInProfile.id
+            profile={this.props.loggedInProfile}
+            activeProfile={this.props.activeProfile}
+            posts={this.props.posts.filter(
+              (post) => post.profile.id === this.props.activeProfile.id
+            )}
+            stories={
+              this.props.stories.filter(
+                (profile) => profile.id === this.props.activeProfile.id
               )[0]
             }
-            posts={this.props.posts.filter(
-              (post) => post.profile.id === this.props.loggedInProfile.id
-            )}
-            profile={this.props.loggedInProfile}
           />
           <ChooseNav
             profile={this.props.loggedInProfile}
+            activeProfile={this.props.activeProfile}
             switchNav={this.props.setActiveTabProfile}
             active={this.props.activeTabProfile}
           />
@@ -52,16 +52,20 @@ class ProfileView extends Component {
           active={this.props.activeTabProfile}
           profile={this.props.loggedInProfile}
           posts={this.props.posts.filter(
-            (post) => post.profile.id === this.props.loggedInProfile.id
+            (post) =>
+              post.profile.id === this.props.loggedInProfile.id &&
+              post.category === "post"
           )}
-          igtv={this.props.igtv.filter(
-            (post) => post.profile.id === this.props.loggedInProfile.id
+          igtv={this.props.posts.filter(
+            (post) =>
+              post.profile.id === this.props.loggedInProfile.id &&
+              post.category === "igtv"
           )}
-          saved={this.props.saved.filter((post) =>
-            post.profileId.includes(this.props.loggedInProfile.id)
+          saved={this.props.posts.filter((post) =>
+            post.savedBy.includes(this.props.loggedInProfile.id)
           )}
-          tagged={this.props.tagged.filter(
-            (post) => post.profile.id === this.props.loggedInProfile.id
+          tagged={this.props.posts.filter((post) =>
+            post.tagged.includes(this.props.loggedInProfile.id)
           )}
         />
       </>
@@ -71,12 +75,10 @@ class ProfileView extends Component {
 
 const mapStateToProps = (state) => ({
   activeTabProfile: state.utility.activeTabProfile,
-  followers: state.followers,
   loggedInProfile: state.utility.loggedInProfile,
+  activeProfile: state.utility.loggedInProfile, //for the time being
   posts: state.posts,
-  igtv: state.igtv,
-  saved: state.saved,
-  tagged: state.tagged,
+  stories: state.stories,
 });
 
 const mapDispatchToProps = (dispatch) => ({

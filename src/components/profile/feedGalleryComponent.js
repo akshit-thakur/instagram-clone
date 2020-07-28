@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Comments from "../post/comments";
-import { baseUrl } from "../../shared/baseUrl";
 import { connect } from "react-redux";
 import {
-  postModal,
   addLike,
-  deleteLike,
   addSaved,
+  deleteLike,
   deleteSaved,
+  postModal,
 } from "../../redux/actionCreators";
+import { baseUrl } from "../../shared/baseUrl";
+import Comments from "../post/comments";
 const About = (props) => {
   if (props.about !== "") {
     return <div className="about-box">{props.about}</div>;
@@ -43,11 +43,16 @@ const DecideToDisplay = (props) => {
   }
 };
 const Info = (props) => {
+  console.log(props.likes, "-------------------");
   return (
     <div>
       <img
         src={
-          props.likes.includes(props.liker)
+          props.activeTab === "igtv"
+            ? props.likes.includes(props.liker)
+              ? "icons/liked.svg"
+              : "icons/like.svg"
+            : props.likes.includes(props.liker)
             ? "icons/liked.svg"
             : "icons/like.svg"
         }
@@ -170,6 +175,7 @@ const Post = (props) => {
               </button>
             </div>
             <Info
+              activeTab={props.activeTab}
               likes={props.postLikes}
               comments={props.post.comments}
               post={props.post}
@@ -213,17 +219,11 @@ class FeedGallery extends Component {
       ));
     };
 
-    const Bottom = (props) => {
-      return (
-        <div className="col-lg-10 offset-lg-1 row">
-          <PostGrid posts={props.posts} />
-        </div>
-      );
-    };
-
     return (
       <>
-        <Bottom posts={this.props.posts} />
+        <div className="col-lg-10 offset-lg-1 row">
+          <PostGrid posts={this.props.posts} />
+        </div>
         <Post
           post={this.props.modalPost}
           postLikes={
@@ -240,10 +240,10 @@ class FeedGallery extends Component {
           isSaved={
             this.props.modalPost === undefined
               ? false
-              : this.props.saved.filter(
+              : this.props.posts.filter(
                   (post) =>
-                    post.profileId.includes(this.props.loggedInProfile.id) &&
-                    post.postId === this.props.modalPost.id
+                    post.savedBy.includes(this.props.loggedInProfile.id) &&
+                    post.id === this.props.modalPost.id
                 ).length !== 0
           }
           liker={this.props.loggedInProfile.id}

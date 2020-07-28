@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Comments from "../post/comments";
-import { baseUrl } from "../../shared/baseUrl";
-import {
-  postModal,
-  addLike,
-  deleteLike,
-  addSaved,
-  deleteSaved,
-} from "../../redux/actionCreators";
 import { connect } from "react-redux";
+import {
+  addLike,
+  addSaved,
+  deleteLike,
+  deleteSaved,
+  postModal,
+} from "../../redux/actionCreators";
+import { baseUrl } from "../../shared/baseUrl";
+import Comments from "../post/comments";
 
 const About = (props) => {
   if (props.about !== "") return <div className="about-box">{props.about}</div>;
@@ -67,7 +67,7 @@ const Info = (props) => {
             });
         }}
       />
-      {props.likes}
+      {props.post.likes.length}
       <img src="icons/comment.svg" alt="comments" width={30} height={30} />
       {props.comments}
       <img
@@ -147,7 +147,7 @@ const PostList = (props) => {
       </div>
       <div className="col card">
         <Info
-          likes={post.likes.length}
+          activeTab={props.activeTab}
           comments={0}
           post={post}
           addLike={props.addLike}
@@ -156,9 +156,8 @@ const PostList = (props) => {
           deleteSaved={props.deleteSaved}
           liker={props.liker}
           isSaved={
-            props.saved.filter(
-              (save) =>
-                save.postId === post.id && save.profileId.includes(props.liker) //liker= current logged in profile
+            props.posts.filter(
+              (p) => p.id === post.id && p.savedBy.includes(props.liker) //liker= current logged in profile
             ).length > 0
           }
         />
@@ -175,21 +174,19 @@ class FeedTimeline extends Component {
     return (
       <div className="col-lg-8 offset-lg-2">
         <PostList
+          activeTab={this.props.activeState}
           posts={this.props.posts}
+          liker={this.props.loggedInProfile.id}
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
           addSaved={this.props.addSaved}
           deleteSaved={this.props.deleteSaved}
-          liker={this.props.loggedInProfile.id}
-          saved={this.props.saved}
         />
       </div>
     );
   }
 }
 const mapStateToProps = (state) => ({
-  posts: state.posts,
-  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
 });
 

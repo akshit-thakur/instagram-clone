@@ -24,6 +24,8 @@ export const Utility = (
         social: "Facebook",
         mentioned: "other account",
       },
+      followers: ["2"],
+      following: ["2"],
     },
     postModal: undefined,
     selectedStory: undefined,

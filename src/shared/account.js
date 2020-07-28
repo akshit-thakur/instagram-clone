@@ -13,6 +13,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "2",
@@ -28,6 +30,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["1", "3", "4", "5", "6", "7", "8", "9"],
+    following: ["1", "3", "4", "5", "6", "7", "8", "9"],
   },
   {
     id: "3",
@@ -43,6 +47,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "4",
@@ -58,6 +64,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "5",
@@ -73,6 +81,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "6",
@@ -88,6 +98,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "7",
@@ -103,6 +115,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "8",
@@ -118,6 +132,8 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
   {
     id: "9",
@@ -133,5 +149,7 @@ export const ACCOUNT = [
       social: "Facebook",
       mentioned: "other account",
     },
+    followers: ["2"],
+    following: ["2"],
   },
 ];

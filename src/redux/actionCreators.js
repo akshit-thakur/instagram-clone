@@ -180,3 +180,13 @@ export const deleteLikeExplore = (postInfo) => ({
 export const toggleSearchBox = () => ({
   type: ActionTypes.TOGGLE_SEARCH,
 });
+
+export const addSavedExplore = (postInfo) => ({
+  type: ActionTypes.ADD_SAVED_EXPLORE,
+  payload: postInfo,
+});
+
+export const deleteSavedExplore = (postInfo) => ({
+  type: ActionTypes.DELETE_SAVED_EXPLORE,
+  payload: postInfo,
+});
