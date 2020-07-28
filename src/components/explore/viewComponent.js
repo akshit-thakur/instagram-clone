@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  postModal,
   addLikeExplore,
+  addSavedExplore,
   deleteLikeExplore,
-  addSaved,
-  deleteSaved,
+  deleteSavedExplore,
+  postModal,
 } from "../../redux/actionCreators";
 import { baseUrl } from "../../shared/baseUrl";
 import Comments from "../post/comments";
@@ -73,11 +73,11 @@ const Info = (props) => {
         className="ml-5"
         onClick={() => {
           props.isSaved
-            ? props.deleteSaved({
+            ? props.deleteSavedExplore({
                 postId: props.post.id,
                 profileId: props.liker,
               })
-            : props.addSaved({
+            : props.addSavedExplore({
                 postId: props.post.id,
                 profileId: props.liker,
               });
@@ -168,14 +168,13 @@ const Post = (props) => {
               addLikeExplore={props.addLikeExplore}
               deleteLikeExplore={props.deleteLikeExplore}
               isSaved={
-                props.saved.filter(
-                  (save) =>
-                    save.postId === props.post.id &&
-                    save.profileId.includes(props.liker) //liker= current logged in profile
+                props.explorePosts.filter(
+                  (p) =>
+                    p.id === props.post.id && p.savedBy.includes(props.liker) //liker= current logged in profile
                 ).length > 0
               }
-              addSaved={props.addSaved}
-              deleteSaved={props.deleteSaved}
+              addSavedExplore={props.addSavedExplore}
+              deleteSavedExplore={props.deleteSavedExplore}
             />
             <hr />
             <About about={props.post.about} />
@@ -231,9 +230,9 @@ class View extends Component {
           liker={this.props.loggedInProfile.id}
           addLikeExplore={this.props.addLikeExplore}
           deleteLikeExplore={this.props.deleteLikeExplore}
-          saved={this.props.saved} //for isSaved found later
-          addSaved={this.props.addSaved}
-          deleteSaved={this.props.deleteSaved}
+          explorePosts={this.props.explorePosts}
+          addSavedExplore={this.props.addSavedExplore}
+          deleteSavedExplore={this.props.deleteSavedExplore}
         />
       </>
     );
@@ -241,7 +240,6 @@ class View extends Component {
 }
 const mapStateToProps = (state) => ({
   explorePosts: state.explore,
-  saved: state.saved,
   post: state.utility.postModal,
   isPostClicked: state.utility.isPostClicked,
   loggedInProfile: state.utility.loggedInProfile,
@@ -251,8 +249,8 @@ const mapDispatchToProps = (dispatch) => ({
   postModal: (post) => dispatch(postModal(post)),
   addLikeExplore: (post) => dispatch(addLikeExplore(post)),
   deleteLikeExplore: (post) => dispatch(deleteLikeExplore(post)),
-  addSaved: (post) => dispatch(addSaved(post)),
-  deleteSaved: (post) => dispatch(deleteSaved(post)),
+  addSavedExplore: (post) => dispatch(addSavedExplore(post)),
+  deleteSavedExplore: (post) => dispatch(deleteSavedExplore(post)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(View);

@@ -10,7 +10,7 @@ Third Commit (10-07-2020)
 
 Designed Home Page
 ml-2 to navicons applied
-Added Dummy Data to shared directory(enough to make one post work)
+Added Dummy Data to shared directory
 *******************
 TODO: 
 Comment box and About Box are at odds
@@ -30,7 +30,6 @@ Added popper.js etc to enable modal
 TODO: 
 Toggle the Posts icon when we toggle between expanded and compact view
 Make required UI adjustments(Expanded posts not aligned)
-
 *******************
 --------------------------------------------
 Fifth Commit (13/07/2020)
@@ -57,7 +56,6 @@ Info in active chat window now toggles between Chat window and Chat info(with on
 Eighth commit (18/07/2020)
 Pvt,Public and Following profile layouts
 Added utilityMethods in profile directory to hold the repeating functions ChooseComponent and changeClasses
-
 *******************
 TODO:
 Dropdowns need to be arranged... both triggers trigger same dropdown
@@ -65,14 +63,9 @@ Make the code consistent with the video
 *******************
 --------------------------------------------
 Ninth commit (20/07/2020)
-
 Story layout basic done.. dropdowns and other css stuff remains
 Expanded the "following" button dropdown a bit(more options now)
 Work laid out for single code to select own,following,private and public profile(just comments)
-*******************
-TODO:
-Make visual changes to IGTV in explore showing various subcategories like people you follow's IGTV
-*******************
 --------------------------------------------
 Tenth Commit (21/07/2020) 
 Reverted changes to a smaller card for story instead of screen filler card
@@ -109,7 +102,6 @@ Work laid out for navbar dropdown onClicks
 *******************
 TODO:
 Include reply in actual number of comments
-Add the already liked heart icon
 *******************
 --------------------------------------------
 Seventeenth Commit(26/07/2020)
@@ -126,6 +118,18 @@ Added Save functionality across Home,Explore,Profile.
 *******************
 TODO:
 Reduce unneccessary props passed around
-Optimize backend.. profile/saved shows no post.
+*******************
+--------------------------------------------
+Nineteenth Commit(28/07/2020)
+Profile tabs can now be succesfully toggled.
+In /shared, igtv,saved,tagged were merged into posts and followers into account to reduce the work at front end.
+PeopleYouMayKnow code optimized due to above change
+In components/profile code for choosing the headers was minimized and different headers were merged into utilityMethods
+Stories of active account now show on main profile only.. not in /stories.
+Homepage posts now show time since posted
+*******************
+TODO:
+Make modal for story and story highlights
+Remove likes:[] from posts category:igtv and change the if accordingly
 *******************
 --------------------------------------------

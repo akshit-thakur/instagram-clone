@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProfileView from "../profile/profileViewComponent";
-import { SideComponent } from "./sideComponent";
 import { withRouter } from "react-router-dom";
 import {
-  isTopToggle,
   addLike,
-  deleteLike,
   addSaved,
+  deleteLike,
   deleteSaved,
+  isTopToggle,
 } from "../../redux/actionCreators";
+import { SideComponent } from "./sideComponent";
 
 class Posts extends Component {
   render() {
@@ -29,7 +28,7 @@ class Posts extends Component {
       return this.props.posts.map((post) => (
         <div className="row shadow-lg mt-5">
           <div className="col-8">
-            <div className="row p-2" onClick={() => <ProfileView />}>
+            <div className="row p-2">
               <div className="col-2">
                 <img
                   src={post.profile.avatar}
@@ -79,6 +78,7 @@ class Posts extends Component {
                   alt="Share"
                 />
               </div>
+              {post.timeSincePosted}h
             </div>
             <img src={post.image} alt="post" className="post-img" />
           </div>
@@ -94,10 +94,10 @@ class Posts extends Component {
               deleteLike={this.props.deleteLike}
               liker={this.props.loggedInProfile.id}
               isSaved={
-                this.props.saved.filter(
-                  (save) =>
-                    save.postId === post.id &&
-                    save.profileId.includes(this.props.loggedInProfile.id)
+                this.props.posts.filter(
+                  (p) =>
+                    p.id === post.id &&
+                    p.savedBy.includes(this.props.loggedInProfile.id)
                 ).length > 0
               }
               addSaved={this.props.addSaved}
@@ -165,7 +165,6 @@ class Posts extends Component {
 const mapStateToProps = (state) => ({
   posts: state.posts,
   comments: state.comments,
-  saved: state.saved,
   loggedInProfile: state.utility.loggedInProfile,
   isTop: state.utility.isTop,
 });

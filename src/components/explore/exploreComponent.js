@@ -36,15 +36,17 @@ const ChooseComponent = ({ active, isExpanded }) => {
 
 class Explore extends Component {
   render() {
-    const PeopleYouMayKnow = ({ people, profileId, account }) => {
+    const PeopleYouMayKnow = ({ profile, accounts }) => {
       //find not followed and follow mutuals
       let peopleToDisplay = [];
-      for (let followers of account.followers) {
-        let tempPerson = people.filter((person) => person.id === followers)[0];
+      for (let followers of profile.followers) {
+        let tempPerson = accounts.filter(
+          (person) => person.id === followers
+        )[0];
         for (let followersOfFollower of tempPerson.followers) {
           if (
-            account.followers.includes(followersOfFollower) === false &&
-            followersOfFollower !== profileId
+            profile.followers.includes(followersOfFollower) === false &&
+            followersOfFollower !== profile.id
           )
             peopleToDisplay.push(followersOfFollower);
         }
@@ -83,13 +85,8 @@ class Explore extends Component {
       <div className="container">
         <h3>People You May Know</h3>
         <PeopleYouMayKnow
-          people={this.props.followers}
-          profileId={this.props.loggedInProfile.id}
-          account={
-            this.props.followers.filter(
-              (account) => account.id === this.props.loggedInProfile.id
-            )[0]
-          }
+          accounts={this.props.accounts}
+          profile={this.props.loggedInProfile}
         />
         <div className="row my-5">
           <ul className="nav nav-tabs col-11">
@@ -178,7 +175,6 @@ const mapStateToProps = (state) => ({
   loggedInProfile: state.utility.loggedInProfile,
   activeTabExplore: state.utility.activeTabExplore,
   accounts: state.accounts,
-  followers: state.followers,
   isExploreExpanded: state.utility.isExploreExpanded,
 });
 

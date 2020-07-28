@@ -2,7 +2,6 @@ import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
-import { OwnProfileHeader } from "./ownProfileHeader";
 
 export const changeClasses = (className) => {
   document.querySelector("#posts").classList.remove("active");
@@ -18,8 +17,8 @@ export const InfoHeader = (props) => {
   return (
     <>
       <div className="col-lg-2 ml-5 shadow">
-        {props.follow.followers.length} followers <hr />
-        {props.follow.following.length} following <hr />
+        {props.profile.followers.length} followers <hr />
+        {props.profile.following.length} following <hr />
         {props.posts.length} posts <hr />
         Story Highlights
       </div>
@@ -36,22 +35,198 @@ export const InfoHeader = (props) => {
   );
 };
 
-export const ChooseTop = ({ follow, posts, profile }) => {
-  //if(active profile id and clicked profile id are same)
-  return <OwnProfileHeader follow={follow} posts={posts} profile={profile} />;
-  //else if(clicked profile has active as follower)
-  // return (
-  //   <FollowingProfileHeader follow={follow} posts={posts} profile={profile} />
-  // );
-  // else if(profile.isPublic)
-  // return (<PublicPrivateProfileHeader follow={follow} posts={posts} profile={profile}/>);
-  //else
-  // return <privateProfileHeader />;
+const OwnProfileHeader = ({ profile }) => {
+  return (
+    <div className="col-lg-4 ml-5 shadow">
+      <div className="row p-3">
+        <h3>{profile.name}</h3>
+        <img
+          src="icons/edit.svg"
+          alt="edit"
+          width={30}
+          height={30}
+          className="ml-auto"
+        />
+        <img
+          src="icons/camera.svg"
+          alt="post"
+          width={30}
+          height={30}
+          className="ml-auto"
+        />
+        <img
+          src="icons/settings.svg"
+          alt="settings"
+          width={30}
+          height={30}
+          className="ml-auto"
+        />
+      </div>
+      <div className="scrollable">{profile.about}</div>
+    </div>
+  );
 };
 
-export const ChooseNav = ({ profile, switchNav, active }) => {
+const FollowingProfileHeader = ({ profile }) => {
+  return (
+    <div className="col-lg-4 ml-5 shadow">
+      <div className="row p-3">
+        <h3>{profile.name}</h3>
+        <button
+          className="btn shadow text-dark text-weight-bold ml-auto dropdown-toggle caret-off"
+          data-toggle="dropdown"
+        >
+          <img src="icons/follow.svg" alt="follow icon" width={25} />
+          Following
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Add to close friends
+          </a>
+          <div className="dropdown-divider"></div>
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Mute
+          </a>
+          <div className="dropdown-divider"></div>
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Take a break
+          </a>
+          <div className="dropdown-divider"></div>
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Unfollow
+          </a>
+        </div>
+        <img
+          src="icons/messages.svg"
+          alt="message"
+          width={30}
+          height={30}
+          className="mt-2 ml-auto"
+        />
+        <img
+          src="icons/alert.svg"
+          alt="report"
+          width={20}
+          height={20}
+          className="mt-2 ml-auto dropdown-toggle caret-off"
+          data-toggle="dropdown"
+        />
+        <div class="dropdown-menu">
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Report
+          </a>
+          <div className="dropdown-divider"></div>
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Block
+          </a>
+        </div>
+      </div>
+      <div className="scrollable mt-2">{profile.about}</div>
+    </div>
+  );
+};
+
+const DecideToDisplayMessage = ({ isPublic }) => {
+  if (isPublic)
+    return (
+      <img
+        src="icons/messages.svg"
+        alt="message"
+        width={30}
+        height={30}
+        className="mt-2"
+      />
+    );
+  else return <></>;
+};
+const PublicPrivateProfileHeader = ({ profile }) => {
+  return (
+    <div className="col-lg-4 ml-5 shadow">
+      <div className="row p-3">
+        <h3>{profile.name}</h3>
+
+        <button className="btn shadow text-dark text-weight-bold mx-5">
+          <img src="icons/follow.svg" alt="follow icon" width={30} />
+          Follow
+        </button>
+
+        <DecideToDisplayMessage isPublic={profile.isPublic} />
+
+        <img
+          src="icons/alert.svg"
+          alt="report"
+          width={20}
+          height={20}
+          className="mt-2 ml-auto dropdown-toggle caret-off"
+          data-toggle="dropdown"
+        />
+        <div class="dropdown-menu">
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Report
+          </a>
+          <div className="dropdown-divider"></div>
+          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            Block
+          </a>
+        </div>
+      </div>
+      <div className="scrollable mt-2">{profile.about}</div>
+    </div>
+  );
+};
+const DecideToDisplayProfile = ({ active, profile }) => {
+  if (active.id === profile.id) return <OwnProfileHeader profile={profile} />;
+  else if (profile.following.includes(active.id))
+    return <FollowingProfileHeader profile={profile} />;
+  else return <PublicPrivateProfileHeader profile={profile} />;
+};
+export const ChooseTop = ({ posts, profile, activeProfile, stories }) => {
+  return (
+    <div className="col-12 row">
+      <div
+        className="col-lg-2 mr-4"
+        onClick={() => (stories !== undefined ? "show stories in Modal" : "")}
+      >
+        <img
+          src={profile.avatar}
+          width={200}
+          height={200}
+          alt={profile.name}
+          className={`${
+            stories === undefined ? "" : "story-circle"
+          } rounded-circle`}
+        />
+      </div>
+      <DecideToDisplayProfile profile={profile} active={activeProfile} />
+      <InfoHeader profile={activeProfile} posts={posts} />
+    </div>
+  );
+};
+
+const DecideToDisplay = (props) => {
+  if (props.show)
+    return (
+      <li className="nav-item mx-auto">
+        <a
+          id="saved"
+          className="nav-link h4 text-secondary"
+          href={`${baseUrl}/you`}
+          onClick={() => {
+            changeClasses("#saved");
+            if (props.active !== "saved") props.switchNav("saved");
+            else props.switchNav("savedExpanded");
+          }}
+        >
+          <img src="icons/save.svg" alt="Saved" width={30} />
+          Saved
+        </a>
+      </li>
+    );
+  else return <></>;
+};
+
+export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
   if (profile.isPublic === false) return <div></div>;
-  console.log(active);
   return (
     <div className="mx-auto my-5">
       <ul className="nav nav-tabs ">
@@ -82,7 +257,7 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
           <a
             id="igtv"
             className="nav-link h4 text-secondary"
-            href={`${baseUrl}/igtv`}
+            href={`${baseUrl}/you`}
             onClick={() => {
               changeClasses("#igtv");
               if (active !== "igtv") switchNav("igtv");
@@ -93,30 +268,16 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
             IGTV
           </a>
         </li>
-        {
-          //if(active profile id and clicked profile id are same)
-        }
-        <li className="nav-item mx-auto">
-          <a
-            id="saved"
-            className="nav-link h4 text-secondary"
-            href={`${baseUrl}/saved`}
-            onClick={() => {
-              changeClasses("#saved");
-              if (active !== "saved") switchNav("saved");
-              else switchNav("savedExpanded");
-            }}
-          >
-            <img src="icons/save.svg" alt="Saved" width={30} />
-            Saved
-          </a>
-        </li>
-        {/*endif*/}
+        <DecideToDisplay
+          switchNav={switchNav}
+          active={active}
+          show={activeProfile.id === profile.id}
+        />
         <li className="nav-item mx-auto">
           <a
             id="tagged"
             className="nav-link h4 text-secondary"
-            href={`${baseUrl}/tagged`}
+            href={`${baseUrl}/you`}
             onClick={() => {
               changeClasses("#tagged");
               if (active !== "tagged") switchNav("tagged");
@@ -134,7 +295,6 @@ export const ChooseNav = ({ profile, switchNav, active }) => {
 
 export const ChooseComponent = ({
   activeState,
-  profile,
   posts,
   igtv,
   saved,
@@ -147,18 +307,12 @@ export const ChooseComponent = ({
     postsToPass = saved;
   else if (activeState === "tagged" || activeState === "taggedExpanded")
     postsToPass = tagged;
-
   if (
     activeState === "posts" ||
     activeState === "igtv" ||
     activeState === "saved" ||
     activeState === "tagged"
   )
-    return <FeedGallery posts={postsToPass} />;
-  else
-    return (
-      <FeedTimeline
-        posts={postsToPass.filter((post) => post.profile.id === profile.id)}
-      />
-    );
+    return <FeedGallery posts={postsToPass} activeState={activeState} />;
+  else return <FeedTimeline posts={postsToPass} activeState={activeState} />;
 };

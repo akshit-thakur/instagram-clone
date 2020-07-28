@@ -26,25 +26,32 @@ class Story extends Component {
           />
         </div>
         <div className="row flex-nowrap people-scroller mt-5">
-          {this.props.stories.map((story) => (
-            <div className="mx-5">
-              <img
-                src={story.avatar}
-                width={70}
-                height={70}
-                alt={story.name}
-                className="rounded-circle story-circle"
-                onClick={() => this.props.selectStory(story)}
-              />
-              <br />
-              <center>
-                <h5>{story.name}</h5>
-              </center>
-            </div>
-          ))}
+          {this.props.stories
+            .filter(
+              (story) => story.profileId !== this.props.loggedInProfile.id
+            )
+            .map((story) => (
+              <div className="mx-5">
+                <img
+                  src={story.avatar}
+                  width={70}
+                  height={70}
+                  alt={story.name}
+                  className="rounded-circle story-circle"
+                  onClick={() => this.props.selectStory(story)}
+                />
+                <br />
+                <center>
+                  <h5>{story.name}</h5>
+                </center>
+              </div>
+            ))}
         </div>
         <hr />
-        <ViewStory story={this.props.selectedStory} />
+        <ViewStory
+          story={this.props.selectedStory}
+          loggedInId={this.props.loggedInProfile.id}
+        />
       </div>
     );
   }
@@ -53,6 +60,7 @@ class Story extends Component {
 const mapStateToProps = (state) => ({
   stories: state.stories,
   selectedStory: state.utility.selectedStory,
+  loggedInProfile: state.utility.loggedInProfile,
 });
 
 const mapDispatchToProps = (dispatch) => ({

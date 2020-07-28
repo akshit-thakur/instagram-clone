@@ -22,6 +22,26 @@ export const Explore = (state = EXPLORE, action) => {
         ),
       };
       return [...state];
+    case ActionTypes.ADD_SAVED_EXPLORE:
+      const indexToSaveAt = state.findIndex(
+        (post) => post.id === action.payload.postId
+      );
+      state[indexToSaveAt] = {
+        ...state[indexToSaveAt],
+        savedBy: state[indexToSaveAt].savedBy.concat(action.payload.profileId),
+      };
+      return [...state];
+    case ActionTypes.DELETE_SAVED_EXPLORE:
+      const indexToUnsaveAt = state.findIndex(
+        (post) => post.id === action.payload.postId
+      );
+      state[indexToUnsaveAt] = {
+        ...state[indexToUnsaveAt],
+        savedBy: state[indexToUnsaveAt].savedBy.filter(
+          (liker) => liker !== action.payload.profileId
+        ),
+      };
+      return [...state];
     default:
       return state;
   }
