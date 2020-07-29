@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  setActiveProfile,
   setActiveTabExplore,
   toggleExploreView,
 } from "../../redux/actionCreators";
 import ExpandedView from "./expandedViewComponent";
 import View from "./viewComponent";
+
 const changeClasses = (activeClass) => {
   document
     .querySelector("#ownPosts")
@@ -183,6 +185,7 @@ const mapDispatchToProps = (dispatch) => {
     setActiveTabExplore: (newTab) => dispatch(setActiveTabExplore(newTab)),
     toggleExploreView: (isExploreExpanded) =>
       dispatch(toggleExploreView(isExploreExpanded)),
+    setActiveProfile: (person) => dispatch(setActiveProfile(person)),
   };
 };
 

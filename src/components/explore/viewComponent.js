@@ -87,7 +87,8 @@ const Info = (props) => {
   );
 };
 const Post = (props) => {
-  if (props.isClicked) {
+  if (props.post === undefined) return <div></div>;
+  else
     return (
       <div id="postModal" className="modal modal-align" role="dialog">
         <div className="container row ">
@@ -187,7 +188,6 @@ const Post = (props) => {
         </div>
       </div>
     );
-  } else return <div></div>;
 };
 const PostGrid = (props) => {
   return props.posts.map((post) => (
@@ -214,6 +214,8 @@ class View extends Component {
               (post) => post.category === this.props.active
             )}
             postModal={this.props.postModal}
+            data-toggle="modal"
+            data-target="#postModal"
           />
         </div>
         <Post
@@ -241,7 +243,6 @@ class View extends Component {
 const mapStateToProps = (state) => ({
   explorePosts: state.explore,
   post: state.utility.postModal,
-  isPostClicked: state.utility.isPostClicked,
   loggedInProfile: state.utility.loggedInProfile,
 });
 

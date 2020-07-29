@@ -67,9 +67,20 @@ class Messages extends Component {
               })}
             </div>
             <hr />
-            <b className="card">
-              <i>Type your msg</i>
-            </b>
+            <div className="row p-2">
+              <div className="col-11">
+                <input
+                  type="text"
+                  placeholder="Type your message..."
+                  className="col-11"
+                />
+                <button className="btn btn-secondary text-white">Send</button>
+              </div>
+              <div className="col">
+                <img src="icons/emoji.png" alt="emoji" width={30} />
+                <img src="icons/gallery.svg" alt="gallery" width={30} />
+              </div>
+            </div>
           </>
         );
     };
@@ -80,7 +91,6 @@ class Messages extends Component {
         )[0];
         return (
           <div className="card col">
-            {console.log(props.active)}
             <div className="row">
               <div className="col-10">
                 <h5 className="p-2">{otherPerson.name}</h5>

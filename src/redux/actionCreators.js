@@ -163,10 +163,6 @@ export const activateChat = (message) => ({
   payload: message,
 });
 
-export const setNavigationModalTrigger = () => ({
-  type: ActionTypes.TOGGLE_NAVIGATION,
-});
-
 export const addLikeExplore = (postInfo) => ({
   type: ActionTypes.ADD_LIKE_EXPLORE,
   payload: postInfo,
@@ -189,4 +185,9 @@ export const addSavedExplore = (postInfo) => ({
 export const deleteSavedExplore = (postInfo) => ({
   type: ActionTypes.DELETE_SAVED_EXPLORE,
   payload: postInfo,
+});
+
+export const setActiveProfile = (profile) => ({
+  type: ActionTypes.SET_ACTIVE_PROFILE,
+  payload: profile,
 });

@@ -72,29 +72,32 @@ const FollowingProfileHeader = ({ profile }) => {
     <div className="col-lg-4 ml-5 shadow">
       <div className="row p-3">
         <h3>{profile.name}</h3>
-        <button
-          className="btn shadow text-dark text-weight-bold ml-auto dropdown-toggle caret-off"
-          data-toggle="dropdown"
-        >
-          <img src="icons/follow.svg" alt="follow icon" width={25} />
-          Following
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Add to close friends
-          </a>
-          <div className="dropdown-divider"></div>
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Mute
-          </a>
-          <div className="dropdown-divider"></div>
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Take a break
-          </a>
-          <div className="dropdown-divider"></div>
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Unfollow
-          </a>
+        <div className="dropdown ml-auto">
+          <button
+            className="btn shadow text-dark text-weight-bold ml-auto dropdown-toggle caret-off"
+            data-toggle="dropdown"
+            data-target="followingDropdown"
+          >
+            <img src="icons/follow.svg" alt="follow icon" width={25} />
+            Following
+          </button>
+          <div class="dropdown-menu" id="followingDropdown">
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Add to close friends
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Mute
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Take a break
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Unfollow
+            </a>
+          </div>
         </div>
         <img
           src="icons/messages.svg"
@@ -103,22 +106,25 @@ const FollowingProfileHeader = ({ profile }) => {
           height={30}
           className="mt-2 ml-auto"
         />
-        <img
-          src="icons/alert.svg"
-          alt="report"
-          width={20}
-          height={20}
-          className="mt-2 ml-auto dropdown-toggle caret-off"
-          data-toggle="dropdown"
-        />
-        <div class="dropdown-menu">
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Report
-          </a>
-          <div className="dropdown-divider"></div>
-          <a class="dropdown-item" type="button" href={`${baseUrl}`}>
-            Block
-          </a>
+        <div className="dropdown ml-auto">
+          <img
+            src="icons/alert.svg"
+            alt="report"
+            width={20}
+            height={20}
+            className="mt-2 ml-auto dropdown-toggle caret-off"
+            data-toggle="dropdown"
+            data-target="reportDropdown"
+          />
+          <div class="dropdown-menu" id="reportDropdown">
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Report
+            </a>
+            <div className="dropdown-divider"></div>
+            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              Block
+            </a>
+          </div>
         </div>
       </div>
       <div className="scrollable mt-2">{profile.about}</div>
@@ -139,6 +145,7 @@ const DecideToDisplayMessage = ({ isPublic }) => {
     );
   else return <></>;
 };
+
 const PublicPrivateProfileHeader = ({ profile }) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
@@ -174,12 +181,14 @@ const PublicPrivateProfileHeader = ({ profile }) => {
     </div>
   );
 };
+
 const DecideToDisplayProfile = ({ active, profile }) => {
   if (active.id === profile.id) return <OwnProfileHeader profile={profile} />;
   else if (profile.following.includes(active.id))
     return <FollowingProfileHeader profile={profile} />;
   else return <PublicPrivateProfileHeader profile={profile} />;
 };
+
 export const ChooseTop = ({ posts, profile, activeProfile, stories }) => {
   return (
     <div className="col-12 row">

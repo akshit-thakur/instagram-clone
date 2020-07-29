@@ -58,7 +58,6 @@ Pvt,Public and Following profile layouts
 Added utilityMethods in profile directory to hold the repeating functions ChooseComponent and changeClasses
 *******************
 TODO:
-Dropdowns need to be arranged... both triggers trigger same dropdown
 Make the code consistent with the video
 *******************
 --------------------------------------------
@@ -110,7 +109,7 @@ Search Box added to messages.
 Replaced all icons with SVG.
 *******************
 TODO:
-Make svg for views, info button
+Make svg for views, story archives(if needed) button
 *******************
 --------------------------------------------
 Eighteenth Commit(27/07/2020)
@@ -133,3 +132,13 @@ Make modal for story and story highlights
 Remove likes:[] from posts category:igtv and change the if accordingly
 *******************
 --------------------------------------------
+Twentieth Commit(30/07/2020)
+SVGs(except View and Story archives) finalized
+/messages has an input form for messages and emoji and gallery icon.
+Two dropdowns on same page now toggle two different dropdownws..were referring to single one before.
+utilityReducer has one property less which was boolean showing if modal post is clicked.. modal data-target has been used instead.
+add story and add post modals done
+*******************
+TODO:
+See if modals can show without displacing components behind.
+*******************

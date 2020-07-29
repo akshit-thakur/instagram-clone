@@ -1,17 +1,74 @@
 import React, { Component } from "react";
-import { baseUrl } from "../../shared/baseUrl";
-import {
-  setNavigationModalTrigger,
-  toggleSearchBox,
-} from "../../redux/actionCreators";
 import { connect } from "react-redux";
+import { toggleSearchBox } from "../../redux/actionCreators";
+import { baseUrl } from "../../shared/baseUrl";
 class Navigation extends Component {
   render() {
     const NewPostModal = () => {
-      return <div></div>;
+      return (
+        <div
+          id="newPost"
+          className="modal modal-body modal-align col-8 bg-white"
+          role="dialog"
+        >
+          <div className="h3">
+            New Post
+            <button type="button" className="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <hr />
+          <img
+            src="posts/7.jpg"
+            alt="your post here"
+            className="col-12"
+            height={500}
+            width={500}
+          />
+          <hr />
+          <div className="row">
+            <button className="btn btn-secondary text-white offset-10 mt-3">
+              Select
+            </button>
+            <button className="btn btn-primary text-white ml-4 mt-3">
+              Upload
+            </button>
+          </div>
+        </div>
+      );
     };
     const NewStoryModal = () => {
-      return <div></div>;
+      return (
+        <div
+          id="newStory"
+          className="modal modal-body modal-align col-8 bg-white"
+          role="dialog"
+        >
+          <div className="h3">
+            New Story
+            <button type="button" className="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <hr />
+          <img
+            src="posts/7.jpg"
+            alt="your post here"
+            className="col-12"
+            height={500}
+            width={500}
+          />
+          <hr />
+          <div className="row">
+            <button className="btn btn-secondary text-white offset-10 mt-3">
+              Select
+            </button>
+            <button className="btn btn-primary text-white ml-4 mt-3">
+              Upload
+            </button>
+          </div>
+        </div>
+      );
     };
     const NavList = () => {
       return (
@@ -24,12 +81,7 @@ class Navigation extends Component {
               this.props.isSearchBoxVisible ? "visible" : "invisible"
             }`}
           />
-          <li
-            className="nav-item"
-            onClick={() => {
-              this.props.toggleSearchBox();
-            }}
-          >
+          <li className="nav-item" onClick={() => this.props.toggleSearchBox()}>
             <a className="nav-link " href={`${baseUrl}`}>
               <img
                 src={`icons/search.svg`}
@@ -67,26 +119,38 @@ class Navigation extends Component {
               />
             </a>
           </li>
-
-          <li className="nav-item ">
-            <a className="nav-link " href="/you">
-              <img src={`icons/profile.svg`} alt="profile" width={30} />
+          <li className="nav-item dropdown">
+            <a className="nav-link " href="/you" data-toggle="dropdown">
+              <img
+                src={`icons/notification.png`}
+                alt="notifications"
+                width={30}
+              />
             </a>
+            <div className="dropdown-menu">
+              <span>notifications</span>
+            </div>
           </li>
           <li className="nav-item dropdown list-unstyled">
+            {" "}
             <a
               className="nav-link dropdown-toggle caret-off"
               data-toggle="dropdown"
               href={`${baseUrl}`}
             >
-              <img src={`icons/dropdown.svg`} alt="dropdown" width={30} />
+              <img src={`icons/profile.svg`} alt="profile" width={30} />
             </a>
             <div className="dropdown-menu">
+              <a className="dropdown-item" href="/you">
+                Profile
+              </a>
+              <div className="dropdown-divider"></div>
               <a
                 className="dropdown-item"
                 type="button"
-                href={`${baseUrl}`}
-                onClick={() => this.props.setNewPostModal()}
+                href="#newPost"
+                data-toggle="modal"
+                data-target="#newPost"
               >
                 New Post
               </a>
@@ -94,8 +158,9 @@ class Navigation extends Component {
               <a
                 className="dropdown-item"
                 type="button"
-                href={`${baseUrl}`}
-                onClick={() => this.props.setNewStoryModal()}
+                href="#newStory"
+                data-toggle="modal"
+                data-target="#newStory"
               >
                 New Story
               </a>
@@ -109,6 +174,18 @@ class Navigation extends Component {
               </a>
             </div>
           </li>
+          {/* <li className="">
+            <a
+              className="nav-link dropdown-toggle caret-off"
+              data-toggle="dropdown"
+              href={`${baseUrl}`}
+            >
+              <img src={`icons/dropdown.svg`} alt="dropdown" width={30} />
+            </a>
+            <div className="dropdown-menu">
+              
+            </div>
+          </li> */}
         </ul>
       );
     };
@@ -120,20 +197,18 @@ class Navigation extends Component {
           </a>
           <NavList />
         </nav>
-        <NewPostModal isSet={this.props.isNewPostModal} />
-        <NewStoryModal isSet={this.props.isNewStoryModal} />
+        <NewPostModal />
+        <NewStoryModal />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  isNewStoryModal: state.utility.isNewStoryModal,
   isSearchBoxVisible: state.utility.isSearchBoxVisible,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setNavigationModalTrigger: () => dispatch(setNavigationModalTrigger()),
   toggleSearchBox: () => dispatch(toggleSearchBox()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

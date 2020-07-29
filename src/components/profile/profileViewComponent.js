@@ -76,7 +76,7 @@ class ProfileView extends Component {
 const mapStateToProps = (state) => ({
   activeTabProfile: state.utility.activeTabProfile,
   loggedInProfile: state.utility.loggedInProfile,
-  activeProfile: state.utility.loggedInProfile, //for the time being
+  activeProfile: state.utility.activeProfile, //for the time being
   posts: state.posts,
   stories: state.stories,
 });

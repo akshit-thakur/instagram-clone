@@ -43,12 +43,11 @@ const DecideToDisplay = (props) => {
   }
 };
 const Info = (props) => {
-  console.log(props.likes, "-------------------");
   return (
     <div>
       <img
         src={
-          props.activeTab === "igtv"
+          props.activeTab === "igtv" //what is this?
             ? props.likes.includes(props.liker)
               ? "icons/liked.svg"
               : "icons/like.svg"
@@ -104,7 +103,8 @@ const Info = (props) => {
   );
 };
 const Post = (props) => {
-  if (props.isClicked) {
+  if (props.post === undefined) return <div></div>;
+  else
     return (
       <div id="postModal" className="modal modal-align" role="dialog">
         <div className="container row ">
@@ -198,7 +198,6 @@ const Post = (props) => {
         </div>
       </div>
     );
-  } else return <div></div>;
 };
 class FeedGallery extends Component {
   render() {
@@ -236,7 +235,6 @@ class FeedGallery extends Component {
           postComments={0}
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
-          isClicked={this.props.isPostClicked}
           isSaved={
             this.props.modalPost === undefined
               ? false
@@ -257,7 +255,6 @@ class FeedGallery extends Component {
 const mapStateToProps = (state) => ({
   postOriginal: state.posts,
   saved: state.saved,
-  isPostClicked: state.utility.isPostClicked,
   modalPost: state.utility.postModal,
   loggedInProfile: state.utility.loggedInProfile,
 });
