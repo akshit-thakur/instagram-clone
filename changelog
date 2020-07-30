@@ -128,7 +128,7 @@ Stories of active account now show on main profile only.. not in /stories.
 Homepage posts now show time since posted
 *******************
 TODO:
-Make modal for story and story highlights
+Make modal for story highlights
 Remove likes:[] from posts category:igtv and change the if accordingly
 *******************
 --------------------------------------------
@@ -138,7 +138,19 @@ SVGs(except View and Story archives) finalized
 Two dropdowns on same page now toggle two different dropdownws..were referring to single one before.
 utilityReducer has one property less which was boolean showing if modal post is clicked.. modal data-target has been used instead.
 add story and add post modals done
+navbar now has notification icon. No need of dropdown arrow
 *******************
 TODO:
 See if modals can show without displacing components behind.
 *******************
+--------------------------------------------
+Twenty-first Commit(31/07/2020)
+/you has working story modal
+/stories moved to modal
+Removed components/home/stories.js component and components/footer directory.
+*******************
+TODO:
+Add relevant components/stories/story.js features into the modal
+Profile redirect
+*******************
+--------------------------------------------

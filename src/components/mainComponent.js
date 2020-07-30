@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Explore from "./explore/exploreComponent";
-import { Home } from "./home/homeComponent";
+import Home from "./home/homeComponent";
 import Messages from "./messages/messagesComponent";
 import Navigation from "./navigation/navigationComponent";
 import ProfileView from "./profile/profileViewComponent";

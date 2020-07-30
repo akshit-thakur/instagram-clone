@@ -132,7 +132,6 @@ class Navigation extends Component {
             </div>
           </li>
           <li className="nav-item dropdown list-unstyled">
-            {" "}
             <a
               className="nav-link dropdown-toggle caret-off"
               data-toggle="dropdown"
@@ -174,18 +173,6 @@ class Navigation extends Component {
               </a>
             </div>
           </li>
-          {/* <li className="">
-            <a
-              className="nav-link dropdown-toggle caret-off"
-              data-toggle="dropdown"
-              href={`${baseUrl}`}
-            >
-              <img src={`icons/dropdown.svg`} alt="dropdown" width={30} />
-            </a>
-            <div className="dropdown-menu">
-              
-            </div>
-          </li> */}
         </ul>
       );
     };

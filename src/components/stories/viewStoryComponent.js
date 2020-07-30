@@ -15,7 +15,7 @@ const DecideToDisplay = (props) => {
 export const ViewStory = (props) => {
   if (props.story)
     return (
-      <div className="shadow-lg mt-5 col-lg-8 offset-lg-2">
+      <div className="shadow-lg mt-5 col-lg-8 offset-lg-2 bg-white">
         <div className="row p-2">
           <div className="col-1">
             <img

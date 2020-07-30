@@ -2,6 +2,7 @@ import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
+import { ViewStory } from "../stories/viewStoryComponent";
 
 export const changeClasses = (className) => {
   document.querySelector("#posts").classList.remove("active");
@@ -189,26 +190,64 @@ const DecideToDisplayProfile = ({ active, profile }) => {
   else return <PublicPrivateProfileHeader profile={profile} />;
 };
 
-export const ChooseTop = ({ posts, profile, activeProfile, stories }) => {
+export const ChooseTop = ({
+  posts,
+  profile,
+  activeProfile,
+  stories,
+  selectStory,
+  selectedStory,
+}) => {
   return (
-    <div className="col-12 row">
-      <div
-        className="col-lg-2 mr-4"
-        onClick={() => (stories !== undefined ? "show stories in Modal" : "")}
-      >
-        <img
-          src={profile.avatar}
-          width={200}
-          height={200}
-          alt={profile.name}
-          className={`${
-            stories === undefined ? "" : "story-circle"
-          } rounded-circle`}
-        />
+    <>
+      <div className="modal bg-white col-lg-10 offset-lg-1" id="storyModal">
+        <div className="h2">
+          Stories
+          <button type="button" className="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div className="row flex-nowrap people-scroller mt-5">
+          {stories.map((story) => (
+            <div className="mx-5">
+              <img
+                src={story.avatar}
+                width={50}
+                height={50}
+                alt={story.name}
+                className="rounded-circle story-circle"
+                onClick={() => selectStory(story)}
+              />
+              <br />
+              <center>
+                <h5>{story.name}</h5>
+              </center>
+            </div>
+          ))}
+        </div>
+        <hr />
+        <ViewStory story={selectedStory} loggedInId={profile.id} />
       </div>
-      <DecideToDisplayProfile profile={profile} active={activeProfile} />
-      <InfoHeader profile={activeProfile} posts={posts} />
-    </div>
+      <div className="col-12 row">
+        <div
+          className="col-lg-2 mr-4"
+          data-toggle="modal"
+          data-target="#storyModal"
+        >
+          <img
+            src={profile.avatar}
+            width={200}
+            height={200}
+            alt={profile.name}
+            className={`${
+              stories === undefined ? "" : "story-circle"
+            } rounded-circle`}
+          />
+        </div>
+        <DecideToDisplayProfile profile={profile} active={activeProfile} />
+        <InfoHeader profile={activeProfile} posts={posts} />
+      </div>
+    </>
   );
 };
 

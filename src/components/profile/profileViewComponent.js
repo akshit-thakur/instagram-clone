@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { setActiveTabProfile } from "../../redux/actionCreators";
+import { setActiveTabProfile, selectStory } from "../../redux/actionCreators";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 
 const PublicOrPrivateSelector = (props) => {
@@ -35,11 +35,11 @@ class ProfileView extends Component {
             posts={this.props.posts.filter(
               (post) => post.profile.id === this.props.activeProfile.id
             )}
-            stories={
-              this.props.stories.filter(
-                (profile) => profile.id === this.props.activeProfile.id
-              )[0]
-            }
+            stories={this.props.stories.filter(
+              (profile) => profile.profileId === this.props.activeProfile.id
+            )}
+            selectStory={this.props.selectStory}
+            selectedStory={this.props.selectedStory}
           />
           <ChooseNav
             profile={this.props.loggedInProfile}
@@ -76,6 +76,7 @@ class ProfileView extends Component {
 const mapStateToProps = (state) => ({
   activeTabProfile: state.utility.activeTabProfile,
   loggedInProfile: state.utility.loggedInProfile,
+  selectedStory: state.utility.selectedStory,
   activeProfile: state.utility.activeProfile, //for the time being
   posts: state.posts,
   stories: state.stories,
@@ -83,6 +84,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveTabProfile: (newTab) => dispatch(setActiveTabProfile(newTab)),
+  selectStory: (story) => dispatch(selectStory(story)),
 });
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ProfileView)
