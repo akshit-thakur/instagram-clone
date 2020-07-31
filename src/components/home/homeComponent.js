@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { selectStory } from "../../redux/actionCreators";
 import Posts from "../post/postComponent";
-import { ViewStory } from "../stories/viewStoryComponent";
+import { ViewStory } from "../viewStoryComponent";
 import { Footer } from "./footerComponent";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 const StoryDisplay = (props) => {
   return props.stories.map((story) => (
     <div className="col-3 offset-1 mb-5">
@@ -33,6 +33,27 @@ class Home extends Component {
             <button type="button" className="close" data-dismiss="modal">
               &times;
             </button>
+            <img
+              className="offset-10"
+              src="icons/search.svg"
+              alt="Search"
+              width={30}
+              height={30}
+            />
+            <img
+              src="icons/uploadstory.svg"
+              alt="add new story"
+              width={30}
+              height={30}
+              className="ml-2"
+            />
+            <img
+              src="icons/settings.svg"
+              alt="Settings"
+              width={30}
+              height={30}
+              className="ml-2"
+            />
           </div>
           <div className="row flex-nowrap people-scroller mt-5">
             {storiesToDisplay.map((story) => (

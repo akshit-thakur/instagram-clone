@@ -6,7 +6,10 @@ import { setActiveTabProfile, selectStory } from "../../redux/actionCreators";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 
 const PublicOrPrivateSelector = (props) => {
-  if (props.profile.isPublic === true)
+  if (
+    props.activeProfile.isPublic ||
+    props.activeProfile.followers.include(props.profile.id)
+  )
     return (
       <ChooseComponent
         activeState={props.active}
@@ -26,6 +29,7 @@ const PublicOrPrivateSelector = (props) => {
 };
 class ProfileView extends Component {
   render() {
+    console.log(this.props.activeProfile);
     return (
       <>
         <div className="container">
@@ -51,21 +55,22 @@ class ProfileView extends Component {
         <PublicOrPrivateSelector
           active={this.props.activeTabProfile}
           profile={this.props.loggedInProfile}
+          activeProfile={this.props.activeProfile}
           posts={this.props.posts.filter(
             (post) =>
-              post.profile.id === this.props.loggedInProfile.id &&
+              post.profile.id === this.props.activeProfile.id &&
               post.category === "post"
           )}
           igtv={this.props.posts.filter(
             (post) =>
-              post.profile.id === this.props.loggedInProfile.id &&
+              post.profile.id === this.props.activeProfile.id &&
               post.category === "igtv"
           )}
           saved={this.props.posts.filter((post) =>
-            post.savedBy.includes(this.props.loggedInProfile.id)
+            post.savedBy.includes(this.props.activeProfile.id)
           )}
           tagged={this.props.posts.filter((post) =>
-            post.tagged.includes(this.props.loggedInProfile.id)
+            post.tagged.includes(this.props.activeProfile.id)
           )}
         />
       </>
@@ -77,7 +82,6 @@ const mapStateToProps = (state) => ({
   activeTabProfile: state.utility.activeTabProfile,
   loggedInProfile: state.utility.loggedInProfile,
   selectedStory: state.utility.selectedStory,
-  activeProfile: state.utility.activeProfile, //for the time being
   posts: state.posts,
   stories: state.stories,
 });

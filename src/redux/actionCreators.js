@@ -1,10 +1,5 @@
 import * as ActionTypes from "./actionTypes";
 
-export const addBlock = (profileInfo) => ({
-  type: ActionTypes.ADD_BLOCK,
-  payload: profileInfo,
-});
-
 export const addComment = (comment) => ({
   type: ActionTypes.ADD_COMMENT,
   payload: comment,
@@ -40,11 +35,6 @@ export const addReply = (replyInfo) => ({
   payload: replyInfo,
 });
 
-export const addReport = (reportInfo) => ({
-  type: ActionTypes.ADD_REPORT,
-  payload: reportInfo,
-});
-
 export const addSaved = (savedInfo) => ({
   type: ActionTypes.ADD_SAVED,
   payload: savedInfo,
@@ -63,11 +53,6 @@ export const addTagged = (taggedInfo) => ({
 export const addView = (viewInfo) => ({
   type: ActionTypes.ADD_VIEW,
   payload: viewInfo,
-});
-
-export const deleteBlock = (profileInfo) => ({
-  type: ActionTypes.DELETE_BLOCK,
-  payload: profileInfo,
 });
 
 export const deleteComment = (comment) => ({
@@ -103,11 +88,6 @@ export const deletePost = (postInfo) => ({
 export const deleteReply = (replyInfo) => ({
   type: ActionTypes.DELETE_REPLY,
   payload: replyInfo,
-});
-
-export const deleteReport = (reportInfo) => ({
-  type: ActionTypes.DELETE_REPORT,
-  payload: reportInfo,
 });
 
 export const deleteSaved = (savedInfo) => ({
@@ -154,6 +134,7 @@ export const selectStory = (story) => ({
   type: ActionTypes.SELECT_STORY,
   payload: story,
 });
+
 export const toggleInfoClicked = () => ({
   type: ActionTypes.TOGGLE_MESSAGE_INFO,
 });

@@ -27,8 +27,7 @@ Added "shadow-lg" to posts
 Added popper.js etc to enable modal
 
 *******************
-TODO: 
-Toggle the Posts icon when we toggle between expanded and compact view
+TODO:
 Make required UI adjustments(Expanded posts not aligned)
 *******************
 --------------------------------------------
@@ -107,10 +106,6 @@ Seventeenth Commit(26/07/2020)
 Search Button toggles search box on navbar.
 Search Box added to messages.
 Replaced all icons with SVG.
-*******************
-TODO:
-Make svg for views, story archives(if needed) button
-*******************
 --------------------------------------------
 Eighteenth Commit(27/07/2020)
 Added Save functionality across Home,Explore,Profile.
@@ -129,7 +124,6 @@ Homepage posts now show time since posted
 *******************
 TODO:
 Make modal for story highlights
-Remove likes:[] from posts category:igtv and change the if accordingly
 *******************
 --------------------------------------------
 Twentieth Commit(30/07/2020)
@@ -148,9 +142,12 @@ Twenty-first Commit(31/07/2020)
 /you has working story modal
 /stories moved to modal
 Removed components/home/stories.js component and components/footer directory.
-*******************
-TODO:
-Add relevant components/stories/story.js features into the modal
-Profile redirect
-*******************
+--------------------------------------------
+Twenty-Second Commit
+/you is temporarily replaced with /:accountId
+stories,navigation and messages directories removed(single file folders)
+state.utility.activeProfile temporarily replaced with activeProfile passed in MainComponent.js
+shared/blocked.js replaced with shared/account/ACCOUNT.blockList
+shared/report.js removed because it is nothing without backend.
+views and uploadstory.svg added
 --------------------------------------------

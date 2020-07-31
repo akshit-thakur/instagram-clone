@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toggleSearchBox } from "../../redux/actionCreators";
-import { baseUrl } from "../../shared/baseUrl";
+
+import { toggleSearchBox } from "../redux/actionCreators";
+import { baseUrl } from "../shared/baseUrl";
 class Navigation extends Component {
   render() {
     const NewPostModal = () => {
@@ -82,7 +84,7 @@ class Navigation extends Component {
             }`}
           />
           <li className="nav-item" onClick={() => this.props.toggleSearchBox()}>
-            <a className="nav-link " href={`${baseUrl}`}>
+            <a className="nav-link ">
               <img
                 src={`icons/search.svg`}
                 alt="search"
@@ -120,7 +122,11 @@ class Navigation extends Component {
             </a>
           </li>
           <li className="nav-item dropdown">
-            <a className="nav-link " href="/you" data-toggle="dropdown">
+            <a
+              className="nav-link "
+              href="/account/:accountId"
+              data-toggle="dropdown"
+            >
               <img
                 src={`icons/notification.png`}
                 alt="notifications"
@@ -135,12 +141,14 @@ class Navigation extends Component {
             <a
               className="nav-link dropdown-toggle caret-off"
               data-toggle="dropdown"
-              href={`${baseUrl}`}
             >
               <img src={`icons/profile.svg`} alt="profile" width={30} />
             </a>
             <div className="dropdown-menu">
-              <a className="dropdown-item" href="/you">
+              <a
+                className="dropdown-item"
+                href={`/account/${this.props.loggedInProfile.id}`}
+              >
                 Profile
               </a>
               <div className="dropdown-divider"></div>
@@ -193,6 +201,7 @@ class Navigation extends Component {
 
 const mapStateToProps = (state) => ({
   isSearchBoxVisible: state.utility.isSearchBoxVisible,
+  loggedInProfile: state.utility.loggedInProfile,
 });
 
 const mapDispatchToProps = (dispatch) => ({

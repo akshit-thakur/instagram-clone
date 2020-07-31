@@ -36,6 +36,7 @@ class Posts extends Component {
                   height={50}
                   alt={post.profile.name}
                   className="rounded-circle"
+                  onClick={() => (window.location.href = `/${post.profile.id}`)}
                 />
               </div>
               <div className="col-4">

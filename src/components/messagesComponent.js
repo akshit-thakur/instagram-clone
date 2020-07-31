@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toggleInfoClicked, activateChat } from "../../redux/actionCreators";
-import { baseUrl } from "../../shared/baseUrl";
+import { toggleInfoClicked, activateChat } from "../redux/actionCreators";
+import { baseUrl } from "../shared/baseUrl";
 import { withRouter } from "react-router-dom";
 class Messages extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React from "react";
-import { baseUrl } from "../../shared/baseUrl";
+import { baseUrl } from "../shared/baseUrl";
 
 const DecideToDisplay = (props) => {
   if (props.loggedInId === props.story.profileId)

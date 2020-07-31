@@ -2,7 +2,7 @@ import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
-import { ViewStory } from "../stories/viewStoryComponent";
+import { ViewStory } from "../viewStoryComponent";
 
 export const changeClasses = (className) => {
   document.querySelector("#posts").classList.remove("active");
@@ -184,10 +184,10 @@ const PublicPrivateProfileHeader = ({ profile }) => {
 };
 
 const DecideToDisplayProfile = ({ active, profile }) => {
-  if (active.id === profile.id) return <OwnProfileHeader profile={profile} />;
+  if (active.id === profile.id) return <OwnProfileHeader profile={active} />;
   else if (profile.following.includes(active.id))
-    return <FollowingProfileHeader profile={profile} />;
-  else return <PublicPrivateProfileHeader profile={profile} />;
+    return <FollowingProfileHeader profile={active} />;
+  else return <PublicPrivateProfileHeader profile={active} />;
 };
 
 export const ChooseTop = ({
@@ -235,10 +235,10 @@ export const ChooseTop = ({
           data-target="#storyModal"
         >
           <img
-            src={profile.avatar}
+            src={activeProfile.avatar}
             width={200}
             height={200}
-            alt={profile.name}
+            alt={activeProfile.name}
             className={`${
               stories === undefined ? "" : "story-circle"
             } rounded-circle`}
@@ -258,7 +258,7 @@ const DecideToDisplay = (props) => {
         <a
           id="saved"
           className="nav-link h4 text-secondary"
-          href={`${baseUrl}/you`}
+          href={`${baseUrl}/account/:accountId`}
           onClick={() => {
             changeClasses("#saved");
             if (props.active !== "saved") props.switchNav("saved");
@@ -282,7 +282,6 @@ export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
           <a
             id="posts"
             className="nav-link h4 text-dark active"
-            href={`${baseUrl}/you`}
             onClick={() => {
               changeClasses("#posts");
               if (active !== "posts") switchNav("posts");
@@ -305,7 +304,6 @@ export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
           <a
             id="igtv"
             className="nav-link h4 text-secondary"
-            href={`${baseUrl}/you`}
             onClick={() => {
               changeClasses("#igtv");
               if (active !== "igtv") switchNav("igtv");
@@ -325,7 +323,6 @@ export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
           <a
             id="tagged"
             className="nav-link h4 text-secondary"
-            href={`${baseUrl}/you`}
             onClick={() => {
               changeClasses("#tagged");
               if (active !== "tagged") switchNav("tagged");
