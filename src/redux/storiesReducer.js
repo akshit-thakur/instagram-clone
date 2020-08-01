@@ -8,7 +8,16 @@ export const Stories = (state = STORIES, action) => {
     case ActionTypes.DELETE_STORY:
       return state;
     case ActionTypes.ADD_VIEW:
-      return state;
+      const indexToAddAt = state.findIndex(
+        (story) => story.id === action.payload.id
+      );
+      state[indexToAddAt] = {
+        ...state[indexToAddAt],
+        views: state[indexToAddAt].views.includes(action.payload.viewer)
+          ? state[indexToAddAt].views
+          : state[indexToAddAt].views.concat(action.payload.viewer),
+      };
+      return [...state];
     default:
       return state;
   }

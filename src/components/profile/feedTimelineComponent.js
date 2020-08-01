@@ -14,8 +14,7 @@ const About = (props) => {
   if (props.about !== "") return <div className="about-box">{props.about}</div>;
   else return <div></div>;
 };
-const DecideToDisplay = (props) => {
-  //saved icon
+const SavedIcon = (props) => {
   if (props.loggedId === props.posterId) return <div></div>;
   else {
     const objToPass = {
@@ -87,7 +86,7 @@ const Info = (props) => {
           Block
         </a>
       </div>
-      <DecideToDisplay
+      <SavedIcon
         loggedId={props.liker}
         isSaved={props.isSaved}
         posterId={props.post.profile.id}

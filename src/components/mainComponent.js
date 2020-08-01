@@ -27,7 +27,7 @@ class MainComponent extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/explore" component={Explore} />
           <Route path="/messages" component={Messages} />
-          <Route path="/account/:accountId" component={ProfileWithId} />
+          <Route path="/:accountId" component={ProfileWithId} />
         </Switch>
       </div>
     );

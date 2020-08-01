@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { selectStory } from "../../redux/actionCreators";
+import { selectStory, addView } from "../../redux/actionCreators";
 import Posts from "../post/postComponent";
 import { ViewStory } from "../viewStoryComponent";
 import { Footer } from "./footerComponent";
@@ -23,7 +23,7 @@ class Home extends Component {
   render() {
     const storiesToDisplay = this.props.stories.filter(
       (story) => story.profileId !== this.props.loggedInProfile.id
-    );
+    ); //not show stories of logged in person on homepage, they are shown in profile component.
     return (
       <>
         {/* Story Modal */}
@@ -64,7 +64,13 @@ class Home extends Component {
                   height={50}
                   alt={story.name}
                   className="rounded-circle story-circle"
-                  onClick={() => this.props.selectStory(story)}
+                  onClick={() => {
+                    this.props.selectStory(story);
+                    this.props.addView({
+                      ...story,
+                      viewer: this.props.loggedInProfile.id,
+                    });
+                  }}
                 />
                 <br />
                 <center>
@@ -78,6 +84,7 @@ class Home extends Component {
             loggedInId={this.props.loggedInProfile.id}
           />
         </div>
+        {/* Main Page Starts */}
         <div className="row offset-1">
           <div className="col-8">
             <Posts />
@@ -112,6 +119,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   selectStory: (story) => dispatch(selectStory(story)),
+  addView: (story) => dispatch(addView(story)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

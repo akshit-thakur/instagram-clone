@@ -5,7 +5,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/1.jpg",
     story: "posts/1.jpg",
-    views: 40,
+    views: ["2"],
     time: "3h",
   },
   {
@@ -14,7 +14,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/2.jpg",
     story: "posts/2.jpg",
-    views: 30,
+    views: ["3", "4", "5"],
     time: "3h",
   },
   {
@@ -23,7 +23,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/3.jpg",
     story: "posts/3.jpg",
-    views: 20,
+    views: ["1", "2", "4"],
     time: "3h",
   },
   {
@@ -32,7 +32,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/4.jpg",
     story: "posts/4.jpg",
-    views: 35,
+    views: ["2", "3", "5"],
     time: "3h",
   },
   {
@@ -41,7 +41,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/5.jpg",
     story: "posts/5.jpg",
-    views: 50,
+    views: ["2", "3", "4", "6"],
     time: "3h",
   },
   {
@@ -50,7 +50,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/6.jpg",
     story: "posts/6.jpg",
-    views: 60,
+    views: ["2", "3", "4", "5"],
     time: "3h",
   },
   {
@@ -59,7 +59,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/7.jpg",
     story: "posts/7.jpg",
-    views: 50,
+    views: ["2", "3", "4", "5", "6"],
     time: "3m",
   },
   {
@@ -68,7 +68,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/8.jpg",
     story: "posts/8.jpg",
-    views: 50,
+    views: ["2", "3", "4", "5", "6", "7"],
     time: "3m",
   },
   {
@@ -77,7 +77,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/9.jpg",
     story: "posts/9.jpg",
-    views: 50,
+    views: ["2", "3", "4", "5", "6", "7", "8"],
     time: "3m",
   },
   {
@@ -86,7 +86,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/1.jpg",
     story: "posts/4.jpg",
-    views: 40,
+    views: ["2"],
     time: "3h",
   },
   {
@@ -95,7 +95,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/2.jpg",
     story: "posts/2.jpg",
-    views: 30,
+    views: ["1", "3", "4"],
     time: "3h",
   },
   {
@@ -104,7 +104,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/3.jpg",
     story: "posts/3.jpg",
-    views: 20,
+    views: ["4", "5", "6", "7"],
     time: "3h",
   },
   {
@@ -113,7 +113,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/4.jpg",
     story: "posts/4.jpg",
-    views: 35,
+    views: [],
     time: "3h",
   },
   {
@@ -122,7 +122,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/5.jpg",
     story: "posts/5.jpg",
-    views: 50,
+    views: ["3", "4"],
     time: "3h",
   },
   {
@@ -131,7 +131,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/6.jpg",
     story: "posts/6.jpg",
-    views: 60,
+    views: ["4", "5"],
     time: "3h",
   },
   {
@@ -140,7 +140,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/7.jpg",
     story: "posts/7.jpg",
-    views: 50,
+    views: ["4", "5", "6"],
     time: "3m",
   },
   {
@@ -149,7 +149,7 @@ export const STORIES = [
     name: "B",
     avatar: "profile/8.jpg",
     story: "posts/8.jpg",
-    views: 50,
+    views: ["4", "5"],
     time: "3m",
   },
   {
@@ -158,7 +158,7 @@ export const STORIES = [
     name: "C",
     avatar: "profile/9.jpg",
     story: "posts/9.jpg",
-    views: 50,
+    views: ["5"],
     time: "3m",
   },
   {
@@ -167,7 +167,7 @@ export const STORIES = [
     name: "A",
     avatar: "profile/1.jpg",
     story: "posts/10.jpg",
-    views: 40,
+    views: ["2"],
     time: "3h",
   },
   {
@@ -187,59 +187,5 @@ export const STORIES = [
     story: "posts/3.jpg",
     views: 20,
     time: "3h",
-  },
-  {
-    id: "22",
-    profileId: "4",
-    name: "A",
-    avatar: "profile/4.jpg",
-    story: "posts/4.jpg",
-    views: 35,
-    time: "3h",
-  },
-  {
-    id: "23",
-    profileId: "5",
-    name: "B",
-    avatar: "profile/5.jpg",
-    story: "posts/5.jpg",
-    views: 50,
-    time: "3h",
-  },
-  {
-    id: "24",
-    profileId: "6",
-    name: "C",
-    avatar: "profile/6.jpg",
-    story: "posts/6.jpg",
-    views: 60,
-    time: "3h",
-  },
-  {
-    id: "25",
-    profileId: "7",
-    name: "A",
-    avatar: "profile/7.jpg",
-    story: "posts/7.jpg",
-    views: 50,
-    time: "3m",
-  },
-  {
-    id: "26",
-    profileId: "8",
-    name: "B",
-    avatar: "profile/8.jpg",
-    story: "posts/8.jpg",
-    views: 50,
-    time: "3m",
-  },
-  {
-    id: "27",
-    profileId: "9",
-    name: "C",
-    avatar: "profile/9.jpg",
-    story: "posts/9.jpg",
-    views: 50,
-    time: "3m",
   },
 ];

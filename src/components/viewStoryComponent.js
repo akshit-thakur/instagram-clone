@@ -1,12 +1,12 @@
 import React from "react";
 import { baseUrl } from "../shared/baseUrl";
 
-const DecideToDisplay = (props) => {
+const ShowViews = (props) => {
   if (props.loggedInId === props.story.profileId)
     return (
       <div className="col-1">
         <img src="icons/views.svg" alt="views" width={35} height={35} />
-        {props.story.views}
+        {props.story.views.length}
       </div>
     );
   else return <div className="col-1"></div>;
@@ -28,7 +28,7 @@ export const ViewStory = (props) => {
           </div>
           <div className="col-5 h6 ml-0">{props.story.name}</div>
 
-          <DecideToDisplay story={props.story} loggedInId={props.loggedInId} />
+          <ShowViews story={props.story} loggedInId={props.loggedInId} />
           <div className="col-2 offset-2">
             <img src="icons/comment.svg" width={40} height={40} alt="Comment" />
             <img src="icons/messages.svg" width={40} height={40} alt="Share" />

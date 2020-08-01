@@ -4,7 +4,8 @@ import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
 import { ViewStory } from "../viewStoryComponent";
 
-export const changeClasses = (className) => {
+//CSS to show active tab in profile navigation
+const changeClasses = (className) => {
   document.querySelector("#posts").classList.remove("active");
   document.querySelector("#igtv").classList.remove("active");
   if (document.querySelector("#saved") !== null)
@@ -14,28 +15,30 @@ export const changeClasses = (className) => {
   document.querySelector(className).classList.add("active");
 };
 
-export const InfoHeader = (props) => {
+//extra info(last 2 boxes of top)
+const DisplayInfo = ({ profile, posts }) => {
   return (
     <>
       <div className="col-lg-2 ml-5 shadow">
-        {props.profile.followers.length} followers <hr />
-        {props.profile.following.length} following <hr />
-        {props.posts.length} posts <hr />
+        {profile.followers.length} followers <hr />
+        {profile.following.length} following <hr />
+        {posts.length} posts <hr />
         Story Highlights
       </div>
       <div className="col-lg-2 ml-5 shadow">
-        <div className="row">{props.profile.extra.location}</div>
+        <div className="row">{profile.extra.location}</div>
         <hr />
-        <div className="row">{props.profile.extra.email}</div>
+        <div className="row">{profile.extra.email}</div>
         <hr />
-        <div className="row">{props.profile.extra.social}</div>
+        <div className="row">{profile.extra.social}</div>
         <hr />
-        <div className="row">{props.profile.extra.mentioned}</div>
+        <div className="row">{profile.extra.mentioned}</div>
       </div>
     </>
   );
 };
 
+//for loggedInProfile
 const OwnProfileHeader = ({ profile }) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
@@ -68,6 +71,7 @@ const OwnProfileHeader = ({ profile }) => {
   );
 };
 
+//for people in account.following array
 const FollowingProfileHeader = ({ profile }) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
@@ -133,7 +137,8 @@ const FollowingProfileHeader = ({ profile }) => {
   );
 };
 
-const DecideToDisplayMessage = ({ isPublic }) => {
+//for non private profiles
+const DisplayMessageIcon = ({ isPublic }) => {
   if (isPublic)
     return (
       <img
@@ -147,6 +152,7 @@ const DecideToDisplayMessage = ({ isPublic }) => {
   else return <></>;
 };
 
+//if not following
 const PublicPrivateProfileHeader = ({ profile }) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
@@ -157,9 +163,7 @@ const PublicPrivateProfileHeader = ({ profile }) => {
           <img src="icons/follow.svg" alt="follow icon" width={30} />
           Follow
         </button>
-
-        <DecideToDisplayMessage isPublic={profile.isPublic} />
-
+        <DisplayMessageIcon isPublic={profile.isPublic} />
         <img
           src="icons/alert.svg"
           alt="report"
@@ -183,11 +187,35 @@ const PublicPrivateProfileHeader = ({ profile }) => {
   );
 };
 
-const DecideToDisplayProfile = ({ active, profile }) => {
+//the name,following/report,about section
+const DisplayAbout = ({ active, profile }) => {
   if (active.id === profile.id) return <OwnProfileHeader profile={active} />;
   else if (profile.following.includes(active.id))
     return <FollowingProfileHeader profile={active} />;
   else return <PublicPrivateProfileHeader profile={active} />;
+};
+
+//displayed only on own profile
+const DisplaySaved = (props) => {
+  if (props.show)
+    return (
+      <li className="nav-item mx-auto">
+        <a
+          id="saved"
+          className="nav-link h4 text-secondary"
+          href={`${baseUrl}/account/:accountId`}
+          onClick={() => {
+            changeClasses("#saved");
+            if (props.active !== "saved") props.switchNav("saved");
+            else props.switchNav("savedExpanded");
+          }}
+        >
+          <img src="icons/save.svg" alt="Saved" width={30} />
+          Saved
+        </a>
+      </li>
+    );
+  else return <></>;
 };
 
 export const ChooseTop = ({
@@ -244,33 +272,11 @@ export const ChooseTop = ({
             } rounded-circle`}
           />
         </div>
-        <DecideToDisplayProfile profile={profile} active={activeProfile} />
-        <InfoHeader profile={activeProfile} posts={posts} />
+        <DisplayAbout profile={profile} active={activeProfile} />
+        <DisplayInfo profile={activeProfile} posts={posts} />
       </div>
     </>
   );
-};
-
-const DecideToDisplay = (props) => {
-  if (props.show)
-    return (
-      <li className="nav-item mx-auto">
-        <a
-          id="saved"
-          className="nav-link h4 text-secondary"
-          href={`${baseUrl}/account/:accountId`}
-          onClick={() => {
-            changeClasses("#saved");
-            if (props.active !== "saved") props.switchNav("saved");
-            else props.switchNav("savedExpanded");
-          }}
-        >
-          <img src="icons/save.svg" alt="Saved" width={30} />
-          Saved
-        </a>
-      </li>
-    );
-  else return <></>;
 };
 
 export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
@@ -314,7 +320,7 @@ export const ChooseNav = ({ profile, activeProfile, switchNav, active }) => {
             IGTV
           </a>
         </li>
-        <DecideToDisplay
+        <DisplaySaved
           switchNav={switchNav}
           active={active}
           show={activeProfile.id === profile.id}

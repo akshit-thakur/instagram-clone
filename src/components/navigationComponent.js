@@ -147,7 +147,7 @@ class Navigation extends Component {
             <div className="dropdown-menu">
               <a
                 className="dropdown-item"
-                href={`/account/${this.props.loggedInProfile.id}`}
+                href={`/${this.props.loggedInProfile.id}`}
               >
                 Profile
               </a>

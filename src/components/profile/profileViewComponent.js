@@ -90,6 +90,7 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveTabProfile: (newTab) => dispatch(setActiveTabProfile(newTab)),
   selectStory: (story) => dispatch(selectStory(story)),
 });
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(ProfileView)
 );

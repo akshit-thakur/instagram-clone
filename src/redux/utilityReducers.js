@@ -22,8 +22,8 @@ export const Utility = (
     activeTabExplore: "ownPosts",
     activeTabProfile: "posts",
     isExploreExpanded: false,
-    isInfoClicked: false,
-    isSearchBoxVisible: false,
+    isInfoClicked: false, //for messages
+    isSearchBoxVisible: false, //for navigation
     isTop: true, //for homepage
     loggedInProfile: {
       id: "1",
