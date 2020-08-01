@@ -14,6 +14,7 @@ const StoryDisplay = (props) => {
         className="justify-content-center rounded-circle"
         width={70}
         height={70}
+        onClick={() => props.selectStory(story)}
       />
       <center>{story.name}</center>
     </div>
@@ -30,7 +31,7 @@ class Home extends Component {
         <div className="modal bg-white col-lg-10 offset-lg-1" id="storyModal">
           <div className="h2">
             Stories
-            <button type="button" className="close" data-dismiss="modal">
+            <button type="button" className="close">
               &times;
             </button>
             <img
@@ -46,6 +47,9 @@ class Home extends Component {
               width={30}
               height={30}
               className="ml-2"
+              data-dismiss="modal"
+              data-toggle="modal"
+              data-target="#newStory"
             />
             <img
               src="icons/settings.svg"
@@ -100,7 +104,10 @@ class Home extends Component {
                   data-toggle="modal"
                   data-target="#storyModal"
                 >
-                  <StoryDisplay stories={storiesToDisplay} />
+                  <StoryDisplay
+                    stories={storiesToDisplay}
+                    selectStory={this.props.selectStory}
+                  />
                 </div>
               </div>
             </div>

@@ -172,3 +172,13 @@ export const setActiveProfile = (profile) => ({
   type: ActionTypes.SET_ACTIVE_PROFILE,
   payload: profile,
 });
+
+export const addFollowRequest = (info) => ({
+  type: ActionTypes.ADD_FOLLOW_REQUEST,
+  payload: info,
+});
+
+export const deleteFollowRequest = (info) => ({
+  type: ActionTypes.DELETE_FOLLOW_REQUEST,
+  payload: info,
+});

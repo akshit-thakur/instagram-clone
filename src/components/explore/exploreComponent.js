@@ -4,6 +4,8 @@ import {
   setActiveProfile,
   setActiveTabExplore,
   toggleExploreView,
+  addFollowRequest,
+  deleteFollowRequest,
 } from "../../redux/actionCreators";
 import ExpandedView from "./expandedViewComponent";
 import View from "./viewComponent";
@@ -35,20 +37,53 @@ const ChooseComponent = ({ active, isExpanded }) => {
   if (isExpanded) return <ExpandedView active={active} />;
   else return <View active={active} />;
 };
-
+const FollowButton = (props) => {
+  if (props.person.pendingRequests.includes(props.loggedInId))
+    return (
+      <button
+        className="btn shadow text-dark text-weight-bold"
+        onClick={() =>
+          props.deleteFollowRequest({
+            person: props.person.id,
+            requester: props.loggedInId,
+          })
+        }
+      >
+        <img src="icons/follow.svg" alt="follow" width={30} />
+        Requested
+      </button>
+    );
+  else
+    return (
+      <button
+        className="btn shadow text-dark text-weight-bold"
+        onClick={() =>
+          props.addFollowRequest({
+            person: props.person.id,
+            requester: props.loggedInId,
+          })
+        }
+      >
+        <img src="icons/follow.svg" alt="follow" width={30} />
+        Follow
+      </button>
+    );
+};
 class Explore extends Component {
   render() {
-    const PeopleYouMayKnow = ({ profile, accounts }) => {
+    const PeopleYouMayKnow = () => {
       //find not followed and follow mutuals
       let peopleToDisplay = [];
-      for (let followers of profile.followers) {
-        let tempPerson = accounts.filter(
+      const loggedIn = this.props.loggedInProfile;
+      const accountList = this.props.accounts;
+      for (let followers of loggedIn.followers) {
+        let tempPerson = accountList.filter(
           (person) => person.id === followers
         )[0];
         for (let followersOfFollower of tempPerson.followers) {
           if (
-            profile.followers.includes(followersOfFollower) === false &&
-            followersOfFollower !== profile.id
+            followersOfFollower !== loggedIn.id &&
+            loggedIn.followers.includes(followersOfFollower) === false
           )
             peopleToDisplay.push(followersOfFollower);
         }
@@ -56,7 +91,7 @@ class Explore extends Component {
       return (
         <div className="row flex-nowrap people-scroller mt-5">
           {peopleToDisplay.map((personId) => {
-            const person = this.props.accounts.filter(
+            const person = accountList.filter(
               (account) => account.id === personId
             )[0];
             return (
@@ -72,10 +107,12 @@ class Explore extends Component {
                   <br />
                   <h4>{person.name}</h4>
                   <br />
-                  <button className="btn shadow text-dark text-weight-bold">
-                    <img src="icons/follow.svg" alt="follow" width={30} />
-                    Follow
-                  </button>
+                  <FollowButton
+                    person={person}
+                    loggedInId={loggedIn.id}
+                    addFollowRequest={this.props.addFollowRequest}
+                    deleteFollowRequest={this.props.deleteFollowRequest}
+                  />
                 </center>
               </div>
             );
@@ -86,10 +123,7 @@ class Explore extends Component {
     return (
       <div className="container">
         <h3>People You May Know</h3>
-        <PeopleYouMayKnow
-          accounts={this.props.accounts}
-          profile={this.props.loggedInProfile}
-        />
+        <PeopleYouMayKnow />
         <div className="row my-5">
           <ul className="nav nav-tabs col-11">
             <li className="nav-item">
@@ -186,6 +220,8 @@ const mapDispatchToProps = (dispatch) => {
     toggleExploreView: (isExploreExpanded) =>
       dispatch(toggleExploreView(isExploreExpanded)),
     setActiveProfile: (person) => dispatch(setActiveProfile(person)),
+    addFollowRequest: (info) => dispatch(addFollowRequest(info)),
+    deleteFollowRequest: (info) => dispatch(deleteFollowRequest(info)),
   };
 };
 

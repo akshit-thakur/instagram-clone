@@ -2,7 +2,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { setActiveTabProfile, selectStory } from "../../redux/actionCreators";
+import {
+  setActiveTabProfile,
+  selectStory,
+  addFollowRequest,
+  deleteFollowRequest,
+} from "../../redux/actionCreators";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 
 const PublicOrPrivateSelector = (props) => {
@@ -29,7 +34,6 @@ const PublicOrPrivateSelector = (props) => {
 };
 class ProfileView extends Component {
   render() {
-    console.log(this.props.activeProfile);
     return (
       <>
         <div className="container">
@@ -44,6 +48,8 @@ class ProfileView extends Component {
             )}
             selectStory={this.props.selectStory}
             selectedStory={this.props.selectedStory}
+            addFollowRequest={this.props.addFollowRequest}
+            deleteFollowRequest={this.props.deleteFollowRequest}
           />
           <ChooseNav
             profile={this.props.loggedInProfile}
@@ -89,6 +95,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setActiveTabProfile: (newTab) => dispatch(setActiveTabProfile(newTab)),
   selectStory: (story) => dispatch(selectStory(story)),
+  addFollowRequest: (info) => dispatch(addFollowRequest(info)),
+  deleteFollowRequest: (info) => dispatch(deleteFollowRequest(info)),
 });
 
 export default withRouter(

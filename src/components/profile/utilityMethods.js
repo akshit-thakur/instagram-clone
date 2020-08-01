@@ -41,33 +41,37 @@ const DisplayInfo = ({ profile, posts }) => {
 //for loggedInProfile
 const OwnProfileHeader = ({ profile }) => {
   return (
-    <div className="col-lg-4 ml-5 shadow">
-      <div className="row p-3">
-        <h3>{profile.name}</h3>
-        <img
-          src="icons/edit.svg"
-          alt="edit"
-          width={30}
-          height={30}
-          className="ml-auto"
-        />
-        <img
-          src="icons/camera.svg"
-          alt="post"
-          width={30}
-          height={30}
-          className="ml-auto"
-        />
-        <img
-          src="icons/settings.svg"
-          alt="settings"
-          width={30}
-          height={30}
-          className="ml-auto"
-        />
+    <>
+      <div className="col-lg-4 ml-5 shadow">
+        <div className="row p-3">
+          <h3>{profile.name}</h3>
+          <img
+            src="icons/edit.svg"
+            alt="edit"
+            width={30}
+            height={30}
+            className="ml-auto"
+          />
+          <img
+            src="icons/camera.svg"
+            alt="post"
+            width={30}
+            height={30}
+            className="ml-auto"
+            data-toggle="modal"
+            data-target="#newPost"
+          />
+          <img
+            src="icons/settings.svg"
+            alt="settings"
+            width={30}
+            height={30}
+            className="ml-auto"
+          />
+        </div>
+        <div className="scrollable">{profile.about}</div>
       </div>
-      <div className="scrollable">{profile.about}</div>
-    </div>
+    </>
   );
 };
 
@@ -152,18 +156,59 @@ const DisplayMessageIcon = ({ isPublic }) => {
   else return <></>;
 };
 
+//follow button for non-followed profiles
+const FollowButton = (props) => {
+  if (props.person.pendingRequests.includes(props.loggedInId))
+    return (
+      <button
+        className="btn shadow text-dark text-weight-bold mx-auto"
+        onClick={() =>
+          props.deleteFollowRequest({
+            person: props.person.id,
+            requester: props.loggedInId,
+          })
+        }
+      >
+        <img src="icons/follow.svg" alt="follow" width={30} />
+        Requested
+      </button>
+    );
+  else
+    return (
+      <button
+        className="btn shadow text-dark text-weight-bold mx-auto"
+        onClick={() =>
+          props.addFollowRequest({
+            person: props.person.id,
+            requester: props.loggedInId,
+          })
+        }
+      >
+        <img src="icons/follow.svg" alt="follow" width={30} />
+        Follow
+      </button>
+    );
+};
+
 //if not following
-const PublicPrivateProfileHeader = ({ profile }) => {
+const PublicPrivateProfileHeader = ({
+  profile,
+  loggedInId,
+  addFollowRequest,
+  deleteFollowRequest,
+}) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
       <div className="row p-3">
         <h3>{profile.name}</h3>
 
-        <button className="btn shadow text-dark text-weight-bold mx-5">
-          <img src="icons/follow.svg" alt="follow icon" width={30} />
-          Follow
-        </button>
-        <DisplayMessageIcon isPublic={profile.isPublic} />
+        <FollowButton
+          person={profile}
+          loggedInId={loggedInId}
+          addFollowRequest={addFollowRequest}
+          deleteFollowRequest={deleteFollowRequest}
+        />
+        <DisplayMessageIcon isPublic={profile.isPublic} className="mx-auto" />
         <img
           src="icons/alert.svg"
           alt="report"
@@ -188,11 +233,24 @@ const PublicPrivateProfileHeader = ({ profile }) => {
 };
 
 //the name,following/report,about section
-const DisplayAbout = ({ active, profile }) => {
+const DisplayAbout = ({
+  active,
+  profile,
+  addFollowRequest,
+  deleteFollowRequest,
+}) => {
   if (active.id === profile.id) return <OwnProfileHeader profile={active} />;
   else if (profile.following.includes(active.id))
     return <FollowingProfileHeader profile={active} />;
-  else return <PublicPrivateProfileHeader profile={active} />;
+  else
+    return (
+      <PublicPrivateProfileHeader
+        profile={active}
+        loggedInId={profile.id}
+        addFollowRequest={addFollowRequest}
+        deleteFollowRequest={deleteFollowRequest}
+      />
+    );
 };
 
 //displayed only on own profile
@@ -203,7 +261,6 @@ const DisplaySaved = (props) => {
         <a
           id="saved"
           className="nav-link h4 text-secondary"
-          href={`${baseUrl}/account/:accountId`}
           onClick={() => {
             changeClasses("#saved");
             if (props.active !== "saved") props.switchNav("saved");
@@ -225,15 +282,28 @@ export const ChooseTop = ({
   stories,
   selectStory,
   selectedStory,
+  addFollowRequest,
+  deleteFollowRequest,
 }) => {
   return (
     <>
+      {/* Story Modal */}
       <div className="modal bg-white col-lg-10 offset-lg-1" id="storyModal">
         <div className="h2">
           Stories
           <button type="button" className="close" data-dismiss="modal">
             &times;
           </button>
+          <img
+            src="icons/uploadstory.svg"
+            alt="add new story"
+            width={30}
+            height={30}
+            className="offset-10"
+            data-dismiss="modal"
+            data-toggle="modal"
+            data-target="#newStory"
+          />
         </div>
         <div className="row flex-nowrap people-scroller mt-5">
           {stories.map((story) => (
@@ -256,6 +326,7 @@ export const ChooseTop = ({
         <hr />
         <ViewStory story={selectedStory} loggedInId={profile.id} />
       </div>
+      {/* Main Display Starts */}
       <div className="col-12 row">
         <div
           className="col-lg-2 mr-4"
@@ -272,7 +343,12 @@ export const ChooseTop = ({
             } rounded-circle`}
           />
         </div>
-        <DisplayAbout profile={profile} active={activeProfile} />
+        <DisplayAbout
+          profile={profile}
+          active={activeProfile}
+          addFollowRequest={addFollowRequest}
+          deleteFollowRequest={deleteFollowRequest}
+        />
         <DisplayInfo profile={activeProfile} posts={posts} />
       </div>
     </>

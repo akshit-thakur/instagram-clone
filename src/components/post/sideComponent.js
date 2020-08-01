@@ -34,6 +34,32 @@ const SavedIcon = (props) => {
     );
   }
 };
+
+const ReportIcon = ({ post, liker }) => {
+  if (post.profile.id !== liker) {
+    return (
+      <>
+        <img
+          src="icons/alert.svg"
+          alt="report here"
+          height={25}
+          width={25}
+          className="ml-5 dropdown-toggle caret-off"
+          data-toggle="dropdown"
+        />
+        <div className="dropdown-menu">
+          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
+            Report
+          </a>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
+            Block
+          </a>
+        </div>
+      </>
+    );
+  } else return <></>;
+};
 const Info = (props) => {
   return (
     <div>
@@ -62,23 +88,8 @@ const Info = (props) => {
       {props.likes}
       <img src="icons/comment.svg" alt="likes" width={30} height={30} />
       {props.comments}
-      <img
-        src="icons/alert.svg"
-        alt="report here"
-        height={25}
-        width={25}
-        className="ml-5 dropdown-toggle caret-off"
-        data-toggle="dropdown"
-      />
-      <div className="dropdown-menu">
-        <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-          Report
-        </a>
-        <div className="dropdown-divider"></div>
-        <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-          Block
-        </a>
-      </div>
+      <ReportIcon post={props.post} liker={props.liker} />
+
       <SavedIcon
         loggedId={props.liker}
         isSaved={props.isSaved}

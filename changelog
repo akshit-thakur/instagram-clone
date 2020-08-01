@@ -151,8 +151,17 @@ shared/blocked.js replaced with shared/account/ACCOUNT.blockList
 shared/report.js removed because it is nothing without backend.
 views and uploadstory.svg added
 --------------------------------------------
-Twenty-Third Commit
+Twenty-Third Commit(01/08/2020)
 added addView in storiesReducer.js
 views is now array in shared/stories.js
 Renamed a few functions
+--------------------------------------------
+Twenty-Fourth Commit(01/08/2020)
+added addFollowerRequest and deleteFollowerRequest in /explore and non-followed profiles.
+added newPost and newStory in stories modal of main page,profile page
+report icon now only shows up on posts of others,not own
+*******************
+TODO:
+Add notifications and comments
+*******************
 --------------------------------------------

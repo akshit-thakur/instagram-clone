@@ -155,7 +155,6 @@ class Navigation extends Component {
               <a
                 className="dropdown-item"
                 type="button"
-                href="#newPost"
                 data-toggle="modal"
                 data-target="#newPost"
               >

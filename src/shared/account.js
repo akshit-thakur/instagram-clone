@@ -15,6 +15,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "2",
@@ -32,6 +34,8 @@ export const ACCOUNT = [
     },
     followers: ["1", "3", "4", "5", "6", "7", "8", "9"],
     following: ["1", "3", "4", "5", "6", "7", "8", "9"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "3",
@@ -49,6 +53,7 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
     blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
@@ -67,6 +72,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "5",
@@ -84,6 +91,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "6",
@@ -101,6 +110,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "7",
@@ -118,6 +129,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "8",
@@ -135,6 +148,8 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {
     id: "9",
@@ -152,5 +167,7 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
+    pendingRequests: ["3", "4", "5"],
+    blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
 ];
