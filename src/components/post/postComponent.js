@@ -7,6 +7,10 @@ import {
   deleteLike,
   deleteSaved,
   isTopToggle,
+  addComment,
+  deleteComment,
+  addReply,
+  isReplyTo,
 } from "../../redux/actionCreators";
 import { SideComponent } from "./sideComponent";
 
@@ -71,6 +75,9 @@ class Posts extends Component {
                   width={25}
                   height={25}
                   alt="Comment"
+                  onClick={() =>
+                    document.querySelector(`#commentInput${post.id}`).focus()
+                  }
                 />
                 <img
                   src="icons/messages.svg"
@@ -86,14 +93,12 @@ class Posts extends Component {
           <div className="col card">
             <SideComponent
               post={post}
-              numberOfComments={
-                this.props.comments.filter(
-                  (comment) => comment.postId === post.id
-                ).length
-              }
+              comments={this.props.comments.filter(
+                (comment) => comment.postId === post.id
+              )}
               addLike={this.props.addLike}
               deleteLike={this.props.deleteLike}
-              liker={this.props.loggedInProfile.id}
+              loggedInProfile={this.props.loggedInProfile}
               isSaved={
                 this.props.posts.filter(
                   (p) =>
@@ -103,6 +108,10 @@ class Posts extends Component {
               }
               addSaved={this.props.addSaved}
               deleteSaved={this.props.deleteSaved}
+              addComment={this.props.addComment}
+              addReply={this.props.addReply}
+              replyTo={this.props.replyTo}
+              isReplyTo={this.props.isReplyTo}
             />
           </div>
         </div>
@@ -168,6 +177,7 @@ const mapStateToProps = (state) => ({
   comments: state.comments,
   loggedInProfile: state.utility.loggedInProfile,
   isTop: state.utility.isTop,
+  replyTo: state.utility.replyTo,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -176,5 +186,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteLike: (post) => dispatch(deleteLike(post)),
   addSaved: (post) => dispatch(addSaved(post)),
   deleteSaved: (post) => dispatch(deleteSaved(post)),
+  addComment: (commentInfo) => dispatch(addComment(commentInfo)),
+  deleteComment: (commentInfo) => dispatch(deleteComment(commentInfo)),
+  addReply: (info) => dispatch(addReply(info)),
+  isReplyTo: (info) => dispatch(isReplyTo(info)),
 });
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Posts));

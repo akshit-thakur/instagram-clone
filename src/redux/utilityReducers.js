@@ -43,6 +43,7 @@ export const Utility = (
       following: ["2"],
     },
     postModal: undefined,
+    replyTo: undefined,
     selectedStory: undefined,
   },
   action
@@ -80,6 +81,8 @@ export const Utility = (
       return { ...state, isSearchBoxVisible: !state.isSearchBoxVisible };
     case ActionTypes.SET_ACTIVE_PROFILE:
       return { ...state, activeProfile: action.payload };
+    case ActionTypes.REPLY_TO:
+      return { ...state, replyTo: action.payload.commentId };
     default:
       return state;
   }

@@ -10,8 +10,8 @@ class Messages extends Component {
         <div className="card col-3">
           <input
             type="text"
+            className="form-control mt-3"
             placeholder="Search messages"
-            className="mx-5 mt-3"
           />
           <hr />
           {props.messages.map((message) => {
@@ -68,14 +68,15 @@ class Messages extends Component {
             </div>
             <hr />
             <div className="row p-2">
-              <div className="col-11">
-                <input
-                  type="text"
-                  placeholder="Type your message..."
-                  className="col-11"
-                />
-                <button className="btn btn-secondary text-white">Send</button>
-              </div>
+              <input
+                type="text"
+                className="form-control col-9"
+                placeholder="Type your message..."
+              />
+              <button className="btn btn-secondary text-white offset-1">
+                Send
+              </button>
+
               <div className="col">
                 <img src="icons/emoji.png" alt="emoji" width={30} />
                 <img src="icons/gallery.svg" alt="gallery" width={30} />

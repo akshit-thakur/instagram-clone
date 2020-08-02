@@ -103,7 +103,7 @@ class Navigation extends Component {
           <li className="nav-item ">
             <a className="nav-link" href="/explore">
               <img
-                src={`icons/explore.svg`}
+                src="icons/explore.svg"
                 alt="explore"
                 title="explore"
                 width={30}
@@ -111,10 +111,10 @@ class Navigation extends Component {
             </a>
           </li>
 
-          <li className="nav-item ">
-            <a className="nav-link " href="/messages">
+          <li className="nav-item">
+            <a className="nav-link" href="/messages">
               <img
-                src={`icons/messages.svg`}
+                src="icons/messages.svg"
                 alt="messages"
                 title="messages"
                 width={30}
@@ -122,13 +122,9 @@ class Navigation extends Component {
             </a>
           </li>
           <li className="nav-item dropdown">
-            <a
-              className="nav-link "
-              href="/account/:accountId"
-              data-toggle="dropdown"
-            >
+            <a className="nav-link " data-toggle="dropdown">
               <img
-                src={`icons/notification.png`}
+                src="icons/notification.png"
                 alt="notifications"
                 width={30}
               />

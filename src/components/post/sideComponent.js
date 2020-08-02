@@ -3,9 +3,14 @@ import { baseUrl } from "../../shared/baseUrl";
 import Comments from "./comments";
 
 const About = (props) => {
-  if (props.about !== "") {
-    return <div className="about-box">{props.about}</div>;
-  } else return <div></div>;
+  if (props.about !== "")
+    return (
+      <>
+        <div className="about-box">{props.about}</div>
+        <hr />
+      </>
+    );
+  else return <div></div>;
 };
 const SavedIcon = (props) => {
   if (props.loggedId === props.posterId) return <div></div>;
@@ -35,8 +40,8 @@ const SavedIcon = (props) => {
   }
 };
 
-const ReportIcon = ({ post, liker }) => {
-  if (post.profile.id !== liker) {
+const ReportIcon = ({ post, loggedInProfile }) => {
+  if (post.profile.id !== loggedInProfile.id) {
     return (
       <>
         <img
@@ -61,11 +66,15 @@ const ReportIcon = ({ post, liker }) => {
   } else return <></>;
 };
 const Info = (props) => {
+  let numberOfReactions = props.comments.length;
+  props.comments.forEach((comment) => {
+    numberOfReactions += comment.replies.length;
+  });
   return (
     <div>
       <img
         src={
-          props.post.likes.includes(props.liker)
+          props.post.likes.includes(props.loggedInProfile.id)
             ? "icons/liked.svg"
             : "icons/like.svg"
         }
@@ -73,25 +82,33 @@ const Info = (props) => {
         height={30}
         width={30}
         onClick={() => {
-          if (props.post.likes.includes(props.liker))
+          if (props.post.likes.includes(props.loggedInProfile.id))
             props.deleteLike({
               postId: props.post.id,
-              liker: props.liker,
+              liker: props.loggedInProfile.id,
             });
           else
             props.addLike({
               postId: props.post.id,
-              liker: props.liker,
+              liker: props.loggedInProfile.id,
             });
         }}
       />
       {props.likes}
-      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
-      {props.comments}
-      <ReportIcon post={props.post} liker={props.liker} />
+      <img
+        src="icons/comment.svg"
+        alt="likes"
+        width={30}
+        height={30}
+        onClick={() =>
+          document.querySelector(`#commentInput${props.post.id}`).focus()
+        }
+      />
+      {numberOfReactions}
+      <ReportIcon post={props.post} loggedInProfile={props.loggedInProfile} />
 
       <SavedIcon
-        loggedId={props.liker}
+        loggedId={props.loggedInProfile.id}
         isSaved={props.isSaved}
         posterId={props.post.profile.id}
         postId={props.post.id}
@@ -108,18 +125,58 @@ export const SideComponent = (props) => {
       <Info
         post={props.post}
         likes={props.post.likes.length}
-        comments={props.numberOfComments}
+        comments={props.comments}
         addLike={props.addLike}
         deleteLike={props.deleteLike}
-        liker={props.liker}
+        loggedInProfile={props.loggedInProfile.id}
         isSaved={props.isSaved}
         addSaved={props.addSaved}
         deleteSaved={props.deleteSaved}
       />
       <hr />
       <About about={props.post.about} />
-      <hr />
       <Comments isAboutEmpty={props.post.about === ""} postId={props.post.id} />
+
+      <div className="mt-auto mb-1">
+        <hr />
+        <div className="row">
+          <input
+            id={`commentInput${props.post.id}`}
+            type="text"
+            style={{
+              border: "none",
+            }}
+            className="form-control col-8 ml-auto"
+            placeholder="Add a comment..."
+          />
+          <button
+            type="submit"
+            className="mx-auto btn bg-white text-primary"
+            onClick={() => {
+              if (props.replyTo)
+                props.addReply({
+                  commentId: props.replyTo,
+                  author: props.loggedInProfile,
+                  text: document.querySelector(`#commentInput${props.post.id}`)
+                    .value,
+                  likes: [],
+                });
+              else
+                props.addComment({
+                  postId: props.post.id,
+                  author: props.loggedInProfile,
+                  text: document.querySelector(`#commentInput${props.post.id}`)
+                    .value,
+                  likes: [],
+                  replies: [],
+                });
+              props.isReplyTo({});
+            }}
+          >
+            Post
+          </button>
+        </div>
+      </div>
     </>
   );
 };

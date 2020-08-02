@@ -97,10 +97,6 @@ Homepage now sorts posts according to likes and timeSincePosted.
 Side Component of post now shows the actual number of comments(replies not included)
 Added Like functionality across Home,Explore,Profile.
 Work laid out for navbar dropdown onClicks
-*******************
-TODO:
-Include reply in actual number of comments
-*******************
 --------------------------------------------
 Seventeenth Commit(26/07/2020)
 Search Button toggles search box on navbar.
@@ -162,6 +158,16 @@ added newPost and newStory in stories modal of main page,profile page
 report icon now only shows up on posts of others,not own
 *******************
 TODO:
-Add notifications and comments
+Add notifications
+*******************
+--------------------------------------------
+Twenty-Fifth Commit(02/08/2020)
+Comment number now show the replies as well
+Added like feature to replies
+Added addComment,add/deleteCommentLike,add/deleteReplyLike
+Add addReply
+*******************
+TODO:
+css changes and copying these features to all components
 *******************
 --------------------------------------------

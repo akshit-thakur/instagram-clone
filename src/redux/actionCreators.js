@@ -182,3 +182,28 @@ export const deleteFollowRequest = (info) => ({
   type: ActionTypes.DELETE_FOLLOW_REQUEST,
   payload: info,
 });
+
+export const addLikeComment = (info) => ({
+  type: ActionTypes.ADD_LIKE_COMMENT,
+  payload: info,
+});
+
+export const deleteLikeComment = (info) => ({
+  type: ActionTypes.DELETE_LIKE_COMMENT,
+  payload: info,
+});
+
+export const addLikeReply = (info) => ({
+  type: ActionTypes.ADD_LIKE_REPLY,
+  payload: info,
+});
+
+export const deleteLikeReply = (info) => ({
+  type: ActionTypes.DELETE_LIKE_REPLY,
+  payload: info,
+});
+
+export const isReplyTo = (info) => ({
+  type: ActionTypes.REPLY_TO,
+  payload: info,
+});
