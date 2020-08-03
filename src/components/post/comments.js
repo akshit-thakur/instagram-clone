@@ -56,9 +56,10 @@ const CommentList = (props) => {
                     });
                 }}
               />
-              {comment.likes.length} {comment.replies.length} replies|{" "}
+              {comment.likes.length} {comment.replies.length} replies|
               <span
                 onClick={() => {
+                  console.log(props.postId);
                   document
                     .querySelector(`#commentInput${props.postId}`)
                     .focus();
@@ -89,31 +90,33 @@ const CommentList = (props) => {
                   {reply.author.name}
                 </a>
                 {reply.text}
-                <img
-                  src={`${
-                    reply.likes.includes(props.loggedInProfile.id)
-                      ? "icons/liked.svg"
-                      : "icons/like.svg"
-                  }`}
-                  alt="likes"
-                  width={15}
-                  className="m-auto"
-                  onClick={() => {
-                    if (reply.likes.includes(props.loggedInProfile.id))
-                      props.deleteLikeReply({
-                        replyId: reply.id,
-                        commentId: comment.id,
-                        liker: props.loggedInProfile.id,
-                      });
-                    else
-                      props.addLikeReply({
-                        replyId: reply.id,
-                        commentId: comment.id,
-                        liker: props.loggedInProfile.id,
-                      });
-                  }}
-                />
-                {reply.likes.length}
+                <div className="font-weight-bold text-secondary inline">
+                  <img
+                    src={`${
+                      reply.likes.includes(props.loggedInProfile.id)
+                        ? "icons/liked.svg"
+                        : "icons/like.svg"
+                    }`}
+                    alt="likes"
+                    width={15}
+                    className="m-auto"
+                    onClick={() => {
+                      if (reply.likes.includes(props.loggedInProfile.id))
+                        props.deleteLikeReply({
+                          replyId: reply.id,
+                          commentId: comment.id,
+                          liker: props.loggedInProfile.id,
+                        });
+                      else
+                        props.addLikeReply({
+                          replyId: reply.id,
+                          commentId: comment.id,
+                          liker: props.loggedInProfile.id,
+                        });
+                    }}
+                  />
+                  {reply.likes.length}
+                </div>
               </div>
             </div>
           ))}

@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {
+  toggleSearchBox,
+  addFollower,
+  deleteFollowRequest,
+} from "../redux/actionCreators";
 
-import { toggleSearchBox } from "../redux/actionCreators";
-import { baseUrl } from "../shared/baseUrl";
 class Navigation extends Component {
   render() {
     const NewPostModal = () => {
@@ -72,6 +75,54 @@ class Navigation extends Component {
         </div>
       );
     };
+    const Requests = (props) => {
+      return props.requestAccountsInfo.map((requester) => (
+        <>
+          <div className="row " style={{ width: "600px" }}>
+            <div className="col-2">
+              <img
+                src={`${requester.avatar}`}
+                className="rounded-circle"
+                alt={`${requester.name}`}
+                width={30}
+                height={30}
+              />
+            </div>
+            <div className="col-5 font-weight-bold text-dark">
+              {requester.name}
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                props.addFollower({
+                  profileId: props.loggedInProfile.id,
+                  follower: requester.id,
+                });
+                props.deleteFollowRequest({
+                  person: props.loggedInProfile.id,
+                  requester: requester.id,
+                });
+              }}
+            >
+              Accept
+            </button>
+            <button
+              className="btn btn-light offset-1"
+              onClick={() =>
+                props.deleteFollowRequest({
+                  person: props.loggedInProfile.id,
+                  requester: requester.id,
+                })
+              }
+            >
+              Decline
+            </button>
+          </div>
+
+          <div className="dropdown-divider" />
+        </>
+      ));
+    };
     const NavList = () => {
       return (
         <ul className="navbar list-unstyled">
@@ -129,8 +180,38 @@ class Navigation extends Component {
                 width={30}
               />
             </a>
-            <div className="dropdown-menu">
-              <span>notifications</span>
+            <div
+              className="dropdown-menu dropdown-menu-right text-secondary"
+              id="notifications"
+              style={{ width: "600px" }}
+            >
+              <div className="dropdown-item">
+                <span className="font-weight-bold" data-t>
+                  {this.props.loggedInProfile.pendingRequests.length} follow
+                  requests
+                </span>
+                <br />
+                <div className="follow-notification-box">
+                  <Requests
+                    addFollower={this.props.addFollower}
+                    deleteFollowRequest={this.props.deleteFollowRequest}
+                    loggedInProfile={this.props.loggedInProfile}
+                    requestAccountsInfo={this.props.accounts.filter((account) =>
+                      this.props.loggedInProfile.pendingRequests.includes(
+                        account.id
+                      )
+                    )}
+                  />
+                </div>
+              </div>
+              <a className="dropdown-item">
+                <span>XYZ liked your pic</span>
+              </a>
+              <div className="dropdown-divider" />
+              <a className="dropdown-item">
+                <span>XYZ mentioned you in a comment</span>
+              </a>
+              <div className="dropdown-divider" />
             </div>
           </li>
           <li className="nav-item dropdown list-unstyled">
@@ -147,7 +228,7 @@ class Navigation extends Component {
               >
                 Profile
               </a>
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider" />
               <a
                 className="dropdown-item"
                 type="button"
@@ -156,7 +237,7 @@ class Navigation extends Component {
               >
                 New Post
               </a>
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider" />
               <a
                 className="dropdown-item"
                 type="button"
@@ -166,12 +247,12 @@ class Navigation extends Component {
               >
                 New Story
               </a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
+              <div className="dropdown-divider" />
+              <a className="dropdown-item" type="button">
                 Settings
               </a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
+              <div className="dropdown-divider" />
+              <a className="dropdown-item" type="button">
                 Logout
               </a>
             </div>
@@ -197,9 +278,12 @@ class Navigation extends Component {
 const mapStateToProps = (state) => ({
   isSearchBoxVisible: state.utility.isSearchBoxVisible,
   loggedInProfile: state.utility.loggedInProfile,
+  accounts: state.accounts,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   toggleSearchBox: () => dispatch(toggleSearchBox()),
+  addFollower: (info) => dispatch(addFollower(info)),
+  deleteFollowRequest: (info) => dispatch(deleteFollowRequest(info)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

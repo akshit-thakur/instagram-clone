@@ -128,7 +128,7 @@ export const SideComponent = (props) => {
         comments={props.comments}
         addLike={props.addLike}
         deleteLike={props.deleteLike}
-        loggedInProfile={props.loggedInProfile.id}
+        loggedInProfile={props.loggedInProfile}
         isSaved={props.isSaved}
         addSaved={props.addSaved}
         deleteSaved={props.deleteSaved}

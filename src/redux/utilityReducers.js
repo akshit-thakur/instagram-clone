@@ -18,6 +18,8 @@ export const Utility = (
       },
       followers: ["2"],
       following: ["2"],
+      pendingRequests: ["3", "4", "5"],
+      blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
     },
     activeTabExplore: "ownPosts",
     activeTabProfile: "posts",
@@ -41,6 +43,8 @@ export const Utility = (
       },
       followers: ["2"],
       following: ["2"],
+      pendingRequests: ["3", "4", "5", "6", "7", "8"],
+      blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
     },
     postModal: undefined,
     replyTo: undefined,

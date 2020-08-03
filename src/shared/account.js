@@ -15,7 +15,7 @@ export const ACCOUNT = [
     },
     followers: ["2"],
     following: ["2"],
-    pendingRequests: ["3", "4", "5"],
+    pendingRequests: ["3", "4", "5", "6", "7"],
     blockList: ["10", "11", "12", "13", "14"], //to see who the profile has blocked.
   },
   {

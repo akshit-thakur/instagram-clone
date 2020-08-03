@@ -7,6 +7,7 @@ import {
   selectStory,
   addFollowRequest,
   deleteFollowRequest,
+  deleteFollower,
 } from "../../redux/actionCreators";
 import { ChooseComponent, ChooseNav, ChooseTop } from "./utilityMethods";
 
@@ -50,6 +51,7 @@ class ProfileView extends Component {
             selectedStory={this.props.selectedStory}
             addFollowRequest={this.props.addFollowRequest}
             deleteFollowRequest={this.props.deleteFollowRequest}
+            deleteFollower={this.props.deleteFollower}
           />
           <ChooseNav
             profile={this.props.loggedInProfile}
@@ -97,6 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
   selectStory: (story) => dispatch(selectStory(story)),
   addFollowRequest: (info) => dispatch(addFollowRequest(info)),
   deleteFollowRequest: (info) => dispatch(deleteFollowRequest(info)),
+  deleteFollower: (info) => dispatch(deleteFollower(info)),
 });
 
 export default withRouter(

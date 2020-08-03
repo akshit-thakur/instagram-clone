@@ -6,6 +6,11 @@
   display: none;
 }
 
+.follow-notification-box {
+  overflow: scroll;
+  max-height: 150px;
+}
+
 /* homepage css*/
 .story-box {
   height: 25vw;

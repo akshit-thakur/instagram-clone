@@ -1,8 +1,8 @@
 import React from "react";
 import { baseUrl } from "../../shared/baseUrl";
+import { ViewStory } from "../viewStoryComponent";
 import FeedGallery from "./feedGalleryComponent";
 import FeedTimeline from "./feedTimelineComponent";
-import { ViewStory } from "../viewStoryComponent";
 
 //CSS to show active tab in profile navigation
 const changeClasses = (className) => {
@@ -76,7 +76,7 @@ const OwnProfileHeader = ({ profile }) => {
 };
 
 //for people in account.following array
-const FollowingProfileHeader = ({ profile }) => {
+const FollowingProfileHeader = ({ profile, loggedInId, deleteFollower }) => {
   return (
     <div className="col-lg-4 ml-5 shadow">
       <div className="row p-3">
@@ -91,19 +91,28 @@ const FollowingProfileHeader = ({ profile }) => {
             Following
           </button>
           <div class="dropdown-menu" id="followingDropdown">
-            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            <a class="dropdown-item" type="button">
               Add to close friends
             </a>
             <div className="dropdown-divider"></div>
-            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            <a class="dropdown-item" type="button">
               Mute
             </a>
             <div className="dropdown-divider"></div>
-            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            <a class="dropdown-item" type="button">
               Take a break
             </a>
             <div className="dropdown-divider"></div>
-            <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            <a
+              class="dropdown-item"
+              type="button"
+              onClick={() =>
+                deleteFollower({
+                  profileId: profile.id,
+                  idToRemove: loggedInId,
+                })
+              }
+            >
               Unfollow
             </a>
           </div>
@@ -238,10 +247,17 @@ const DisplayAbout = ({
   profile,
   addFollowRequest,
   deleteFollowRequest,
+  deleteFollower,
 }) => {
   if (active.id === profile.id) return <OwnProfileHeader profile={active} />;
   else if (profile.following.includes(active.id))
-    return <FollowingProfileHeader profile={active} />;
+    return (
+      <FollowingProfileHeader
+        profile={active}
+        loggedInId={profile.id}
+        deleteFollower={deleteFollower}
+      />
+    );
   else
     return (
       <PublicPrivateProfileHeader
@@ -284,6 +300,7 @@ export const ChooseTop = ({
   selectedStory,
   addFollowRequest,
   deleteFollowRequest,
+  deleteFollower,
 }) => {
   return (
     <>
@@ -348,6 +365,7 @@ export const ChooseTop = ({
           active={activeProfile}
           addFollowRequest={addFollowRequest}
           deleteFollowRequest={deleteFollowRequest}
+          deleteFollower={deleteFollower}
         />
         <DisplayInfo profile={activeProfile} posts={posts} />
       </div>

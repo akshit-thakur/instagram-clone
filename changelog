@@ -1,13 +1,10 @@
 First Commit
-
 Scaffolded out application
 --------------------------------------------
 Second Commit
-
 Added Navigation Component
 --------------------------------------------
 Third Commit (10-07-2020)
-
 Designed Home Page
 ml-2 to navicons applied
 Added Dummy Data to shared directory
@@ -18,23 +15,19 @@ Make the page layout screen responsive
 *******************
 --------------------------------------------
 Fourth Commit (12/07/2020)
-
 Setup react-router in MainComponent.js
 Added dummy required components (to setup layout later)
 Added "/you" profileComponent
 Setup nav to other tabs in profileComponent(will setup layout later)
 Added "shadow-lg" to posts
 Added popper.js etc to enable modal
-
 *******************
 TODO:
 Make required UI adjustments(Expanded posts not aligned)
 *******************
 --------------------------------------------
 Fifth Commit (13/07/2020)
-
 Added messages page and relevant dummy data and css classes
-
 --------------------------------------------
 Sixth Commit (14/07/2020)
 Rearranged CSS classes by page
@@ -168,6 +161,15 @@ Added addComment,add/deleteCommentLike,add/deleteReplyLike
 Add addReply
 *******************
 TODO:
-css changes and copying these features to all components
+css changes 
+copying these features to all components
+*******************
+--------------------------------------------
+Twenty-Sixth Commit(04/08/2020)
+Notification dropdown completed
+Added follow-notification-box css class
+*******************
+TODO:
+Clicking reply doesn't focus the comment box
 *******************
 --------------------------------------------
