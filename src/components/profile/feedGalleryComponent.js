@@ -211,18 +211,24 @@ class FeedGallery extends Component {
   render() {
     const PostGrid = (props) => {
       return props.posts.map((post) => (
-        <img
-          key={post.id}
-          src={post.image}
-          width={400}
-          height={400}
-          alt="post"
-          role="button"
-          className="col-4 mb-5"
-          data-toggle="modal"
-          data-target="#postModal"
-          onClick={() => this.props.postModal(post)}
-        />
+        <>
+          <img
+            key={post.id}
+            src={post.image}
+            width={400}
+            height={400}
+            alt="post"
+            role="button"
+            className="image col-4 mb-5"
+            data-toggle="modal"
+            data-target="#postModal"
+            onClick={() => this.props.postModal(post)}
+          />
+          {/* <div className="middle">
+            <img src="icons/like.svg" alt="likes" />
+            {post.likes.length}
+          </div> */}
+        </>
       ));
     };
 

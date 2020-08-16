@@ -14,7 +14,7 @@ const CommentList = (props) => {
   return (
     <>
       {props.comments.map((comment) => (
-        <div className="row">
+        <div className="row wordwrap ">
           <div className="col-lg-2 col-1">
             <img
               src={comment.author.avatar}
@@ -24,7 +24,7 @@ const CommentList = (props) => {
               height={40}
             />
           </div>
-          <div className="col-lg-10 col small">
+          <div className="col small">
             <a
               className="unstyled text-dark font-weight-bold mr-1"
               href={comment.author.link}
@@ -72,7 +72,7 @@ const CommentList = (props) => {
           </div>
 
           {comment.replies.map((reply) => (
-            <div className="lg-offset-2 offset-1 row">
+            <div className="offset-1 row wordwrap ">
               <div className="col-lg-2 col-1">
                 <img
                   src={reply.author.avatar}

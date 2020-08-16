@@ -158,7 +158,7 @@ Twenty-Fifth Commit(02/08/2020)
 Comment number now show the replies as well
 Added like feature to replies
 Added addComment,add/deleteCommentLike,add/deleteReplyLike
-Add addReply
+Added addReply
 *******************
 TODO:
 css changes 
@@ -171,5 +171,15 @@ Added follow-notification-box css class
 *******************
 TODO:
 Clicking reply doesn't focus the comment box
+*******************
+--------------------------------------------
+Twenty-Seventh Commit(17/08/2020)
+removed unneccessary scroll bars in messages and about box of post.
+*******************
+TODO:
+Unable to do CSS to hover-display likes in Feed Gallery View
+profile story viewStory is passing props but not displaying as desired(Windows)
+ChooseNav defaults to posts on refresh(Windows)
+modal align for newStory and postModal are same..decouple and apply CSS accordingly
 *******************
 --------------------------------------------

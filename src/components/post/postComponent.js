@@ -54,8 +54,8 @@ class Posts extends Component {
                       ? "icons/liked.svg"
                       : "icons/like.svg"
                   }
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Like"
                   onClick={() => {
                     if (post.likes.includes(this.props.loggedInProfile.id))
@@ -69,21 +69,24 @@ class Posts extends Component {
                         liker: this.props.loggedInProfile.id,
                       });
                   }}
+                  className="mx-1"
                 />
                 <img
                   src="icons/comment.svg"
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Comment"
                   onClick={() =>
                     document.querySelector(`#commentInput${post.id}`).focus()
                   }
+                  className="mx-1"
                 />
                 <img
                   src="icons/messages.svg"
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Share"
+                  className="mx-1"
                 />
               </div>
               {post.timeSincePosted}h

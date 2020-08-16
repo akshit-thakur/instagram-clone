@@ -13,6 +13,7 @@ const changeClasses = (className) => {
     document.querySelector("#saved").classList.remove("active");
   document.querySelector("#tagged").classList.remove("active");
   document.querySelector(className).classList.add("active");
+  console.log(className);
 };
 
 //extra info(last 2 boxes of top)

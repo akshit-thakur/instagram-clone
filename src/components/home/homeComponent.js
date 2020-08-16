@@ -35,7 +35,7 @@ class Home extends Component {
               &times;
             </button>
             <img
-              className="offset-10"
+              className="offset-9"
               src="icons/search.svg"
               alt="Search"
               width={30}
@@ -46,7 +46,7 @@ class Home extends Component {
               alt="add new story"
               width={30}
               height={30}
-              className="ml-2"
+              className="ml-4"
               data-dismiss="modal"
               data-toggle="modal"
               data-target="#newStory"
@@ -56,7 +56,7 @@ class Home extends Component {
               alt="Settings"
               width={30}
               height={30}
-              className="ml-2"
+              className="ml-4"
             />
           </div>
           <div className="row flex-nowrap people-scroller mt-5">

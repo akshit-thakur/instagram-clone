@@ -35,7 +35,7 @@ class Navigation extends Component {
             <button className="btn btn-secondary text-white offset-10 mt-3">
               Select
             </button>
-            <button className="btn btn-primary text-white ml-4 mt-3">
+            <button className="btn btn-primary text-white ml-2 mt-3">
               Upload
             </button>
           </div>
@@ -68,7 +68,7 @@ class Navigation extends Component {
             <button className="btn btn-secondary text-white offset-10 mt-3">
               Select
             </button>
-            <button className="btn btn-primary text-white ml-4 mt-3">
+            <button className="btn btn-primary text-white ml-2 mt-3">
               Upload
             </button>
           </div>

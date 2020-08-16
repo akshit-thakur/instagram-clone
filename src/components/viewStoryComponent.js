@@ -5,7 +5,7 @@ const ShowViews = (props) => {
   if (props.loggedInId === props.story.profileId)
     return (
       <div className="col-1">
-        <img src="icons/views.svg" alt="views" width={35} height={35} />
+        <img src="icons/views.svg" alt="views" width={20} height={20} />
         {props.story.views.length}
       </div>
     );
@@ -13,6 +13,7 @@ const ShowViews = (props) => {
 };
 
 export const ViewStory = (props) => {
+  console.log(props);
   if (props.story)
     return (
       <div className="shadow-lg mt-5 col-lg-8 offset-lg-2 bg-white">
@@ -30,22 +31,34 @@ export const ViewStory = (props) => {
 
           <ShowViews story={props.story} loggedInId={props.loggedInId} />
           <div className="col-2 offset-2">
-            <img src="icons/comment.svg" width={40} height={40} alt="Comment" />
-            <img src="icons/messages.svg" width={40} height={40} alt="Share" />
+            <img
+              src="icons/comment.svg"
+              width={20}
+              height={20}
+              alt="Comment"
+              className="mx-1"
+            />
+            <img
+              src="icons/messages.svg"
+              width={20}
+              height={20}
+              alt="Share"
+              className="mx-1"
+            />
             <img
               src="icons/alert.svg"
-              width={30}
-              height={30}
+              width={20}
+              height={20}
               alt="Report"
-              className="dropdown-toggle caret-off"
+              className="dropdown-toggle caret-off mx-1"
               data-toggle="dropdown"
             />
-            <div class="dropdown-menu">
-              <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+            <div className="dropdown-menu">
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 Report
               </a>
               <div className="dropdown-divider"></div>
-              <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+              <a className="dropdown-item" type="button" href={`${baseUrl}`}>
                 Block
               </a>
             </div>

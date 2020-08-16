@@ -27,9 +27,9 @@ const SavedIcon = (props) => {
             : "icons/save.svg"
         }
         alt="save"
-        width={50}
-        height={50}
-        className="ml-5"
+        width={40}
+        height={40}
+        className="offset-1"
         onClick={() => {
           props.isSaved
             ? props.deleteSaved(objToPass)
@@ -47,9 +47,9 @@ const ReportIcon = ({ post, loggedInProfile }) => {
         <img
           src="icons/alert.svg"
           alt="report here"
-          height={25}
-          width={25}
-          className="ml-5 dropdown-toggle caret-off"
+          height={20}
+          width={20}
+          className="offset-5 dropdown-toggle caret-off"
           data-toggle="dropdown"
         />
         <div className="dropdown-menu">
@@ -79,8 +79,8 @@ const Info = (props) => {
             : "icons/like.svg"
         }
         alt="likes"
-        height={30}
-        width={30}
+        height={20}
+        width={20}
         onClick={() => {
           if (props.post.likes.includes(props.loggedInProfile.id))
             props.deleteLike({
@@ -98,8 +98,8 @@ const Info = (props) => {
       <img
         src="icons/comment.svg"
         alt="likes"
-        width={30}
-        height={30}
+        width={20}
+        height={20}
         onClick={() =>
           document.querySelector(`#commentInput${props.post.id}`).focus()
         }
