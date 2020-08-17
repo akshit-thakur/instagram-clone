@@ -15,6 +15,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1002",
@@ -32,6 +33,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1003",
@@ -49,6 +51,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1004",
@@ -66,6 +69,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1005",
@@ -83,6 +87,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1006",
@@ -100,6 +105,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1007",
@@ -117,6 +123,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1008",
@@ -134,6 +141,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1009",
@@ -151,6 +159,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "1010",
@@ -168,6 +177,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "111",
@@ -185,6 +195,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "112",
@@ -202,6 +213,7 @@ export const EXPLORE = [
     category: "ownPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "113",
@@ -219,6 +231,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "114",
@@ -236,6 +249,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "115",
@@ -253,6 +267,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "116",
@@ -270,6 +285,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "117",
@@ -287,6 +303,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "118",
@@ -304,6 +321,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "119",
@@ -321,6 +339,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "120",
@@ -338,6 +357,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours,
   },
   {
     id: "121",
@@ -355,6 +375,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "122",
@@ -372,6 +393,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "123",
@@ -389,6 +411,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "124",
@@ -406,6 +429,7 @@ export const EXPLORE = [
     category: "otherPosts",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "125",
@@ -423,6 +447,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "126",
@@ -440,6 +465,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "127",
@@ -457,6 +483,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "128",
@@ -474,6 +501,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "129",
@@ -491,6 +519,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2", //hours
   },
   {
     id: "130",
@@ -508,6 +537,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "131",
@@ -525,6 +555,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "132",
@@ -542,6 +573,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "133",
@@ -559,6 +591,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "134",
@@ -576,6 +609,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "135",
@@ -593,6 +627,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "136",
@@ -610,6 +645,7 @@ export const EXPLORE = [
     category: "igtv",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
 
   {
@@ -628,6 +664,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "138",
@@ -645,6 +682,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "139",
@@ -662,6 +700,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "140",
@@ -679,6 +718,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "141",
@@ -696,6 +736,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "142",
@@ -713,6 +754,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "143",
@@ -730,6 +772,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "144",
@@ -747,6 +790,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "145",
@@ -764,6 +808,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "146",
@@ -781,6 +826,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "147",
@@ -798,6 +844,7 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
   {
     id: "148",
@@ -815,5 +862,6 @@ export const EXPLORE = [
     category: "reels",
     savedBy: ["2"],
     tagged: [],
+    timeSincePosted: "0.2",
   },
 ];

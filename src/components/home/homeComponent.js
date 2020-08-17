@@ -7,16 +7,16 @@ import { ViewStory } from "../viewStoryComponent";
 import { Footer } from "./footerComponent";
 const StoryDisplay = (props) => {
   return props.stories.map((story) => (
-    <div className="col-3 offset-1 mb-5">
+    <div className="col-4 mb-5 text-center">
       <img
         src={story.avatar}
         alt={story.name}
         className="justify-content-center rounded-circle"
-        width={70}
-        height={70}
+        width={60}
+        height={60}
         onClick={() => props.selectStory(story)}
       />
-      <center>{story.name}</center>
+      {story.name}
     </div>
   ));
 };

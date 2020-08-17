@@ -174,12 +174,21 @@ Clicking reply doesn't focus the comment box
 *******************
 --------------------------------------------
 Twenty-Seventh Commit(17/08/2020)
-removed unneccessary scroll bars in messages and about box of post.
+Removed unneccessary scroll bars in messages and about box of post.
+Reduced icon sizes for homepage posts and other areas.
 *******************
 TODO:
 Unable to do CSS to hover-display likes in Feed Gallery View
 profile story viewStory is passing props but not displaying as desired(Windows)
 ChooseNav defaults to posts on refresh(Windows)
-modal align for newStory and postModal are same..decouple and apply CSS accordingly
+*******************
+--------------------------------------------
+Twenty-Eighth Commit()
+post modal in /explore and /profile  and "add new post/story" modals are now 2 different CSS classes under navbar CSS and undefined CSS
+Expanded view and modal posts reaction icons size reduced.
+emoji and gallery icons in messages chat box reduced by 5px
+*******************
+TODO:
+Responsiveness
 *******************
 --------------------------------------------

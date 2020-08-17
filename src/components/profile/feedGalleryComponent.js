@@ -29,9 +29,9 @@ const SavedIcon = (props) => {
             : "icons/save.svg"
         }
         alt="save"
-        width={50}
-        height={50}
-        className="ml-5"
+        width={40}
+        height={40}
+        className="offset-1"
         onClick={() =>
           props.isSaved
             ? props.deleteSaved(objToPass)
@@ -48,9 +48,9 @@ const ReportIcon = ({ post, liker }) => {
         <img
           src="icons/alert.svg"
           alt="report here"
-          height={25}
-          width={25}
-          className="ml-5 dropdown-toggle caret-off"
+          height={20}
+          width={20}
+          className="offset-6 dropdown-toggle caret-off"
           data-toggle="dropdown"
         />
         <div className="dropdown-menu">
@@ -80,8 +80,8 @@ const Info = (props) => {
             : "icons/like.svg"
         }
         alt="likes"
-        height={30}
-        width={30}
+        height={20}
+        width={20}
         onClick={() => {
           if (props.likes.includes(props.liker))
             props.deleteLike({
@@ -96,7 +96,7 @@ const Info = (props) => {
         }}
       />
       {props.likes.length}
-      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
+      <img src="icons/comment.svg" alt="likes" height={20} width={20} />
       {props.comments}
       <ReportIcon post={props.post} liker={props.liker} />
       <SavedIcon
@@ -114,7 +114,7 @@ const Post = (props) => {
   if (props.post === undefined) return <div></div>;
   else
     return (
-      <div id="postModal" className="modal modal-align" role="dialog">
+      <div id="postModal" className="modal modal-post" role="dialog">
         <div className="container row ">
           <div className="col-8 modal-content">
             <div className="row p-2">
@@ -131,15 +131,15 @@ const Post = (props) => {
                 <div className="row h6">{props.post.profile.name}</div>
                 <div className="row small">{props.post.location}</div>
               </div>
-              <div className="offset-4 col">
+              <div className="offset-3 col">
                 <img
                   src={
                     props.postLikes.includes(props.liker)
                       ? "icons/liked.svg"
                       : "icons/like.svg"
                   }
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Like"
                   onClick={() => {
                     if (props.postLikes.includes(props.liker))
@@ -153,20 +153,24 @@ const Post = (props) => {
                         liker: props.liker,
                       });
                   }}
+                  className="mx-1"
                 />
                 <img
                   src="icons/comment.svg"
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Comment"
+                  className="mx-1"
                 />
                 <img
                   src="icons/messages.svg"
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   alt="Share"
+                  className="mx-1"
                 />
               </div>
+              {props.post.timeSincePosted}h
             </div>
             <div className="row">
               <img

@@ -93,6 +93,7 @@ const Info = (props) => {
               liker: props.loggedInProfile.id,
             });
         }}
+        className="mx-1"
       />
       {props.likes}
       <img
@@ -103,6 +104,7 @@ const Info = (props) => {
         onClick={() =>
           document.querySelector(`#commentInput${props.post.id}`).focus()
         }
+        className="mx-1"
       />
       {numberOfReactions}
       <ReportIcon post={props.post} loggedInProfile={props.loggedInProfile} />

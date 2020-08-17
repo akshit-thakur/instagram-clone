@@ -23,8 +23,8 @@ const Info = (props) => {
             : "icons/like.svg"
         }
         alt="likes"
-        height={30}
-        width={30}
+        height={20}
+        width={20}
         onClick={() => {
           if (props.post.likes.includes(props.liker))
             props.deleteLikeExplore({
@@ -41,14 +41,14 @@ const Info = (props) => {
         }}
       />
       {props.post.likes.length}
-      <img src="icons/comment.svg" alt="likes" width={30} height={30} />
+      <img src="icons/comment.svg" alt="likes" height={20} width={20} />
       {props.comments}
       <img
         src="icons/alert.svg"
         alt="report here"
-        height={25}
-        width={25}
-        className="ml-4 dropdown-toggle caret-off"
+        height={20}
+        width={20}
+        className="offset-5 dropdown-toggle caret-off"
         data-toggle="dropdown"
       />
       <div class="dropdown-menu">
@@ -67,9 +67,9 @@ const Info = (props) => {
             : "icons/save.svg"
         }
         alt="saved"
-        width={50}
-        height={50}
-        className="ml-2"
+        width={40}
+        height={40}
+        className="offset-1"
         onClick={() => {
           props.isSaved
             ? props.deleteSavedExplore({
@@ -110,8 +110,8 @@ const PostList = (props) => {
                   ? "icons/liked.svg"
                   : "icons/like.svg"
               }
-              width={25}
-              height={25}
+              width={20}
+              height={20}
               alt="Like"
               onClick={() => {
                 if (post.likes.includes(props.liker))
@@ -125,10 +125,24 @@ const PostList = (props) => {
                     liker: props.liker,
                   });
               }}
+              className="mx-1"
             />
-            <img src="icons/comment.svg" width={25} height={25} alt="Comment" />
-            <img src="icons/messages.svg" width={25} height={25} alt="Share" />
+            <img
+              src="icons/comment.svg"
+              width={20}
+              height={20}
+              alt="Comment"
+              className="mx-1"
+            />
+            <img
+              src="icons/messages.svg"
+              width={20}
+              height={20}
+              alt="Share"
+              className="mx-1"
+            />
           </div>
+          {post.timeSincePosted}h
         </div>
         <img src={post.image} alt="post" className="post-img-expanded" />
       </div>

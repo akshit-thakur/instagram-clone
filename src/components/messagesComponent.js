@@ -70,16 +70,26 @@ class Messages extends Component {
             <div className="row p-2">
               <input
                 type="text"
-                className="form-control col-9"
+                className="form-control col-8"
                 placeholder="Type your message..."
               />
-              <button className="btn btn-secondary text-white offset-1">
+              <button className="btn btn-secondary text-white offset-lg-1">
                 Send
               </button>
 
               <div className="col">
-                <img src="icons/emoji.png" alt="emoji" width={30} />
-                <img src="icons/gallery.svg" alt="gallery" width={30} />
+                <img
+                  src="icons/emoji.png"
+                  alt="emoji"
+                  height={25}
+                  className="mx-3"
+                />
+                <img
+                  src="icons/gallery.svg"
+                  alt="gallery"
+                  height={25}
+                  className="mx-3"
+                />
               </div>
             </div>
           </>

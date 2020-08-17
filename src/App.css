@@ -5,30 +5,11 @@ white-space: -o-pre-wrap; /* Opera 7
 word-wrap: break-word;  IE 
 }*/
 
-/* .middle {
-  transition: 0.5s ease;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  color: white;
-  background-color: black;
+/*post modal modal css*/
+.modal-post {
+  margin-left: 15%;
+  margin-top: 5%;
 }
-
-.image {
-  opacity: 1;
-  transition: 0.5s ease;
-  backface-visibility: hidden;
-}
-
-.image:hover {
-  opacity: 0.3;
-}
-
-.image:hover .middle {
-  opacity: 1;
-} */
 /*navbar*/
 .caret-off::before {
   display: none;
@@ -40,6 +21,11 @@ word-wrap: break-word;  IE
 .follow-notification-box {
   overflow: scroll;
   max-height: 150px;
+}
+
+.modal-align {
+  margin-left: 10%;
+  margin-top: -5%;
 }
 
 /* homepage css*/
@@ -128,11 +114,6 @@ word-wrap: break-word;  IE
   object-fit: cover;
   width: 600px;
   height: 600px;
-}
-
-.modal-align {
-  margin-left: 10%;
-  margin-top: -5%;
 }
 
 /*messages css*/
