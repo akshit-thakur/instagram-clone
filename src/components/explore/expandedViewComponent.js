@@ -14,6 +14,10 @@ const About = (props) => {
 };
 
 const Info = (props) => {
+  let numberOfReactions = props.comments.length;
+  props.post.comments.forEach((comment) => {
+    numberOfReactions += comment.replies.length;
+  });
   return (
     <div>
       <img
@@ -42,7 +46,7 @@ const Info = (props) => {
       />
       {props.post.likes.length}
       <img src="icons/comment.svg" alt="likes" height={20} width={20} />
-      {props.comments}
+      {numberOfReactions}
       <img
         src="icons/alert.svg"
         alt="report here"

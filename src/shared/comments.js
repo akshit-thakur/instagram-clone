@@ -343,4 +343,57 @@ export const COMMENTS = [
       },
     ],
   },
+  {
+    id: "6",
+    postId: "111",
+    text: "Morbi ac lacus vehicula, pulvinar sem nec, condimentum ipsum.",
+    author: {
+      id: "2",
+      name: "DEF",
+      avatar: `profile/2.jpg`,
+      link: "localhost:3000/profile/2.html",
+    },
+    likes: ["2"],
+    replies: [
+      {
+        id: "1",
+        commentId: "6",
+        text:
+          "Phasellus mi justo, convallis id tellus at, tempus tristique turpis.",
+        author: {
+          id: "1",
+          name: "ABC",
+          avatar: `profile/1.jpg`,
+          link: "localhost:3000/profile/1.html",
+        },
+        likes: ["2"],
+      },
+      {
+        id: "1",
+        commentId: "6",
+        text:
+          "Phasellus mi justo, convallis id tellus at, tempus tristique turpis.",
+        author: {
+          id: "1",
+          name: "ABC",
+          avatar: `profile/1.jpg`,
+          link: "localhost:3000/profile/1.html",
+        },
+        likes: ["2"],
+      },
+      {
+        id: "1",
+        commentId: "6",
+        text:
+          "Phasellus mi justo, convallis id tellus at, tempus tristique turpis.",
+        author: {
+          id: "1",
+          name: "ABC",
+          avatar: `profile/1.jpg`,
+          link: "localhost:3000/profile/1.html",
+        },
+        likes: ["2"],
+      },
+    ],
+  },
 ];

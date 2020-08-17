@@ -161,7 +161,6 @@ Added addComment,add/deleteCommentLike,add/deleteReplyLike
 Added addReply
 *******************
 TODO:
-css changes 
 copying these features to all components
 *******************
 --------------------------------------------
@@ -183,12 +182,19 @@ profile story viewStory is passing props but not displaying as desired(Windows)
 ChooseNav defaults to posts on refresh(Windows)
 *******************
 --------------------------------------------
-Twenty-Eighth Commit()
+Twenty-Eighth Commit(17/08/2020)
 post modal in /explore and /profile  and "add new post/story" modals are now 2 different CSS classes under navbar CSS and undefined CSS
 Expanded view and modal posts reaction icons size reduced.
 emoji and gallery icons in messages chat box reduced by 5px
 *******************
 TODO:
 Responsiveness
+*******************
+--------------------------------------------
+Twenty-Ninth Commit(18/08/2020)
+Comments are now more aesthetic
+*******************
+TODO:
+View All Replies(0) is still showing
 *******************
 --------------------------------------------

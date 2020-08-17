@@ -212,6 +212,7 @@ const mapStateToProps = (state) => ({
   activeTabExplore: state.utility.activeTabExplore,
   accounts: state.accounts,
   isExploreExpanded: state.utility.isExploreExpanded,
+  comments: state.comments,
 });
 
 const mapDispatchToProps = (dispatch) => {

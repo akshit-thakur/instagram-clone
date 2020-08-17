@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -14,113 +15,136 @@ const CommentList = (props) => {
   return (
     <>
       {props.comments.map((comment) => (
-        <div className="row wordwrap ">
-          <div className="col-lg-2 col-1">
-            <img
-              src={comment.author.avatar}
-              alt={comment.author.name}
-              className="rounded-circle"
-              width={40}
-              height={40}
-            />
-          </div>
-          <div className="col small">
-            <a
-              className="unstyled text-dark font-weight-bold mr-1"
-              href={comment.author.link}
-            >
-              {comment.author.name}
-            </a>
-            {comment.text}
-
-            <div className="font-weight-bold text-secondary">
+        <>
+          <div className="row p-2">
+            <div className="col-lg-2 col-1">
               <img
-                src={`${
-                  comment.likes.includes(props.loggedInProfile.id)
-                    ? "icons/liked.svg"
-                    : "icons/like.svg"
-                }`}
-                alt="likes"
-                width={15}
-                className="m-auto"
-                onClick={() => {
-                  if (comment.likes.includes(props.loggedInProfile.id))
-                    props.deleteLikeComment({
-                      commentId: comment.id,
-                      liker: props.loggedInProfile.id,
-                    });
-                  else
-                    props.addLikeComment({
-                      commentId: comment.id,
-                      liker: props.loggedInProfile.id,
-                    });
-                }}
+                src={comment.author.avatar}
+                alt={comment.author.name}
+                className="rounded-circle"
+                width={40}
+                height={40}
               />
-              {comment.likes.length} {comment.replies.length} replies|
-              <span
-                onClick={() => {
-                  console.log(props.postId);
-                  document
-                    .querySelector(`#commentInput${props.postId}`)
-                    .focus();
-                  props.isReplyTo({ commentId: comment.id });
-                }}
+            </div>
+            <div className="col small">
+              <a
+                className="unstyled text-dark font-weight-bold mr-1"
+                href={comment.author.link}
               >
-                Reply
-              </span>
+                {comment.author.name}
+              </a>
+              {comment.text}
+
+              <div className="font-weight-bold text-secondary">
+                <img
+                  src={`${
+                    comment.likes.includes(props.loggedInProfile.id)
+                      ? "icons/liked.svg"
+                      : "icons/like.svg"
+                  }`}
+                  alt="likes"
+                  width={15}
+                  className="m-auto"
+                  onClick={() => {
+                    if (comment.likes.includes(props.loggedInProfile.id))
+                      props.deleteLikeComment({
+                        commentId: comment.id,
+                        liker: props.loggedInProfile.id,
+                      });
+                    else
+                      props.addLikeComment({
+                        commentId: comment.id,
+                        liker: props.loggedInProfile.id,
+                      });
+                  }}
+                />
+                {comment.likes.length}
+                <a
+                  onClick={() => {
+                    console.log(props.postId);
+                    document
+                      .querySelector(`#commentInput${props.postId}`)
+                      .focus();
+                    props.isReplyTo({ commentId: comment.id });
+                  }}
+                  className="ml-2"
+                >
+                  Reply
+                </a>
+              </div>
             </div>
           </div>
-
-          {comment.replies.map((reply) => (
-            <div className="offset-1 row wordwrap ">
-              <div className="col-lg-2 col-1">
-                <img
-                  src={reply.author.avatar}
-                  alt={reply.author.name}
-                  className="rounded-circle"
-                  width={30}
-                  height={30}
-                />
-              </div>
-              <div className="col-10 small">
-                <a
-                  className="unstyled text-dark font-weight-bold mr-1"
-                  href={reply.author.link}
-                >
-                  {reply.author.name}
-                </a>
-                {reply.text}
-                <div className="font-weight-bold text-secondary inline">
+          <div className="font-weight-bold text-secondary small">
+            <a
+              id={`reply-list-enable${comment.id}`}
+              data-toggle="collapse"
+              data-target={`#replyDiv${comment.id}`}
+              className={`offset-1 `}
+              onClick={() => {
+                document.querySelector(
+                  `#reply-list-enable${comment.id}`
+                ).innerHTML =
+                  document.querySelector(`#reply-list-enable${comment.id}`)
+                    .innerHTML === "Hide All Replies"
+                    ? `View All Replies(${comment.replies.length})`
+                    : "Hide All Replies";
+              }}
+            >
+              View all replies({comment.replies.length})
+            </a>
+          </div>
+          <div id={`replyDiv${comment.id}`} class="collapse">
+            {comment.replies.map((reply) => (
+              <div className="offset-1 row p-2">
+                <div className="col-lg-2 col-1">
                   <img
-                    src={`${
-                      reply.likes.includes(props.loggedInProfile.id)
-                        ? "icons/liked.svg"
-                        : "icons/like.svg"
-                    }`}
-                    alt="likes"
-                    width={15}
-                    className="m-auto"
-                    onClick={() => {
-                      if (reply.likes.includes(props.loggedInProfile.id))
-                        props.deleteLikeReply({
-                          replyId: reply.id,
-                          commentId: comment.id,
-                          liker: props.loggedInProfile.id,
-                        });
-                      else
-                        props.addLikeReply({
-                          replyId: reply.id,
-                          commentId: comment.id,
-                          liker: props.loggedInProfile.id,
-                        });
-                    }}
+                    src={reply.author.avatar}
+                    alt={reply.author.name}
+                    className="rounded-circle"
+                    width={30}
+                    height={30}
                   />
-                  {reply.likes.length}
+                </div>
+                <div className="col-10 small">
+                  <a
+                    className="unstyled text-dark font-weight-bold mr-1"
+                    href={reply.author.link}
+                  >
+                    {reply.author.name}
+                  </a>
+                  {reply.text}
+                  <div className="font-weight-bold text-secondary inline">
+                    <img
+                      src={`${
+                        reply.likes.includes(props.loggedInProfile.id)
+                          ? "icons/liked.svg"
+                          : "icons/like.svg"
+                      }`}
+                      alt="likes"
+                      width={15}
+                      className="m-auto"
+                      onClick={() => {
+                        if (reply.likes.includes(props.loggedInProfile.id))
+                          props.deleteLikeReply({
+                            replyId: reply.id,
+                            commentId: comment.id,
+                            liker: props.loggedInProfile.id,
+                          });
+                        else
+                          props.addLikeReply({
+                            replyId: reply.id,
+                            commentId: comment.id,
+                            liker: props.loggedInProfile.id,
+                          });
+                      }}
+                    />
+                    {reply.likes.length}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       ))}
     </>
   );
