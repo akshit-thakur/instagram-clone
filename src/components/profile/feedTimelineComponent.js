@@ -7,105 +7,7 @@ import {
   deleteSaved,
   postModal,
 } from "../../redux/actionCreators";
-import { baseUrl } from "../../shared/baseUrl";
-import Comments from "../post/comments";
-
-const About = (props) => {
-  if (props.about !== "") return <div className="about-box">{props.about}</div>;
-  else return <div></div>;
-};
-const SavedIcon = (props) => {
-  if (props.loggedId === props.posterId) return <div></div>;
-  else {
-    const objToPass = {
-      postId: props.postId,
-      profileId: props.loggedId,
-    };
-    return (
-      <img
-        src={
-          props.isSaved //check if saved
-            ? "icons/saved.svg"
-            : "icons/save.svg"
-        }
-        alt="save"
-        width={50}
-        height={50}
-        className="ml-5"
-        onClick={() =>
-          props.isSaved
-            ? props.deleteSaved(objToPass)
-            : props.addSaved(objToPass)
-        }
-      />
-    );
-  }
-};
-const ReportIcon = ({ post, liker }) => {
-  if (post.profile.id !== liker) {
-    return (
-      <>
-        <img
-          src="icons/alert.svg"
-          alt="report here"
-          height={25}
-          width={25}
-          className="ml-5 dropdown-toggle caret-off"
-          data-toggle="dropdown"
-        />
-        <div className="dropdown-menu">
-          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-            Report
-          </a>
-          <div className="dropdown-divider"></div>
-          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-            Block
-          </a>
-        </div>
-      </>
-    );
-  } else return <></>;
-};
-const Info = (props) => {
-  return (
-    <div>
-      <img
-        src={
-          props.post.likes.includes(props.liker)
-            ? "icons/liked.svg"
-            : "icons/like.svg"
-        }
-        alt="likes"
-        height={30}
-        width={30}
-        onClick={() => {
-          if (props.post.likes.includes(props.liker))
-            props.deleteLike({
-              postId: props.post.id,
-              liker: props.liker,
-            });
-          else
-            props.addLike({
-              postId: props.post.id,
-              liker: props.liker,
-            });
-        }}
-      />
-      {props.post.likes.length}
-      <img src="icons/comment.svg" alt="comments" width={30} height={30} />
-      {props.comments}
-      <ReportIcon post={props.post} liker={props.liker} />
-      <SavedIcon
-        loggedId={props.liker}
-        isSaved={props.isSaved}
-        posterId={props.post.profile.id}
-        postId={props.post.id}
-        addSaved={props.addSaved}
-        deleteSaved={props.deleteSaved}
-      />
-    </div>
-  );
-};
+import { SideComponent } from "../post/sideComponent";
 const PostList = (props) => {
   return props.posts.map((post) => (
     <div className="row shadow-lg mt-5">
@@ -127,52 +29,65 @@ const PostList = (props) => {
           <div className="col offset-3">
             <img
               src={
-                post.likes.includes(props.liker)
+                post.likes.includes(props.liker.id)
                   ? "icons/liked.svg"
                   : "icons/like.svg"
               }
-              width={25}
-              height={25}
+              width={20}
+              height={20}
               alt="Like"
               onClick={() => {
-                if (post.likes.includes(props.liker))
+                if (post.likes.includes(props.liker.id))
                   props.deleteLike({
                     postId: post.id,
-                    liker: props.liker,
+                    liker: props.liker.id,
                   });
                 else
                   props.addLike({
                     postId: post.id,
-                    liker: props.liker,
+                    liker: props.liker.id,
                   });
               }}
+              className="mx-1"
             />
-            <img src="icons/comment.svg" width={25} height={25} alt="Comment" />
-            <img src="icons/messages.svg" width={25} height={25} alt="Share" />
+            <img
+              src="icons/comment.svg"
+              width={20}
+              height={20}
+              alt="Comment"
+              className="mx-1"
+            />
+            <img
+              src="icons/messages.svg"
+              width={20}
+              height={20}
+              alt="Share"
+              className="mx-1"
+            />
           </div>
+          {post.timeSincePosted}h
         </div>
         <img src={post.image} alt="post" className="post-img-expanded" />
       </div>
       <div className="col card">
-        <Info
+        <SideComponent
           activeTab={props.activeTab}
-          comments={0}
           post={post}
+          comments={props.allComments.filter(
+            (comment) => comment.postId === post.id
+          )}
           addLike={props.addLike}
           deleteLike={props.deleteLike}
           addSaved={props.addSaved}
           deleteSaved={props.deleteSaved}
-          liker={props.liker}
+          loggedInProfile={props.liker}
           isSaved={
             props.posts.filter(
-              (p) => p.id === post.id && p.savedBy.includes(props.liker) //liker= current logged in profile
+              (p) => p.id === post.id && p.savedBy.includes(props.liker.id) //liker= current logged in profile
             ).length > 0
           }
+          about={post.about}
         />
-        <hr />
-        <About about={post.about} />
-        <hr />
-        <Comments isAboutEmpty={post.about === ""} postId={post.id} />
       </div>
     </div>
   ));
@@ -184,7 +99,8 @@ class FeedTimeline extends Component {
         <PostList
           activeTab={this.props.activeState}
           posts={this.props.posts}
-          liker={this.props.loggedInProfile.id}
+          allComments={this.props.comments}
+          liker={this.props.loggedInProfile}
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
           addSaved={this.props.addSaved}
@@ -196,6 +112,7 @@ class FeedTimeline extends Component {
 }
 const mapStateToProps = (state) => ({
   loggedInProfile: state.utility.loggedInProfile,
+  comments: state.comments,
 });
 
 const mapDispatchToProps = (dispatch) => ({

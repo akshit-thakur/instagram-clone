@@ -8,11 +8,6 @@ Third Commit (10-07-2020)
 Designed Home Page
 ml-2 to navicons applied
 Added Dummy Data to shared directory
-*******************
-TODO: 
-Comment box and About Box are at odds
-Make the page layout screen responsive 
-*******************
 --------------------------------------------
 Fourth Commit (12/07/2020)
 Setup react-router in MainComponent.js
@@ -21,10 +16,6 @@ Added "/you" profileComponent
 Setup nav to other tabs in profileComponent(will setup layout later)
 Added "shadow-lg" to posts
 Added popper.js etc to enable modal
-*******************
-TODO:
-Make required UI adjustments(Expanded posts not aligned)
-*******************
 --------------------------------------------
 Fifth Commit (13/07/2020)
 Added messages page and relevant dummy data and css classes
@@ -34,10 +25,6 @@ Rearranged CSS classes by page
 Layout of /explore page (src/explore)
 added explore.js in shared
 added more photos in public/posts/
-*******************
-TODO:
-Mostly CSS arrangements which is a continuous process anyways.
-*******************
 --------------------------------------------
 Seventh Commit (17/07/2020)
 Adjusted the navbar to accomodate the dropdown (resulted in a bit expanded navigation icon tray)
@@ -48,10 +35,6 @@ Info in active chat window now toggles between Chat window and Chat info(with on
 Eighth commit (18/07/2020)
 Pvt,Public and Following profile layouts
 Added utilityMethods in profile directory to hold the repeating functions ChooseComponent and changeClasses
-*******************
-TODO:
-Make the code consistent with the video
-*******************
 --------------------------------------------
 Ninth commit (20/07/2020)
 Story layout basic done.. dropdowns and other css stuff remains
@@ -62,10 +45,6 @@ Tenth Commit (21/07/2020)
 Reverted changes to a smaller card for story instead of screen filler card
 Change to Redux will take care of required profile component. Everything else in /profile working fine.
 Got rid of individual profileComponents. Only 4 things govern /profile now -> viewProfile.. chooseTop,chooseNav,chooseComponent
-*******************
-TODO:
-Take care of commented code.
-*******************
 --------------------------------------------
 Eleventh Commit(22/07/2020)
 Framework of Redux done
@@ -98,10 +77,6 @@ Replaced all icons with SVG.
 --------------------------------------------
 Eighteenth Commit(27/07/2020)
 Added Save functionality across Home,Explore,Profile.
-*******************
-TODO:
-Reduce unneccessary props passed around
-*******************
 --------------------------------------------
 Nineteenth Commit(28/07/2020)
 Profile tabs can now be succesfully toggled.
@@ -110,10 +85,6 @@ PeopleYouMayKnow code optimized due to above change
 In components/profile code for choosing the headers was minimized and different headers were merged into utilityMethods
 Stories of active account now show on main profile only.. not in /stories.
 Homepage posts now show time since posted
-*******************
-TODO:
-Make modal for story highlights
-*******************
 --------------------------------------------
 Twentieth Commit(30/07/2020)
 SVGs(except View and Story archives) finalized
@@ -122,10 +93,6 @@ Two dropdowns on same page now toggle two different dropdownws..were referring t
 utilityReducer has one property less which was boolean showing if modal post is clicked.. modal data-target has been used instead.
 add story and add post modals done
 navbar now has notification icon. No need of dropdown arrow
-*******************
-TODO:
-See if modals can show without displacing components behind.
-*******************
 --------------------------------------------
 Twenty-first Commit(31/07/2020)
 /you has working story modal
@@ -149,52 +116,46 @@ Twenty-Fourth Commit(01/08/2020)
 added addFollowerRequest and deleteFollowerRequest in /explore and non-followed profiles.
 added newPost and newStory in stories modal of main page,profile page
 report icon now only shows up on posts of others,not own
-*******************
-TODO:
-Add notifications
-*******************
 --------------------------------------------
 Twenty-Fifth Commit(02/08/2020)
 Comment number now show the replies as well
 Added like feature to replies
 Added addComment,add/deleteCommentLike,add/deleteReplyLike
 Added addReply
-*******************
-TODO:
-copying these features to all components
-*******************
 --------------------------------------------
 Twenty-Sixth Commit(04/08/2020)
 Notification dropdown completed
 Added follow-notification-box css class
-*******************
-TODO:
-Clicking reply doesn't focus the comment box
-*******************
 --------------------------------------------
 Twenty-Seventh Commit(17/08/2020)
 Removed unneccessary scroll bars in messages and about box of post.
 Reduced icon sizes for homepage posts and other areas.
-*******************
-TODO:
-Unable to do CSS to hover-display likes in Feed Gallery View
-profile story viewStory is passing props but not displaying as desired(Windows)
-ChooseNav defaults to posts on refresh(Windows)
-*******************
 --------------------------------------------
 Twenty-Eighth Commit(17/08/2020)
 post modal in /explore and /profile  and "add new post/story" modals are now 2 different CSS classes under navbar CSS and undefined CSS
 Expanded view and modal posts reaction icons size reduced.
 emoji and gallery icons in messages chat box reduced by 5px
-*******************
-TODO:
-Responsiveness
-*******************
 --------------------------------------------
 Twenty-Ninth Commit(18/08/2020)
 Comments are now more aesthetic
+--------------------------------------------
+Thirthieth Commit(20/08/2020)
+View All Replies(0) was showing.. removed with ReplyListToggle component.
+SideComponent component imported wherever needed. Deleted Repeated Code.
 *******************
 TODO:
-View All Replies(0) is still showing
+Comment box and About Box are at odds
+Profile modals not working as intended
+profile story viewStory is passing props but not displaying as desired(Windows)
+Make modal for story highlights
+ChooseNav defaults to posts on refresh(Windows)
+Responsiveness
+Not all profiles showing
+Clicking reply doesn't focus the comment box
+See if modals can show without displacing components behind
+Reduce unneccessary props passed around
+Take care of commented code
+Make the code consistent with the video
+Mostly CSS arrangements which is a continuous process anyways
 *******************
 --------------------------------------------

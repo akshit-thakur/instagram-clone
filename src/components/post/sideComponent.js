@@ -121,6 +121,7 @@ const Info = (props) => {
     </div>
   );
 };
+
 export const SideComponent = (props) => {
   return (
     <>
@@ -138,47 +139,6 @@ export const SideComponent = (props) => {
       <hr />
       <About about={props.post.about} />
       <Comments isAboutEmpty={props.post.about === ""} postId={props.post.id} />
-
-      <div className="mt-auto mb-1">
-        <hr />
-        <div className="row">
-          <input
-            id={`commentInput${props.post.id}`}
-            type="text"
-            style={{
-              border: "none",
-            }}
-            className="form-control col-8 ml-auto"
-            placeholder="Add a comment..."
-          />
-          <button
-            type="submit"
-            className="mx-auto btn bg-white text-primary"
-            onClick={() => {
-              if (props.replyTo)
-                props.addReply({
-                  commentId: props.replyTo,
-                  author: props.loggedInProfile,
-                  text: document.querySelector(`#commentInput${props.post.id}`)
-                    .value,
-                  likes: [],
-                });
-              else
-                props.addComment({
-                  postId: props.post.id,
-                  author: props.loggedInProfile,
-                  text: document.querySelector(`#commentInput${props.post.id}`)
-                    .value,
-                  likes: [],
-                  replies: [],
-                });
-              props.isReplyTo({});
-            }}
-          >
-            Post
-          </button>
-        </div>
-      </div>
     </>
   );
 };

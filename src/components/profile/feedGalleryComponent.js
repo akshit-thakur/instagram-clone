@@ -7,109 +7,7 @@ import {
   deleteSaved,
   postModal,
 } from "../../redux/actionCreators";
-import { baseUrl } from "../../shared/baseUrl";
-import Comments from "../post/comments";
-const About = (props) => {
-  if (props.about !== "") {
-    return <div className="about-box">{props.about}</div>;
-  } else return <div></div>;
-};
-const SavedIcon = (props) => {
-  if (props.loggedId === props.posterId) return <div></div>;
-  else {
-    const objToPass = {
-      postId: props.postId,
-      profileId: props.loggedId,
-    };
-    return (
-      <img
-        src={
-          props.isSaved //check if saved
-            ? "icons/saved.svg"
-            : "icons/save.svg"
-        }
-        alt="save"
-        width={40}
-        height={40}
-        className="offset-1"
-        onClick={() =>
-          props.isSaved
-            ? props.deleteSaved(objToPass)
-            : props.addSaved(objToPass)
-        }
-      />
-    );
-  }
-};
-const ReportIcon = ({ post, liker }) => {
-  if (post.profile.id !== liker) {
-    return (
-      <>
-        <img
-          src="icons/alert.svg"
-          alt="report here"
-          height={20}
-          width={20}
-          className="offset-6 dropdown-toggle caret-off"
-          data-toggle="dropdown"
-        />
-        <div className="dropdown-menu">
-          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-            Report
-          </a>
-          <div className="dropdown-divider"></div>
-          <a className="dropdown-item" type="button" href={`${baseUrl}`}>
-            Block
-          </a>
-        </div>
-      </>
-    );
-  } else return <></>;
-};
-const Info = (props) => {
-  return (
-    <div>
-      <img
-        src={
-          props.activeTab === "igtv" //what is this?
-            ? props.likes.includes(props.liker)
-              ? "icons/liked.svg"
-              : "icons/like.svg"
-            : props.likes.includes(props.liker)
-            ? "icons/liked.svg"
-            : "icons/like.svg"
-        }
-        alt="likes"
-        height={20}
-        width={20}
-        onClick={() => {
-          if (props.likes.includes(props.liker))
-            props.deleteLike({
-              postId: props.post.id,
-              liker: props.liker,
-            });
-          else
-            props.addLike({
-              postId: props.post.id,
-              liker: props.liker,
-            });
-        }}
-      />
-      {props.likes.length}
-      <img src="icons/comment.svg" alt="likes" height={20} width={20} />
-      {props.comments}
-      <ReportIcon post={props.post} liker={props.liker} />
-      <SavedIcon
-        loggedId={props.liker}
-        isSaved={props.isSaved}
-        posterId={props.post.profile.id}
-        postId={props.post.id}
-        addSaved={props.addSaved}
-        deleteSaved={props.deleteSaved}
-      />
-    </div>
-  );
-};
+import { SideComponent } from "../post/sideComponent";
 const Post = (props) => {
   if (props.post === undefined) return <div></div>;
   else
@@ -186,25 +84,19 @@ const Post = (props) => {
                 &times;
               </button>
             </div>
-            <Info
+            <SideComponent
               activeTab={props.activeTab}
               likes={props.postLikes}
-              comments={props.post.comments}
               post={props.post}
-              liker={props.liker}
+              comments={props.allComments.filter(
+                (comment) => comment.postId === props.post.id
+              )}
+              loggedInProfile={props.liker}
               addLike={props.addLike}
               deleteLike={props.deleteLike}
               isSaved={props.isSaved}
               addSaved={props.addSaved}
               deleteSaved={props.deleteSaved}
-            />
-
-            <hr />
-            <About about={props.post.about} />
-            <hr />
-            <Comments
-              isAboutEmpty={props.post.about === ""}
-              postId={props.post.id}
             />
           </div>
         </div>
@@ -250,7 +142,7 @@ class FeedGallery extends Component {
                   (post) => post.id === this.props.modalPost.id
                 )[0].likes
           }
-          postComments={0}
+          allComments={this.props.comments}
           addLike={this.props.addLike}
           deleteLike={this.props.deleteLike}
           isSaved={
@@ -262,7 +154,7 @@ class FeedGallery extends Component {
                     post.id === this.props.modalPost.id
                 ).length !== 0
           }
-          liker={this.props.loggedInProfile.id}
+          liker={this.props.loggedInProfile}
           addSaved={this.props.addSaved}
           deleteSaved={this.props.deleteSaved}
         />
@@ -272,6 +164,7 @@ class FeedGallery extends Component {
 }
 const mapStateToProps = (state) => ({
   postOriginal: state.posts,
+  comments: state.comments,
   saved: state.saved,
   modalPost: state.utility.postModal,
   loggedInProfile: state.utility.loggedInProfile,
