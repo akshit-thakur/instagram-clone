@@ -142,6 +142,9 @@ Comments are now more aesthetic
 Thirthieth Commit(20/08/2020)
 View All Replies(0) was showing.. removed with ReplyListToggle component.
 SideComponent component imported wherever needed. Deleted Repeated Code.
+--------------------------------------------
+Thirty-first Commit(21/08/2020)
+Reverted use of SideComponent in /explore because the backend is different.
 *******************
 TODO:
 Comment box and About Box are at odds

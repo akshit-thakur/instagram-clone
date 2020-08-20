@@ -15,6 +15,10 @@ const About = (props) => {
 };
 
 const Info = (props) => {
+  let numberOfReactions = props.comments.length;
+  props.comments.forEach((comment) => {
+    numberOfReactions += comment.replies.length;
+  });
   return (
     <div>
       <img
@@ -50,7 +54,7 @@ const Info = (props) => {
         height={20}
         className="mx-1"
       />
-      {props.comments}
+      {numberOfReactions}
       <img
         src="icons/alert.svg"
         alt="report here"
@@ -94,7 +98,6 @@ const Info = (props) => {
   );
 };
 const Post = (props) => {
-  console.log(props.post);
   if (props.post === undefined) return <div></div>;
   else
     return (
@@ -175,7 +178,9 @@ const Post = (props) => {
             <Info
               post={props.post}
               postStats={props.postStats}
-              comments={0}
+              comments={props.allComments.filter(
+                (comment) => comment.postId === props.post.id
+              )}
               active={props.active}
               liker={props.liker}
               addLikeExplore={props.addLikeExplore}
@@ -239,6 +244,7 @@ class View extends Component {
                   (post) => post.id === this.props.post.id
                 )[0]
           }
+          allComments={this.props.allComments}
           isClicked={this.props.isPostClicked}
           active={this.props.active}
           liker={this.props.loggedInProfile.id}
@@ -254,6 +260,7 @@ class View extends Component {
 }
 const mapStateToProps = (state) => ({
   explorePosts: state.explore,
+  allComments: state.comments,
   post: state.utility.postModal,
   loggedInProfile: state.utility.loggedInProfile,
 });

@@ -6,8 +6,97 @@ import {
   deleteLikeExplore,
   deleteSavedExplore,
 } from "../../redux/actionCreators";
-import { SideComponent } from "../post/sideComponent";
+import { baseUrl } from "../../shared/baseUrl";
+import Comments from "../post/comments";
 
+const About = (props) => {
+  if (props.about !== "") return <div className="about-box">{props.about}</div>;
+  else return <div></div>;
+};
+
+const Info = (props) => {
+  let numberOfReactions = props.comments.length;
+  props.comments.forEach((comment) => {
+    numberOfReactions += comment.replies.length;
+  });
+  return (
+    <div>
+      <img
+        src={
+          props.post.likes.includes(props.liker)
+            ? "icons/liked.svg"
+            : "icons/like.svg"
+        }
+        alt="likes"
+        height={20}
+        width={20}
+        onClick={() => {
+          if (props.post.likes.includes(props.liker))
+            props.deleteLikeExplore({
+              postId: props.post.id,
+              category: props.active,
+              liker: props.liker,
+            });
+          else
+            props.addLikeExplore({
+              postId: props.post.id,
+              category: props.active,
+              liker: props.liker,
+            });
+        }}
+        className="mx-1"
+      />
+      {props.post.likes.length}
+      <img
+        src="icons/comment.svg"
+        alt="comment"
+        width={20}
+        height={20}
+        className="mx-1"
+      />
+      {numberOfReactions}
+      <img
+        src="icons/alert.svg"
+        alt="report here"
+        height={20}
+        width={20}
+        className="offset-5 dropdown-toggle caret-off"
+        data-toggle="dropdown"
+      />
+      <div class="dropdown-menu">
+        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+          Report
+        </a>
+        <div className="dropdown-divider"></div>
+        <a class="dropdown-item" type="button" href={`${baseUrl}`}>
+          Block
+        </a>
+      </div>
+      <img
+        src={
+          props.isSaved //check if saved
+            ? "icons/saved.svg"
+            : "icons/save.svg"
+        }
+        alt="saved"
+        width={40}
+        height={40}
+        className="offset-1"
+        onClick={() => {
+          props.isSaved
+            ? props.deleteSavedExplore({
+                postId: props.post.id,
+                profileId: props.liker,
+              })
+            : props.addSavedExplore({
+                postId: props.post.id,
+                profileId: props.liker,
+              });
+        }}
+      />
+    </div>
+  );
+};
 const PostList = (props) => {
   return props.posts.map((post) => (
     <div className="row shadow-lg mt-5">
@@ -70,24 +159,26 @@ const PostList = (props) => {
         <img src={post.image} alt="post" className="post-img-expanded" />
       </div>
       <div className="col card">
-        <SideComponent
-          activeTab={props.activeTab}
+        <Info
           post={post}
           comments={props.allComments.filter(
             (comment) => comment.postId === post.id
           )}
-          addLike={props.addLike}
-          deleteLike={props.deleteLike}
-          addSaved={props.addSaved}
-          deleteSaved={props.deleteSaved}
-          loggedInProfile={props.liker}
+          addLikeExplore={props.addLikeExplore}
+          deleteLikeExplore={props.deleteLikeExplore}
+          liker={props.liker}
           isSaved={
             props.posts.filter(
-              (p) => p.id === post.id && p.savedBy.includes(props.liker.id) //liker= current logged in profile
+              (p) => p.id === post.id && p.savedBy.includes(props.liker) //liker= current logged in profile
             ).length > 0
           }
-          about={post.about}
+          addSavedExplore={props.addSavedExplore}
+          deleteSavedExplore={props.deleteSavedExplore}
         />
+        <hr />
+        <About about={post.about} />
+        <hr />
+        <Comments isAboutEmpty={post.about === ""} postId={post.id} />
       </div>
     </div>
   ));

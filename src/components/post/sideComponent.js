@@ -95,7 +95,7 @@ const Info = (props) => {
         }}
         className="mx-1"
       />
-      {props.likes}
+      {props.likes.length}
       <img
         src="icons/comment.svg"
         alt="likes"
@@ -127,7 +127,7 @@ export const SideComponent = (props) => {
     <>
       <Info
         post={props.post}
-        likes={props.post.likes.length}
+        likes={props.post.likes}
         comments={props.comments}
         addLike={props.addLike}
         deleteLike={props.deleteLike}

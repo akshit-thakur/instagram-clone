@@ -137,7 +137,7 @@ class FeedGallery extends Component {
           post={this.props.modalPost}
           postLikes={
             this.props.modalPost === undefined
-              ? 0
+              ? []
               : this.props.postOriginal.filter(
                   (post) => post.id === this.props.modalPost.id
                 )[0].likes
